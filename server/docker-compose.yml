@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mysql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: always
+    container_name: mssql
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: ThisIsReallyStrongPassword123
+      MSSQL_PID: Developer

@@ -15,3 +15,5 @@ dotnet ef migrations add <migration name>
 dotnet ef database update
 dotnet ef migrations remove
 ```
+## Sources
+- [Introducing FOREIGN KEY constraint may cause cycles or multiple cascade paths - why?](https://stackoverflow.com/questions/17127351/introducing-foreign-key-constraint-may-cause-cycles-or-multiple-cascade-paths)

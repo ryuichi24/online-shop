@@ -13,6 +13,10 @@ using Microsoft.Extensions.Logging;
 // swagger
 using Swashbuckle.AspNetCore;
 using Microsoft.OpenApi.Models;
+// database
+using server.DataAccess;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace server
 {
@@ -20,21 +24,28 @@ namespace server
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // database
+            services.AddDbContext<OnlineShopDbContext>
+            (
+                options => options.UseSqlServer
+                (
+                    this.Configuration.GetConnectionString("DatabaseConnection")
+                )
+            );
 
             // swagger
             services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new OpenApiInfo { Version = "v1", Title = "Online Shop API" }));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

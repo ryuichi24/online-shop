@@ -19,6 +19,7 @@ namespace server.Models
         [MaxLength(250)]
         public string Password { get; set; }
 
+        [MaxLength(50)]
         public string Phone { get; set; }
     }
 }

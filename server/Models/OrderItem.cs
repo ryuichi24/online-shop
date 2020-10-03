@@ -8,6 +8,8 @@ namespace server.Models
         [Key]
         public int OrderItemId { get; set; }
 
+        public int OrderItemCount { get; set; }
+
         public int OrderId { get; set; }
 
         [ForeignKey("OrderId")]

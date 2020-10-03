@@ -13,6 +13,8 @@ namespace server.Models
         [ForeignKey("ProductId")]
         public Product Product { get; set; }
 
+        public int CartItemCount { get; set; }
+
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]

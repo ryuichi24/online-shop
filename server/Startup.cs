@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+// swagger
+using Swashbuckle.AspNetCore;
+using Microsoft.OpenApi.Models;
 
 namespace server
 {
@@ -26,6 +29,9 @@ namespace server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // swagger
+            services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new OpenApiInfo { Version = "v1", Title = "Online Shop API" }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +52,11 @@ namespace server
             {
                 endpoints.MapControllers();
             });
+
+
+             // swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(opt => opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Online Shop API"));
         }
     }
 }

@@ -30,7 +30,7 @@ namespace server.Controllers
         }
 
         [HttpPost]
-        public ActionResult<TModel> AddNewEntity([FromBody] TModel item)
+        public virtual ActionResult<TModel> AddNewEntity([FromBody] TModel item)
         {
             this._repository.Add(item);
             this._repository.SaveChanges();

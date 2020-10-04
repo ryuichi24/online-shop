@@ -43,7 +43,7 @@ namespace server.Controllers
             bool isAuthorized = this._authManager.ComparePassword(loginParameter.Password, existingAdmin.Password);
             if(!isAuthorized) return this.Unauthorized();
 
-            string token = this._authManager.GenerateJwt(existingAdmin.AdminId.ToString(), existingAdmin.Email, "admin");
+            string token = this._authManager.GenerateJwt(existingAdmin.AdminId.ToString(), existingAdmin.Email, AuthRole.Admin);
 
             // TODO: return obj with success msg
             return this.Ok(token);

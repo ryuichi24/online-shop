@@ -6,7 +6,7 @@ namespace server.Repositories
 {
     public abstract class Repository<TModel> : IRepository<TModel> where TModel : class
     {
-        private readonly DbContext _DbContext;
+        protected readonly DbContext _DbContext;
 
         public Repository(DbContext dbContext)
         {

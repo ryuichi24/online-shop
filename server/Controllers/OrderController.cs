@@ -6,8 +6,8 @@ namespace server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderController : RootController<Order, OrderRepository>
+    public class OrderController : RootController<Order, IOrderRepository>
     {
-        public OrderController(OrderRepository repository) : base(repository) { }
+        public OrderController(IOrderRepository repository) : base(repository) { }
     }
 }

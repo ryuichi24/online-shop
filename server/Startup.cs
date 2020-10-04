@@ -18,6 +18,13 @@ using server.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using server.Repositories.AdminRepo;
 using server.Helpers;
+using server.Services.Auth;
+using server.Repositories.AddressRepo;
+using server.Repositories.CartItemRepo;
+using server.Repositories.CategoryRepo;
+using server.Repositories.OrderRepo;
+using server.Repositories.ProductRepo;
+using server.Repositories.UserRepo;
 
 namespace server
 {
@@ -35,7 +42,15 @@ namespace server
             services.AddControllers();
 
             // dependency injections
-            services.AddScoped<AdminRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IAdminRepository, AdminRepository>();
+            services.AddScoped<ICartItemRepository, CartItemRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddSingleton<IAuthManager, AuthManager>();
 
             // database
             services.AddDbContext<OnlineShopDbContext>

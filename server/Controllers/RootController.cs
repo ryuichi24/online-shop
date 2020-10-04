@@ -6,7 +6,7 @@ namespace server.Controllers
 {
     public abstract class RootController<TModel, TRepository> : ControllerBase where TModel : class where TRepository : IRepository<TModel>
     {
-        private readonly TRepository _repository;
+        protected readonly TRepository _repository;
 
         public RootController(TRepository repository)
         {
@@ -30,12 +30,12 @@ namespace server.Controllers
         }
 
         [HttpPost]
-        public virtual ActionResult<TModel> AddNewEntity([FromBody] TModel item)
+        public virtual ActionResult<TModel> AddNewEntity([FromBody] TModel entity)
         {
-            this._repository.Add(item);
+            this._repository.Add(entity);
             this._repository.SaveChanges();
 
-            return this.Ok(item);
+            return this.Ok(entity);
         }
 
         [HttpPut("{id}")]

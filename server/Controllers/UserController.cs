@@ -6,8 +6,8 @@ namespace server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : RootController<User, UserRepository>
+    public class UserController : RootController<User, IUserRepository>
     {
-        public UserController(UserRepository repository) : base(repository) { }
+        public UserController(IUserRepository repository) : base(repository) { }
     }
 }

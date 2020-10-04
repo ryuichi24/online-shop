@@ -6,8 +6,8 @@ namespace server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : RootController<Category, CategoryRepository>
+    public class CategoryController : RootController<Category, ICategoryRepository>
     {
-        public CategoryController(CategoryRepository repository) : base(repository) { }
+        public CategoryController(ICategoryRepository repository) : base(repository) { }
     }
 }

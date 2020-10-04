@@ -6,8 +6,8 @@ namespace server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CartItemController : RootController<CartItem, CartItemRepository>
+    public class CartItemController : RootController<CartItem, ICartItemRepository>
     {
-        public CartItemController(CartItemRepository repository) : base(repository) { }
+        public CartItemController(ICartItemRepository repository) : base(repository) { }
     }
 }

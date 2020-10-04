@@ -6,8 +6,8 @@ namespace server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : RootController<Product, ProductRepository>
+    public class ProductController : RootController<Product, IProductRepository>
     {
-        public ProductController(ProductRepository repository) : base(repository) { }
+        public ProductController(IProductRepository repository) : base(repository) { }
     }
 }

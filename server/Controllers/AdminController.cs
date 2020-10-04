@@ -19,7 +19,6 @@ namespace server.Controllers
         [HttpPost]
         public override ActionResult<Admin> AddNewEntity([FromBody] Admin newAdmin)
         {
-            // TODO: check if the user is already created by his/her email
             Admin existingAdmin = this._repository.GetAdminByEmail(newAdmin.Email);
             if(existingAdmin != null) return this.BadRequest();
 

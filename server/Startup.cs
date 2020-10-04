@@ -17,6 +17,7 @@ using Microsoft.OpenApi.Models;
 using server.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using server.Repositories.AdminRepo;
+using server.Helpers;
 
 namespace server
 {
@@ -44,6 +45,9 @@ namespace server
                     this.Configuration.GetConnectionString("DatabaseConnection")
                 )
             );
+
+             // AppSettings
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             // swagger
             services.AddSwaggerGen(opt => opt.SwaggerDoc("v1", new OpenApiInfo { Version = "v1", Title = "Online Shop API" }));

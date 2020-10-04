@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using server.Helpers.ParameterClass;
 using server.Models;
 using server.Repositories.AdminRepo;
 using server.Services.Auth;
@@ -26,6 +27,22 @@ namespace server.Controllers
             this._repository.Add(newAdmin);
             this._repository.SaveChanges();
             return CreatedAtRoute(new { Id = newAdmin.AdminId }, newAdmin);
+        }
+
+        [Route("login")]
+        [HttpPost]
+        public ActionResult<string> LoginAdmin(LoginParameter loginParameter)
+        {
+            Admin existingAdmin = this._repository.GetAdminByEmail(loginParameter.Email);
+            if(existingAdmin == null) return this.Unauthorized();
+
+            bool isAuthorized = this._authManager.ComparePassword(loginParameter.Password, existingAdmin.Password);
+            if(!isAuthorized) return this.Unauthorized();
+
+            string token = this._authManager.GenerateJwt(existingAdmin.AdminId.ToString(), existingAdmin.Email, "admin");
+
+            // TODO: return obj with success msg
+            return this.Ok(token);
         }
     }
 }

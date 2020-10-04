@@ -16,7 +16,7 @@ using Microsoft.OpenApi.Models;
 // database
 using server.DataAccess;
 using Microsoft.EntityFrameworkCore;
-
+using server.Repositories.AdminRepo;
 
 namespace server
 {
@@ -32,6 +32,9 @@ namespace server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            // dependency injections
+            services.AddScoped<AdminRepository>();
 
             // database
             services.AddDbContext<OnlineShopDbContext>
@@ -65,7 +68,7 @@ namespace server
             });
 
 
-             // swagger
+            // swagger
             app.UseSwagger();
             app.UseSwaggerUI(opt => opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Online Shop API"));
         }

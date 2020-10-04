@@ -41,7 +41,7 @@ namespace server.Services.Auth
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("Id", id),
+                    new Claim("id", id),
                     new Claim(ClaimTypes.Email, email),
                     new Claim(ClaimTypes.Role, role)
                 }),

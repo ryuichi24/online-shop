@@ -19,10 +19,12 @@ namespace server.Controllers
         [HttpPost]
         public override ActionResult<Admin> AddNewEntity([FromBody] Admin entity)
         {
+            // TODO: check if the user is already created by his/her email
+
             entity.Password = this._authManager.EncryptPassword(entity.Password);
             base._repository.Add(entity);
             base._repository.SaveChanges();
-            return entity;
+            return CreatedAtRoute(new { Id = entity.AdminId }, entity);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using server.Helpers.ParameterClass;
 using server.Models;
@@ -6,6 +7,7 @@ using server.Services.Auth;
 
 namespace server.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : RootController<Admin, IAdminRepository>
@@ -29,6 +31,7 @@ namespace server.Controllers
             return CreatedAtRoute(new { Id = newAdmin.AdminId }, newAdmin);
         }
 
+        [AllowAnonymous]
         [Route("login")]
         [HttpPost]
         public ActionResult<string> LoginAdmin(LoginParameter loginParameter)

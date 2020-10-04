@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using server.Helpers;
 using server.Helpers.ParameterClass;
 using server.Models;
 using server.Repositories.AdminRepo;
@@ -7,7 +8,7 @@ using server.Services.Auth;
 
 namespace server.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = AuthRole.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : RootController<Admin, IAdminRepository>

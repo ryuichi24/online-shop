@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace server.Helpers.ParameterClass
 {
-    public class AdminParameter
+    public class AdminUpdateParameter
     {
         [MaxLength(100)]
         public string Name { get; set; }

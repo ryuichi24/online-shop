@@ -21,17 +21,17 @@ namespace server.Controllers.AdminCntlr
         }
 
         [HttpPost]
-        public ActionResult<Admin> AddNewEntity([FromBody] AdminParameter adminParameter)
+        public ActionResult<Admin> AddNewEntity([FromBody] AdminCreateParameter adminCreateParameter)
         {
-            Admin existingAdmin = this._repository.GetAdminByEmail(adminParameter.Email);
+            Admin existingAdmin = this._repository.GetAdminByEmail(adminCreateParameter.Email);
             if(existingAdmin != null) return this.BadRequest();
 
             Admin newAdmin = new Admin()
             {
-                Name = adminParameter.Name,
-                Email = adminParameter.Email,
-                Phone = adminParameter.Phone,
-                Password = this._authManager.EncryptPassword(adminParameter.Password)
+                Name = adminCreateParameter.Name,
+                Email = adminCreateParameter.Email,
+                Phone = adminCreateParameter.Phone,
+                Password = this._authManager.EncryptPassword(adminCreateParameter.Password)
             };
 
             this._repository.Add(newAdmin);
@@ -40,15 +40,15 @@ namespace server.Controllers.AdminCntlr
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateEntity(int id, [FromBody] AdminParameter entityToUpdate)
+        public ActionResult UpdateEntity(int id, [FromBody] AdminUpdateParameter adminUpdateParameter)
         {
             Admin existingAdmin = this._repository.GetById(id);
             if (existingAdmin == null) return this.NotFound();
 
-            if(entityToUpdate.Name != null) existingAdmin.Name = entityToUpdate.Name;
-            if(entityToUpdate.Email != null) existingAdmin.Email = entityToUpdate.Email;
-            if(entityToUpdate.Phone != null) existingAdmin.Phone = entityToUpdate.Phone;
-            if(entityToUpdate.Password != null) existingAdmin.Password = this._authManager.EncryptPassword(entityToUpdate.Password);
+            if(adminUpdateParameter.Name != null) existingAdmin.Name = adminUpdateParameter.Name;
+            if(adminUpdateParameter.Email != null) existingAdmin.Email = adminUpdateParameter.Email;
+            if(adminUpdateParameter.Phone != null) existingAdmin.Phone = adminUpdateParameter.Phone;
+            if(adminUpdateParameter.Password != null) existingAdmin.Password = this._authManager.EncryptPassword(adminUpdateParameter.Password);
 
             this._repository.Update(existingAdmin);
             this._repository.SaveChanges();

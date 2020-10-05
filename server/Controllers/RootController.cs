@@ -29,27 +29,6 @@ namespace server.Controllers
             return this.Ok(entity);
         }
 
-        [HttpPost]
-        public virtual ActionResult<TModel> AddNewEntity([FromBody] TModel entity)
-        {
-            this._repository.Add(entity);
-            this._repository.SaveChanges();
-
-            return this.Ok(entity);
-        }
-
-        [HttpPut("{id}")]
-        public ActionResult UpdateEntity(int id, [FromBody] TModel entityToUpdate)
-        {
-            TModel entity = this._repository.GetById(id);
-            if (entity == null) return NotFound();
-
-            this._repository.Update(entityToUpdate);
-            this._repository.SaveChanges();
-
-            return this.NoContent();
-        }
-
         [HttpDelete("{id}")]
         public ActionResult DeleteEntity(int id)
         {

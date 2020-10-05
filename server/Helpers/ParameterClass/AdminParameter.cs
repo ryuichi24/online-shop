@@ -1,22 +1,15 @@
 using System.ComponentModel.DataAnnotations;
-using server.Helpers.ParameterClass;
 
-namespace server.Models
+namespace server.Helpers.ParameterClass
 {
-    public class Admin
+    public class AdminParameter
     {
-        [Key]
-        public int AdminId { get; set; }
-
-        [Required]
         [MaxLength(100)]
         public string Name { get; set; }
 
-        [Required]
         [MaxLength(50)]
         public string Email { get; set; }
 
-        [Required]
         [MaxLength(250)]
         public string Password { get; set; }
 

@@ -10,7 +10,7 @@ namespace server.Models
 
         [Required]
         [MaxLength(150)]
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         [Required]
         public float Price { get; set; }

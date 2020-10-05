@@ -36,7 +36,7 @@ namespace server.Controllers.AdminCntlr
 
             this._repository.Add(newAdmin);
             this._repository.SaveChanges();
-            return CreatedAtRoute(new { Id = newAdmin.AdminId }, newAdmin);
+            return this.CreatedAtRoute(new { Id = newAdmin.AdminId }, newAdmin);
         }
 
         [HttpPut("{id}")]

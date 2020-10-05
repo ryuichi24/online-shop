@@ -5,7 +5,7 @@ namespace server.Helpers.ParameterClass
     public class ProductUpdateParameter
     {
         [MaxLength(150)]
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         public float Price { get; set; }
 

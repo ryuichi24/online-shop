@@ -1,0 +1,41 @@
+.nav {
+  $self: &;
+
+  background: white;
+  height: 6rem;
+  padding: 0 1.5rem 0 1.5rem;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto 0 auto;
+  }
+
+  &__brand-container {
+    #{ $self }__brand {
+      color: $nav-item-brand-color;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+  }
+
+  &__items {
+    display: flex;
+    list-style: none;
+
+    #{ $self }__item {
+      margin-right: 1rem;
+      font-weight: 700;
+      color: $nav-item-color-unselected;
+      padding-bottom: 0.2rem;
+
+      &--selected {
+        color: $nav-item-color-selected;
+        border-bottom: solid 1px $nav-item-border-bottom-color-selected;
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@import './global';
+@import './variables';
+// layouts
+@import '../../layouts//navbar/navbar';
+@import '../../layouts//footer/footer';
+// components
+
+
+// font
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Karla', sans-serif;
+  margin: 0;
+  background: $main-background-color;
+}
+
+a {
+  text-decoration: none;
+}

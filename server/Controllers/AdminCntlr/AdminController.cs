@@ -21,7 +21,7 @@ namespace server.Controllers.AdminCntlr
         }
 
         [HttpPost]
-        public ActionResult<Admin> AddNewEntity([FromBody] AdminCreateParameter adminCreateParameter)
+        public ActionResult<Admin> AddNewAdmin([FromBody] AdminCreateParameter adminCreateParameter)
         {
             Admin existingAdmin = this._repository.GetAdminByEmail(adminCreateParameter.Email);
             if(existingAdmin != null) return this.BadRequest();
@@ -40,7 +40,7 @@ namespace server.Controllers.AdminCntlr
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateEntity(int id, [FromBody] AdminUpdateParameter adminUpdateParameter)
+        public ActionResult UpdateAdmin(int id, [FromBody] AdminUpdateParameter adminUpdateParameter)
         {
             Admin existingAdmin = this._repository.GetById(id);
             if (existingAdmin == null) return this.NotFound();

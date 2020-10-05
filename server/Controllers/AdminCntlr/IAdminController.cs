@@ -6,8 +6,8 @@ namespace server.Controllers.AdminCntlr
 {
     public interface IAdminController
     {
-        public ActionResult<Admin> AddNewEntity([FromBody] AdminCreateParameter adminCreateParameter);
+        public ActionResult<Admin> AddNewAdmin([FromBody] AdminCreateParameter adminCreateParameter);
 
-        public ActionResult UpdateEntity(int id, [FromBody] AdminUpdateParameter adminUpdateParameter);
+        public ActionResult UpdateAdmin(int id, [FromBody] AdminUpdateParameter adminUpdateParameter);
     }
 }

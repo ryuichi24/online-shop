@@ -12,13 +12,13 @@ namespace server.Controllers.ProductCntlr
         public ProductController(IProductRepository repository) : base(repository) { }
 
         [HttpPost]
-        public ActionResult<Product> AddNewEntity([FromBody] ProductCreateParameter productCreateParameter)
+        public ActionResult<Product> AddNewProduct([FromBody] ProductCreateParameter productCreateParameter)
         {
             throw new System.NotImplementedException();
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateEntity(int id, [FromBody] ProductUpdateParameter productUpdateParameter)
+        public ActionResult UpdateProduct(int id, [FromBody] ProductUpdateParameter productUpdateParameter)
         {
             throw new System.NotImplementedException();
         }

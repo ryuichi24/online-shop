@@ -6,8 +6,8 @@ namespace server.Controllers.ProductCntlr
 {
     public interface IProductController
     {
-        public ActionResult<Product> AddNewEntity([FromBody] ProductCreateParameter productCreateParameter);
+        public ActionResult<Product> AddNewProduct([FromBody] ProductCreateParameter productCreateParameter);
 
-        public ActionResult UpdateEntity(int id, [FromBody] ProductUpdateParameter productUpdateParameter);
+        public ActionResult UpdateProduct(int id, [FromBody] ProductUpdateParameter productUpdateParameter);
     }
 }

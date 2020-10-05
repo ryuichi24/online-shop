@@ -15,6 +15,9 @@ namespace server.Helpers.ParameterClass
         public string Description { get; set; }
 
         [Required]
+        public int Inventory { get; set; }
+
+        [Required]
         public int CategoryId { get; set; }
     }
 }

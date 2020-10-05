@@ -12,6 +12,8 @@ namespace server.Helpers.ParameterClass
         [MaxLength(250)]
         public string Description { get; set; }
 
+        public int Inventory { get; set; }
+
         public int CategoryId { get; set; }
     }
 }

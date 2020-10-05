@@ -18,6 +18,9 @@ namespace server.Models
         [MaxLength(250)]
         public string Description { get; set; }
 
+        [Required]
+        public int Inventory { get; set; }
+
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]

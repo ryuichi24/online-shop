@@ -19,6 +19,7 @@ namespace server.Controllers.ProductCntlr
                 Name = productCreateParameter.Name,
                 Price = productCreateParameter.Price,
                 Description = productCreateParameter.Description,
+                Inventory = productCreateParameter.Inventory,
                 CategoryId = productCreateParameter.CategoryId
             };
 
@@ -37,6 +38,7 @@ namespace server.Controllers.ProductCntlr
             if(productUpdateParameter.Name != null) existingProduct.Name = productUpdateParameter.Name;
             if(!productUpdateParameter.Price.Equals(null)) existingProduct.Price = productUpdateParameter.Price;
             if(productUpdateParameter.Description != null) existingProduct.Description = productUpdateParameter.Description;
+            if(!productUpdateParameter.Inventory.Equals(null)) existingProduct.Inventory = productUpdateParameter.Inventory;
             if(!productUpdateParameter.CategoryId.Equals(null)) existingProduct.CategoryId = productUpdateParameter.CategoryId;
 
             this._repository.Update(existingProduct);

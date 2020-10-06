@@ -29,8 +29,7 @@ const actions = {
     adminCredentials: { email: string; password: string }
   ) {
     try {
-      const res = await AdminController.loginAdmin(adminCredentials);
-      const { admin, token } = res;
+      const { admin, token } = await AdminController.loginAdmin(adminCredentials);
 
       commit(SET_ADMIN_AUTH, { admin, token });
     } catch (err) {
@@ -40,8 +39,9 @@ const actions = {
   async checkAdminAuth({ commit }: { commit: Commit }) {
     try {
       if (!JwtService.getToken()) return commit(CLEAR_ADMIN_AUTH);
+      const { admin } = await AdminController.checkAdminAuth();
 
-      // call api to check if JWT is valid
+      commit(SET_ADMIN_AUTH, { admin });
     } catch (err) {
       console.log(err.message);
     }

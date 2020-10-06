@@ -1,6 +1,15 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import {
+  createRouter,
+  createWebHistory,
+  RouteRecordRaw,
+  RouteLocationNormalized,
+  NavigationGuardNext,
+} from 'vue-router';
 // views
 import { HomePage, AdminPage, ProductSection, OrderSection } from '@/views';
+// vuex
+import store from '@/store';
+import { CHECK_ADMIN_AUTH } from '@/store/types/action.type';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -16,12 +25,12 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'products',
         name: 'ProductSection',
-        component: ProductSection
+        component: ProductSection,
       },
       {
         path: 'orders',
         name: 'OrderSection',
-        component: OrderSection
+        component: OrderSection,
       },
     ],
   },
@@ -31,5 +40,13 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+router.beforeEach(
+  async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    // admin auth check
+    await store.dispatch(CHECK_ADMIN_AUTH);
+    next();
+  }
+);
 
 export default router;

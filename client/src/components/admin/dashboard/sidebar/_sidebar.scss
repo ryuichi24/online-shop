@@ -1,0 +1,21 @@
+.sidebar {
+  $self: &;
+
+  height: 100vh;
+  width: 300px;
+  background-color: #fff;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 40%;
+
+    list-style: none;
+
+    #{ $self }__brand {
+        //
+    }
+  }
+}

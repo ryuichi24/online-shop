@@ -1,10 +1,6 @@
 <template>
   <TheNavbar v-if="!isAdmin" />
-
-  <div class="container" style="margin-bottom: 10rem;">
-    <RouterView />
-  </div>
-
+  <RouterView />
   <TheFooter v-if="!isAdmin" />
 </template>
 

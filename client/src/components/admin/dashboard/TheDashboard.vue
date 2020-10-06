@@ -1,7 +1,15 @@
 <template>
-  <div>Dashboard</div>
+  <TheSideBar />
 </template>
 
 <script>
-export default {};
+import { defineComponent } from 'vue';
+// components
+import TheSideBar from './sidebar/TheSidebar.vue';
+
+export default defineComponent({
+  components: {
+    TheSideBar,
+  },
+});
 </script>

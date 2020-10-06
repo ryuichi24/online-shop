@@ -1,1 +1,3 @@
-export { default as user } from "./user.module";
+import admin from './admin.module';
+
+export { admin };

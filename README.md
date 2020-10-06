@@ -23,3 +23,4 @@ dotnet ef migrations remove
 - [How to read Claims from Jason Web Token in ASP.NET Core 2.1 Web API - C#](https://www.youtube.com/watch?v=n_w07VeIg_k)
 - [Setting up Swagger (ASP.NET Core) using the Authorization headers (Bearer)](https://stackoverflow.com/questions/43447688/setting-up-swagger-asp-net-core-using-the-authorization-headers-bearer)
 - [Fetch foreign key table data](https://entityframework.net/knowledge-base/52352970/fetch-foreign-key-table-data)
+- [Request header field content-type is not allowed by Access-Control-Allow-Headers in preflight response](https://forums.asp.net/t/2168883.aspx?Request+header+field+content+type+is+not+allowed+by+Access+Control+Allow+Headers+in+preflight+response+)

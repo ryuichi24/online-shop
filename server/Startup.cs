@@ -58,6 +58,15 @@ namespace server
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
+            // CORS
+            services.AddCors(options => options.AddDefaultPolicy
+            (
+                builder => builder.WithOrigins("http://localhost:8080")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+            ));
+
             // JWT authentication
             string jwtSecret = appSettingsSection.Get<AppSettings>().JwtSecret;
             services.AddSingleton<IAuthManager, AuthManager>();
@@ -147,6 +156,9 @@ namespace server
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // CORS
+            app.UseCors();
 
             // JWT authentication
             app.UseAuthentication();

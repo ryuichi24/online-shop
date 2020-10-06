@@ -18,4 +18,4 @@ const setToken = () => {
 export default {
   API,
   setToken,
-}
+};

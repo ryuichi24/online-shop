@@ -21,6 +21,7 @@ namespace server.Controllers.AdminCntlr
             this._authManager = authManager;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult<Admin> AddNewAdmin([FromBody] AdminCreateParameter adminCreateParameter)
         {

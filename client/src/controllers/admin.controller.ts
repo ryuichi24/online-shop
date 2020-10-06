@@ -10,8 +10,22 @@ const loginAdmin = async (adminCredentials: { email: string; password: string })
       '/admin/login',
       adminCredentials,
     );
-    const token = data;
-    return token;
+    return data;
+  } catch (err) {
+    if (err && err.response) {
+      const axiosError = err as AxiosError<ServerError>;
+      if (axiosError.response) return axiosError.response.data;
+    }
+    throw err;
+  }
+};
+
+const checkAdminAuth = async () => {
+  try {
+    ApiService.setToken();
+
+    const { data } = await ApiService.API.get<{ admin: Admin }>('/admin/check-auth');
+    return data;
   } catch (err) {
     if (err && err.response) {
       const axiosError = err as AxiosError<ServerError>;
@@ -23,4 +37,5 @@ const loginAdmin = async (adminCredentials: { email: string; password: string })
 
 export default {
   loginAdmin,
+  checkAdminAuth,
 };

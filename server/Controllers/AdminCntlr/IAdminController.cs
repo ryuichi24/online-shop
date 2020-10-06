@@ -9,5 +9,7 @@ namespace server.Controllers.AdminCntlr
         public ActionResult<Admin> AddNewAdmin([FromBody] AdminCreateParameter adminCreateParameter);
 
         public ActionResult UpdateAdmin(int id, [FromBody] AdminUpdateParameter adminUpdateParameter);
+
+        public ActionResult<Admin> CheckAdminAuth();
     }
 }

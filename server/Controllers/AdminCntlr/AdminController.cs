@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using server.Helpers;
@@ -6,6 +7,7 @@ using server.Helpers.ParameterClass;
 using server.Models;
 using server.DataAccess.Repositories.AdminRepo;
 using server.Services.Auth;
+using System;
 
 namespace server.Controllers.AdminCntlr
 {
@@ -74,5 +76,20 @@ namespace server.Controllers.AdminCntlr
             return this.Ok(new LoginAdminSuccessResponse { Token = token, Admin = existingAdmin });
         }
 
+        [AllowAnonymous]
+        [Route("check-auth")]
+        [HttpGet]
+        public ActionResult<Admin> CheckAdminAuth()
+        {
+            var adminIdClaim = this.User.Claims.SingleOrDefault(claim => claim.Type.ToString().Equals("id", StringComparison.InvariantCultureIgnoreCase));
+            if (adminIdClaim == null) return this.Unauthorized();
+
+            int adminId = int.Parse(adminIdClaim.Value);
+
+            Admin currentAdmin = this._repository.GetById(adminId);
+            if(currentAdmin == null) return this.Unauthorized();
+
+            return this.Ok(currentAdmin);
+        }
     }
 }

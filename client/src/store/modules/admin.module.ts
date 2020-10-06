@@ -6,7 +6,7 @@ import { AdminController } from '@/controllers';
 // types
 import { Admin } from '@/types';
 // mutation types
-import { SET_ADMIN_AUTH } from '../types/mutation.type';
+import { SET_ADMIN_AUTH, CLEAR_ADMIN_AUTH } from '../types/mutation.type';
 
 interface AdminState {
   currentAdmin: Admin | null;
@@ -37,16 +37,27 @@ const actions = {
       console.log(err.message);
     }
   },
+  async checkAdminAuth({ commit }: { commit: Commit }) {
+    try {
+      if (!JwtService.getToken()) return commit(CLEAR_ADMIN_AUTH);
+
+      // call api to check if JWT is valid
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
 };
 
 const mutations = {
-  SET_ADMIN_AUTH: (
-    state: AdminState,
-    { admin, token }: { admin: Admin; token: string }
-  ) => {
+  SET_ADMIN_AUTH: (state: AdminState, { admin, token }: { admin: Admin; token: string }) => {
     state.currentAdmin = admin;
     state.isAdmin = true;
     if (token) JwtService.saveToken(token);
+  },
+  CLEAR_ADMIN_AUTH: (state: AdminState) => {
+    state.currentAdmin = null;
+    state.isAdmin = false;
+    JwtService.destroyToken();
   },
 };
 

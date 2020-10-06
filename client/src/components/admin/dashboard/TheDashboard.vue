@@ -1,5 +1,8 @@
 <template>
-  <TheSideBar />
+  <div class="dashboard">
+    <TheSideBar />
+    <router-view />
+  </div>
 </template>
 
 <script>

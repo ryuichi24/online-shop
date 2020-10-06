@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 // views
-import { HomePage, AdminPage } from '@/views';
+import { HomePage, AdminPage, ProductSection, OrderSection } from '@/views';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,6 +12,18 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin',
     name: 'AdminPage',
     component: AdminPage,
+    children: [
+      {
+        path: 'products',
+        name: 'ProductSection',
+        component: ProductSection
+      },
+      {
+        path: 'orders',
+        name: 'OrderSection',
+        component: OrderSection
+      },
+    ],
   },
 ];
 

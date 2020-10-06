@@ -1,5 +1,8 @@
 import { Commit } from 'vuex';
-
+// services
+import JwtService from '@/services/jwt.service';
+// controllers
+import { AdminController } from '@/controllers';
 // types
 import { Admin } from '@/types';
 // mutation types
@@ -26,28 +29,24 @@ const actions = {
     adminCredentials: { email: string; password: string }
   ) {
     try {
-      const { email, password } = adminCredentials;
-      // do some api call
-      // get token
-
-      // dummy results
-      const admin = { name: 'Admin' };
-      const token = 'ThisIsADummyToken';
+      const res = await AdminController.loginAdmin(adminCredentials);
+      const { admin, token } = res;
 
       commit(SET_ADMIN_AUTH, { admin, token });
-    } catch (error) {}
+    } catch (err) {
+      console.log(err.message);
+    }
   },
 };
 
 const mutations = {
   SET_ADMIN_AUTH: (
     state: AdminState,
-    { admin, token }: { admin: { name: string }; token: string }
+    { admin, token }: { admin: Admin; token: string }
   ) => {
     state.currentAdmin = admin;
     state.isAdmin = true;
-    // TODO: add a json web token service
-    if (token) localStorage.setItem('token', token);
+    if (token) JwtService.saveToken(token);
   },
 };
 

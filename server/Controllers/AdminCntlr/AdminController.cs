@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using server.Helpers;
+using server.Helpers.CustomResponse;
 using server.Helpers.ParameterClass;
 using server.Models;
 using server.Repositories.AdminRepo;
@@ -24,7 +25,7 @@ namespace server.Controllers.AdminCntlr
         public ActionResult<Admin> AddNewAdmin([FromBody] AdminCreateParameter adminCreateParameter)
         {
             Admin existingAdmin = this._repository.GetAdminByEmail(adminCreateParameter.Email);
-            if(existingAdmin != null) return this.BadRequest();
+            if (existingAdmin != null) return this.BadRequest();
 
             Admin newAdmin = new Admin()
             {
@@ -45,10 +46,10 @@ namespace server.Controllers.AdminCntlr
             Admin existingAdmin = this._repository.GetById(id);
             if (existingAdmin == null) return this.NotFound();
 
-            if(adminUpdateParameter.Name != null) existingAdmin.Name = adminUpdateParameter.Name;
-            if(adminUpdateParameter.Email != null) existingAdmin.Email = adminUpdateParameter.Email;
-            if(adminUpdateParameter.Phone != null) existingAdmin.Phone = adminUpdateParameter.Phone;
-            if(adminUpdateParameter.Password != null) existingAdmin.Password = this._authManager.EncryptPassword(adminUpdateParameter.Password);
+            if (adminUpdateParameter.Name != null) existingAdmin.Name = adminUpdateParameter.Name;
+            if (adminUpdateParameter.Email != null) existingAdmin.Email = adminUpdateParameter.Email;
+            if (adminUpdateParameter.Phone != null) existingAdmin.Phone = adminUpdateParameter.Phone;
+            if (adminUpdateParameter.Password != null) existingAdmin.Password = this._authManager.EncryptPassword(adminUpdateParameter.Password);
 
             this._repository.Update(existingAdmin);
             this._repository.SaveChanges();
@@ -59,18 +60,17 @@ namespace server.Controllers.AdminCntlr
         [AllowAnonymous]
         [Route("login")]
         [HttpPost]
-        public ActionResult<string> LoginAdmin(LoginParameter loginParameter)
+        public ActionResult<LoginAdminSuccessResponse> LoginAdmin(LoginParameter loginParameter)
         {
             Admin existingAdmin = this._repository.GetAdminByEmail(loginParameter.Email);
-            if(existingAdmin == null) return this.Unauthorized();
+            if (existingAdmin == null) return this.Unauthorized();
 
             bool isAuthorized = this._authManager.ComparePassword(loginParameter.Password, existingAdmin.Password);
-            if(!isAuthorized) return this.Unauthorized();
+            if (!isAuthorized) return this.Unauthorized();
 
             string token = this._authManager.GenerateJwt(existingAdmin.AdminId.ToString(), existingAdmin.Email, AuthRole.Admin);
 
-            // TODO: return obj with success msg
-            return this.Ok(token);
+            return this.Ok(new LoginAdminSuccessResponse { Token = token, Admin = existingAdmin });
         }
 
     }

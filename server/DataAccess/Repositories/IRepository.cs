@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace server.Repositories
+namespace server.DataAccess.Repositories
 {
     public interface IRepository<TModel> where TModel : class
     {

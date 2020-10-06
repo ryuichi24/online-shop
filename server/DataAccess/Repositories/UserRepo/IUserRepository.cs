@@ -1,6 +1,6 @@
 using server.Models;
 
-namespace server.Repositories.UserRepo
+namespace server.DataAccess.Repositories.UserRepo
 {
     public interface IUserRepository : IRepository<User>
     {

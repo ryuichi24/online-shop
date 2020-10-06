@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using server.Models;
-using server.Repositories.CartItemRepo;
+using server.DataAccess.Repositories.CartItemRepo;
 
 namespace server.Controllers
 {

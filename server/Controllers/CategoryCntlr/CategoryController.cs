@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using server.Helpers.ParameterClass;
 using server.Models;
-using server.Repositories.CategoryRepo;
+using server.DataAccess.Repositories.CategoryRepo;
 
 namespace server.Controllers.CategoryCntlr
 {

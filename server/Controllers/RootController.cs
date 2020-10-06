@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using server.Repositories;
+using server.DataAccess.Repositories;
 
 namespace server.Controllers
 {

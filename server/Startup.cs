@@ -16,15 +16,15 @@ using Microsoft.OpenApi.Models;
 // database
 using server.DataAccess;
 using Microsoft.EntityFrameworkCore;
-using server.Repositories.AdminRepo;
 using server.Helpers;
 using server.Services.Auth;
-using server.Repositories.AddressRepo;
-using server.Repositories.CartItemRepo;
-using server.Repositories.CategoryRepo;
-using server.Repositories.OrderRepo;
-using server.Repositories.ProductRepo;
-using server.Repositories.UserRepo;
+using server.DataAccess.Repositories.AdminRepo;
+using server.DataAccess.Repositories.AddressRepo;
+using server.DataAccess.Repositories.CartItemRepo;
+using server.DataAccess.Repositories.CategoryRepo;
+using server.DataAccess.Repositories.OrderRepo;
+using server.DataAccess.Repositories.ProductRepo;
+using server.DataAccess.Repositories.UserRepo;
 // jwt authentication
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;

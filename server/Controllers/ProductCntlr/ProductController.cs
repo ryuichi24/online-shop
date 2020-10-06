@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using server.Helpers.ParameterClass;
 using server.Models;
-using server.Repositories.ProductRepo;
+using server.DataAccess.Repositories.ProductRepo;
 
 namespace server.Controllers.ProductCntlr
 {

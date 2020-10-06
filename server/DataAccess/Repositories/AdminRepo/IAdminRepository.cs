@@ -1,6 +1,6 @@
 using server.Models;
 
-namespace server.Repositories.AdminRepo
+namespace server.DataAccess.Repositories.AdminRepo
 {
     public interface IAdminRepository : IRepository<Admin>
     {

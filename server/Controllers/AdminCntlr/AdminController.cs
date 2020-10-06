@@ -4,7 +4,7 @@ using server.Helpers;
 using server.Helpers.CustomResponse;
 using server.Helpers.ParameterClass;
 using server.Models;
-using server.Repositories.AdminRepo;
+using server.DataAccess.Repositories.AdminRepo;
 using server.Services.Auth;
 
 namespace server.Controllers.AdminCntlr

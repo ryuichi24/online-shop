@@ -1,7 +1,7 @@
 using server.DataAccess;
 using server.Models;
 
-namespace server.Repositories.OrderRepo
+namespace server.DataAccess.Repositories.OrderRepo
 {
     public class OrderRepository : Repository<Order>, IOrderRepository
     {

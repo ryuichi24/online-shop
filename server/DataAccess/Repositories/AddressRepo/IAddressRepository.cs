@@ -1,6 +1,6 @@
 using server.Models;
 
-namespace server.Repositories.AddressRepo
+namespace server.DataAccess.Repositories.AddressRepo
 {
     public interface IAddressRepository : IRepository<Address>
     {

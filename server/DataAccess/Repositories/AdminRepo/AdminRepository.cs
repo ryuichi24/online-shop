@@ -2,7 +2,7 @@ using System.Linq;
 using server.DataAccess;
 using server.Models;
 
-namespace server.Repositories.AdminRepo
+namespace server.DataAccess.Repositories.AdminRepo
 {
     public class AdminRepository : Repository<Admin>, IAdminRepository
     {

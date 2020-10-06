@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using server.Models;
-using server.Repositories.AddressRepo;
+using server.DataAccess.Repositories.AddressRepo;
 
 namespace server.Controllers
 {

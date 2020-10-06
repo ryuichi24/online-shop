@@ -1,6 +1,6 @@
 using server.Models;
 
-namespace server.Repositories.OrderItemRepo
+namespace server.DataAccess.Repositories.OrderItemRepo
 {
     public interface IOrderItemRepository : IRepository<OrderItem>
     {

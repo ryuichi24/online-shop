@@ -1,7 +1,7 @@
 using server.DataAccess;
 using server.Models;
 
-namespace server.Repositories.CartItemRepo
+namespace server.DataAccess.Repositories.CartItemRepo
 {
     public class CartItemRepository : Repository<CartItem>, ICartItemRepository
     {

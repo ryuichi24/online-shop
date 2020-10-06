@@ -1,7 +1,7 @@
 using server.DataAccess;
 using server.Models;
 
-namespace server.Repositories.ProductRepo
+namespace server.DataAccess.Repositories.ProductRepo
 {
     public class ProductRepository : Repository<Product>, IProductRepository
     {

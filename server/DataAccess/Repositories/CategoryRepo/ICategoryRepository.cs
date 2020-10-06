@@ -1,6 +1,6 @@
 using server.Models;
 
-namespace server.Repositories.CategoryRepo
+namespace server.DataAccess.Repositories.CategoryRepo
 {
     public interface ICategoryRepository : IRepository<Category>
     {

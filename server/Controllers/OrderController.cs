@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using server.Models;
-using server.Repositories.OrderRepo;
+using server.DataAccess.Repositories.OrderRepo;
 
 namespace server.Controllers
 {

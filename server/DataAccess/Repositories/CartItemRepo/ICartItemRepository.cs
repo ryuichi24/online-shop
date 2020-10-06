@@ -1,6 +1,6 @@
 using server.Models;
 
-namespace server.Repositories.CartItemRepo
+namespace server.DataAccess.Repositories.CartItemRepo
 {
     public interface ICartItemRepository : IRepository<CartItem>
     {

@@ -1,6 +1,6 @@
 using server.Models;
 
-namespace server.Repositories.ProductRepo
+namespace server.DataAccess.Repositories.ProductRepo
 {
     public interface IProductRepository : IRepository<Product>
     {

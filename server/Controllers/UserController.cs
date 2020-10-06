@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using server.Models;
-using server.Repositories.UserRepo;
+using server.DataAccess.Repositories.UserRepo;
 
 namespace server.Controllers
 {

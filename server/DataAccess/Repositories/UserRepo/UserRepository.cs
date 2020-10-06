@@ -1,7 +1,7 @@
 using server.DataAccess;
 using server.Models;
 
-namespace server.Repositories.UserRepo
+namespace server.DataAccess.Repositories.UserRepo
 {
     public class UserRepository : Repository<User>, IUserRepository
     {

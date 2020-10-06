@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using server.Helpers.CustomResponse;
 using server.Helpers.ParameterClass;
 using server.Models;
 
@@ -10,6 +11,6 @@ namespace server.Controllers.AdminCntlr
 
         public ActionResult UpdateAdmin(int id, [FromBody] AdminUpdateParameter adminUpdateParameter);
 
-        public ActionResult<Admin> CheckAdminAuth();
+        public ActionResult<CheckAdminAuthSuccessResponse> CheckAdminAuth();
     }
 }

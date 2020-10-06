@@ -40,6 +40,7 @@ const actions = {
     try {
       if (!JwtService.getToken()) return commit(CLEAR_ADMIN_AUTH);
       const { admin } = await AdminController.checkAdminAuth();
+      if (!admin) return commit(CLEAR_ADMIN_AUTH);
 
       commit(SET_ADMIN_AUTH, { admin });
     } catch (err) {

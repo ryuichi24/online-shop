@@ -76,10 +76,9 @@ namespace server.Controllers.AdminCntlr
             return this.Ok(new LoginAdminSuccessResponse { Token = token, Admin = existingAdmin });
         }
 
-        [AllowAnonymous]
         [Route("check-auth")]
         [HttpGet]
-        public ActionResult<Admin> CheckAdminAuth()
+        public ActionResult<CheckAdminAuthSuccessResponse> CheckAdminAuth()
         {
             var adminIdClaim = this.User.Claims.SingleOrDefault(claim => claim.Type.ToString().Equals("id", StringComparison.InvariantCultureIgnoreCase));
             if (adminIdClaim == null) return this.Unauthorized();
@@ -89,7 +88,7 @@ namespace server.Controllers.AdminCntlr
             Admin currentAdmin = this._repository.GetById(adminId);
             if(currentAdmin == null) return this.Unauthorized();
 
-            return this.Ok(currentAdmin);
+            return this.Ok(new CheckAdminAuthSuccessResponse { Admin = currentAdmin });
         }
     }
 }

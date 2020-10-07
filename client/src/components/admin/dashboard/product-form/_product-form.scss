@@ -1,0 +1,21 @@
+.product-form {
+  $self: &;
+
+  width: 520px;
+  margin: 0 auto;
+
+  &__input-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}

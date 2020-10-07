@@ -1,6 +1,10 @@
 import { Commit } from 'vuex';
+// controller
+import { ProductController } from '@/controllers';
 // type
 import { Product } from '@/types';
+// mutation types
+import { ADD_PRODUCT } from '../types/mutation.type';
 
 interface ProductState {
   selectedProduct: Product | null;
@@ -18,11 +22,11 @@ const getters = {
 };
 
 const actions = {
-  async addProduct() {
+  async addProduct({ commit }: { commit: Commit }, newProduct: Product) {
     try {
-      // api call
+      const addedProduct = await ProductController.addProduct(newProduct);
 
-      // commit
+      commit(ADD_PRODUCT, addedProduct);
     } catch (err) {
       console.log(err.message);
     }
@@ -30,8 +34,8 @@ const actions = {
 };
 
 const mutations = {
-  ADD_PRODUCT: (state: ProductState, product: Product) => {
-    state.products.push(product);
+  ADD_PRODUCT: (state: ProductState, addedProduct: Product) => {
+    state.products.push(addedProduct);
   },
 };
 

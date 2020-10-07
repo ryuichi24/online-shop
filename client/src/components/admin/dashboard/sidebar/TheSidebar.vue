@@ -1,14 +1,13 @@
 <template>
   <nav class="sidebar">
     <ul class="sidebar__container">
-      <li class="sidebar__item">
-        <router-link to="/admin/products">
-          <span>Products</span>
-        </router-link>
-      </li>
-      <li class="sidebar__item">
-        <router-link to="/admin/orders">
-          <span>Orders</span>
+      <li
+        v-for="(item, index) in sidebarItems"
+        :key="index"
+        :class="[`sidebar__item ${item.isSelected && 'sidebar__item--selected'}`]"
+      >
+        <router-link :to="item.path">
+          <span>{{ item.text }}</span>
         </router-link>
       </li>
     </ul>
@@ -16,5 +15,26 @@
 </template>
 
 <script>
-export default {};
+import { defineComponent, ref } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const sidebarItems = ref([
+      {
+        text: 'Products',
+        path: '/admin/products',
+        isSelected: false,
+      },
+      {
+        text: 'Orders',
+        path: '/admin/orders',
+        isSelected: true,
+      },
+    ]);
+
+    return {
+      sidebarItems,
+    };
+  },
+});
 </script>

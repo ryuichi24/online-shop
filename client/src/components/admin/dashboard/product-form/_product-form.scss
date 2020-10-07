@@ -10,6 +10,12 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+
+  &__category-input-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
 }
 
 .close-btn {

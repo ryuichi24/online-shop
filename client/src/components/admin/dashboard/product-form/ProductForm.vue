@@ -9,7 +9,7 @@
         </div>
         <div class="product-form__input-container">
           <label for="price">Price</label>
-          <input name="price" type="number" step="0.01">
+          <input name="price" type="number" step="0.01" />
         </div>
         <div class="product-form__input-container">
           <label for="description">Description</label>
@@ -17,7 +17,14 @@
         </div>
         <div class="product-form__input-container">
           <label for="inventory">Inventory</label>
-          <input name="inventory" type="number">
+          <input name="inventory" type="number" />
+        </div>
+        <div class="product-form__category-input-container">
+          <label for="category-list">Category</label>
+          <select name="category-list">
+            <option value="it">IT</option>
+          </select>
+          <CategoryForm />
         </div>
         <button type="submit">Create</button>
       </form>
@@ -29,6 +36,7 @@
 import { defineComponent } from 'vue';
 // components
 import ModalWrapper from '../../../common/modal/ModalWrapper.vue';
+import CategoryForm from './category-form/CategoryForm.vue';
 
 export default defineComponent({
   props: {
@@ -36,6 +44,7 @@ export default defineComponent({
   },
   components: {
     ModalWrapper,
+    CategoryForm,
   },
 });
 </script>

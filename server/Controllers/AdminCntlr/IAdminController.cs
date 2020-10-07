@@ -13,6 +13,6 @@ namespace server.Controllers.AdminCntlr
 
         public ActionResult<LoginAdminSuccessResponse> LoginAdmin(LoginParameter loginParameter);
 
-        public ActionResult<CheckAdminAuthSuccessResponse> CheckAdminAuth();
+        public ActionResult<Admin> CheckAdminAuth();
     }
 }

@@ -6,7 +6,7 @@ import { Category, ServerError } from '@/types';
 
 const getCategories = async () => {
   try {
-    const { data } = await ApiService.API.get('/category');
+    const { data } = await ApiService.API.get<Category[]>('/category');
 
     return data;
   } catch (err) {
@@ -20,7 +20,7 @@ const getCategories = async () => {
 
 const addCategory = async (name: string) => {
   try {
-    const { data } = await ApiService.API.post<{ category: Category }>('/category', { name });
+    const { data } = await ApiService.API.post<Category>('/category', { name });
     return data;
   } catch (err) {
     if (err && err.response) {

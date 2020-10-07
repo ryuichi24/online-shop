@@ -20,5 +20,6 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'no-shadow': 'off',
+    'consistent-return': 'off',
   },
 };

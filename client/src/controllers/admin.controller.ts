@@ -24,7 +24,7 @@ const checkAdminAuth = async () => {
   try {
     ApiService.setToken();
 
-    const { data } = await ApiService.API.get<{ admin: Admin }>('/admin/check-auth');
+    const { data } = await ApiService.API.get<Admin>('/admin/check-auth');
     return data;
   } catch (err) {
     if (err && err.response) {

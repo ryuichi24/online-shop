@@ -1,5 +1,6 @@
 // admin
-export const LOGIN_ADMIN = "loginAdmin";
-export const CHECK_ADMIN_AUTH = "checkAdminAuth";
+export const LOGIN_ADMIN = 'loginAdmin';
+export const CHECK_ADMIN_AUTH = 'checkAdminAuth';
 // category
-export const ADD_CATEGORY = "addCategory";
+export const GET_CATEGORIES = 'getCategories';
+export const ADD_CATEGORY = 'addCategory';

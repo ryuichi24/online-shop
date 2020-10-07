@@ -13,7 +13,7 @@ namespace server.Controllers.CategoryCntlr
         public CategoryController(ICategoryRepository repository) : base(repository) { }
 
         [HttpPost]
-        public ActionResult<AddCategorySuccessResponse> AddNewCategory([FromBody] CategoryCreateParameter categoryCreateParameter)
+        public ActionResult<Category> AddNewCategory([FromBody] CategoryCreateParameter categoryCreateParameter)
         {
             Category newCategory = new Category()
             {
@@ -23,7 +23,7 @@ namespace server.Controllers.CategoryCntlr
             this._repository.Add(newCategory);
             this._repository.SaveChanges();
 
-            return this.CreatedAtRoute(new { Id = newCategory.CategoryId }, new AddCategorySuccessResponse { Category = newCategory });
+            return this.CreatedAtRoute(new { Id = newCategory.CategoryId }, newCategory);
         }
 
         [HttpPut("{id}")]

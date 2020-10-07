@@ -22,7 +22,12 @@
         <div class="product-form__category-input-container">
           <label for="category-list">Category</label>
           <select name="category-list">
-            <option v-for="(category, index) in categories" :key="index" value="category.categoryId">{{ category.name }}</option>
+            <option
+              v-for="(category, index) in categories"
+              :key="index"
+              value="category.categoryId"
+              >{{ category.name }}</option
+            >
           </select>
           <CategoryForm />
         </div>
@@ -33,9 +38,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, onMounted } from 'vue';
 // vuex
 import { useStore } from 'vuex';
+import { GET_CATEGORIES } from '../../../../store/types/action.type';
 // components
 import ModalWrapper from '../../../common/modal/ModalWrapper.vue';
 import CategoryForm from './category-form/CategoryForm.vue';
@@ -49,9 +55,13 @@ export default defineComponent({
     CategoryForm,
   },
   setup() {
-    const { getters } = useStore();
+    const { getters, dispatch } = useStore();
 
     const categories = computed(() => getters.categories);
+
+    onMounted(() => {
+      dispatch(GET_CATEGORIES);
+    });
 
     return {
       categories,

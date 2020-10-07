@@ -7,7 +7,7 @@ namespace server.Controllers.CategoryCntlr
 {
     public interface ICategoryController
     {
-        public ActionResult<AddCategorySuccessResponse> AddNewCategory([FromBody] CategoryCreateParameter categoryCreateParameter);
+        public ActionResult<Category> AddNewCategory([FromBody] CategoryCreateParameter categoryCreateParameter);
 
         public ActionResult UpdateCategory(int id, [FromBody] CategoryUpdateParameter categoryUpdateParameter);
     }

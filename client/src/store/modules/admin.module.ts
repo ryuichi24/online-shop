@@ -26,7 +26,7 @@ const getters = {
 const actions = {
   async loginAdmin(
     { commit }: { commit: Commit },
-    adminCredentials: { email: string; password: string }
+    adminCredentials: { email: string; password: string },
   ) {
     try {
       const { admin, token } = await AdminController.loginAdmin(adminCredentials);
@@ -39,7 +39,7 @@ const actions = {
   async checkAdminAuth({ commit }: { commit: Commit }) {
     try {
       if (!JwtService.getToken()) return commit(CLEAR_ADMIN_AUTH);
-      const { admin } = await AdminController.checkAdminAuth();
+      const admin = await AdminController.checkAdminAuth();
       if (!admin) return commit(CLEAR_ADMIN_AUTH);
 
       commit(SET_ADMIN_AUTH, { admin });

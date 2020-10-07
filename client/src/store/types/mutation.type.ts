@@ -4,3 +4,5 @@ export const CLEAR_ADMIN_AUTH = 'CLEAR_ADMIN_AUTH';
 // category
 export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
+// product
+export const ADD_PRODUCT = 'ADD_PRODUCT';

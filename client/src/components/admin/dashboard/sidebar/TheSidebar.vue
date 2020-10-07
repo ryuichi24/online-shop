@@ -7,7 +7,7 @@
         :class="[`sidebar__item ${item.isSelected && 'sidebar__item--selected'}`]"
       >
         <router-link :to="item.path">
-          <span>{{ item.text }}</span>
+          <span :class="[`sidebar__item-text ${item.isSelected && 'sidebar__item-text--selected'}`]">{{ item.text }}</span>
         </router-link>
       </li>
     </ul>

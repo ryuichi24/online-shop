@@ -5,5 +5,5 @@ export const CHECK_ADMIN_AUTH = 'checkAdminAuth';
 export const GET_CATEGORIES = 'getCategories';
 export const ADD_CATEGORY = 'addCategory';
 // product
-export const GET_PRODUCTS = "getProducts";
+export const GET_PRODUCTS = 'getProducts';
 export const ADD_PRODUCT = 'addProduct';

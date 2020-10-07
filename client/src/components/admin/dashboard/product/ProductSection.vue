@@ -12,76 +12,20 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed, onMounted } from 'vue';
+// vuex
+import { useStore } from 'vuex';
+import { GET_PRODUCTS } from '../../../../store/types/action.type';
 
 export default defineComponent({
   setup() {
-    const products = ref([
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-      {
-        name: 'product 1',
-        price: '10',
-      },
-    ]);
+    const { dispatch, getters } = useStore();
+
+    const products = computed(() => getters.products);
+
+    onMounted(() => {
+      dispatch(GET_PRODUCTS);
+    });
 
     return {
       products,

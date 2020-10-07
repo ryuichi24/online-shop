@@ -1,0 +1,41 @@
+.product-section {
+  $self: &;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  width: 85%;
+
+  height: 100vh;
+  overflow: scroll;
+
+
+  &__heading-container {
+    width: 90%;
+
+    margin-top: 2rem;
+
+    h1 {
+        color: rgba(0, 0, 0, 0.755);
+    }
+  }
+
+  &__product-list-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3rem;
+    grid-auto-rows: minmax(250px, auto);
+
+    width: 90%;
+
+    margin-top: 2rem;
+    padding-bottom: 4rem;
+
+    #{ $self }__product {
+      background-color: #fff;
+      border-radius: 0.5rem;
+    }
+  }
+}

@@ -11,6 +11,8 @@ namespace server.Controllers.AdminCntlr
 
         public ActionResult UpdateAdmin(int id, [FromBody] AdminUpdateParameter adminUpdateParameter);
 
+        public ActionResult<LoginAdminSuccessResponse> LoginAdmin(LoginParameter loginParameter);
+
         public ActionResult<CheckAdminAuthSuccessResponse> CheckAdminAuth();
     }
 }

@@ -6,15 +6,15 @@ import { Product, ServerError } from '@/types';
 
 const addProduct = async (product: Product) => {
   try {
-      const { data } = await ApiService.API.post<Product>('/product', product);
+    const { data } = await ApiService.API.post<Product>('/product', product);
 
-      return data;
+    return data;
   } catch (err) {
     if (err && err.response) {
-        const axiosError = err as AxiosError<ServerError>;
-        if (axiosError.response) return axiosError.response.data;
-      }
-      throw err;
+      const axiosError = err as AxiosError<ServerError>;
+      if (axiosError.response) return axiosError.response.data;
+    }
+    throw err;
   }
 };
 

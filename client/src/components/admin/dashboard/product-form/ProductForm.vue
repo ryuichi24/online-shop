@@ -22,7 +22,7 @@
         <div class="product-form__category-input-container">
           <label for="category-list">Category</label>
           <select v-model="categoryId" name="category-list">
-            <option value="default">-- Choose a category --</option>
+            <option value="null">-- Choose a category --</option>
             <option
               v-for="(category, index) in categories"
               :key="index"
@@ -42,7 +42,7 @@
 import { defineComponent, computed, onMounted, reactive, toRefs } from 'vue';
 // vuex
 import { useStore } from 'vuex';
-import { GET_CATEGORIES } from '../../../../store/types/action.type';
+import { GET_CATEGORIES, ADD_PRODUCT } from '../../../../store/types/action.type';
 // components
 import ModalWrapper from '../../../common/modal/ModalWrapper.vue';
 import CategoryForm from './category-form/CategoryForm.vue';
@@ -60,14 +60,21 @@ export default defineComponent({
 
     const productInputs = reactive({
       name: '',
-      price: 0,
+      price: '',
       description: '',
-      inventory: 0,
-      categoryId: 'default',
+      inventory: '',
+      categoryId: '',
     });
 
     const addNewProduct = () => {
-      console.log(productInputs);
+      const parsed = {
+        name: productInputs.name,
+        price: parseInt(productInputs.price, 10),
+        description: productInputs.description,
+        inventory: parseInt(productInputs.inventory, 10),
+        categoryId: parseInt(productInputs.categoryId, 10),
+      };
+      dispatch(ADD_PRODUCT, parsed);
     };
 
     const categories = computed(() => getters.categories);

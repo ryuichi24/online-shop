@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed, onMounted } from 'vue';
+import { defineComponent, computed, onMounted } from 'vue';
 // vuex
 import { useStore } from 'vuex';
 import { GET_PRODUCTS } from '../../../../store/types/action.type';

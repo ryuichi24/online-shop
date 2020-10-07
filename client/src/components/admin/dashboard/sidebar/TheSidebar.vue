@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 // hooks
 import { useSidebarItems } from '../../../../hooks';
@@ -37,8 +37,6 @@ export default defineComponent({
     afterEach(() => {
       changeSelectedState();
     });
-
-    onMounted(() => changeSelectedState());
 
     return {
       sidebarItems,

@@ -22,7 +22,7 @@
         <div class="product-form__category-input-container">
           <label for="category-list">Category</label>
           <select name="category-list">
-            <option value="it">IT</option>
+            <option v-for="(category, index) in categories" :key="index" value="category.categoryId">{{ category.name }}</option>
           </select>
           <CategoryForm />
         </div>
@@ -33,7 +33,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
+// vuex
+import { useStore } from 'vuex';
 // components
 import ModalWrapper from '../../../common/modal/ModalWrapper.vue';
 import CategoryForm from './category-form/CategoryForm.vue';
@@ -45,6 +47,15 @@ export default defineComponent({
   components: {
     ModalWrapper,
     CategoryForm,
+  },
+  setup() {
+    const { getters } = useStore();
+
+    const categories = computed(() => getters.categories);
+
+    return {
+      categories,
+    };
   },
 });
 </script>

@@ -6,13 +6,18 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
+// vuex
+import { useStore } from 'vuex';
+import { ADD_CATEGORY } from '../../../../../store/types/action.type';
 
 export default defineComponent({
   setup() {
+    const { dispatch } = useStore();
+
     const categoryName = ref();
 
     const addCategory = () => {
-      console.log(categoryName.value);
+      dispatch(ADD_CATEGORY, categoryName.value);
     };
 
     return {

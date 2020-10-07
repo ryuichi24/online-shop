@@ -7,11 +7,11 @@ import { Category } from '@/types';
 import { ADD_CATEGORY } from '../types/mutation.type';
 
 interface CategoryState {
-  categories: Category[],
+  categories: Category[];
 }
 
 const state = {
-  categories: null,
+  categories: [],
 };
 
 const getters = {
@@ -27,13 +27,13 @@ const actions = {
     } catch (err) {
       console.log(err.message);
     }
-  }
+  },
 };
 
 const mutations = {
   ADD_CATEGORY: (state: CategoryState, category: Category) => {
     state.categories.push(category);
-  }
+  },
 };
 
 export default {

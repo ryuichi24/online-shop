@@ -22,7 +22,6 @@ const useSidebarItems = () => {
 
   const changeSelectedState = () => {
     resetSelectedState();
-    console.log('object');
 
     const { href } = document.location;
     const reg = /([^/]*)\/*$/;

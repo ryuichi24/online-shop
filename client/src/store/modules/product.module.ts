@@ -1,5 +1,9 @@
 import { Commit } from "vuex";
 
+interface ProductState {
+  //
+}
+
 const state = {
 
   };

@@ -15,22 +15,21 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+// hooks
+import { useSidebarItems } from '../../../../hooks';
 
 export default defineComponent({
   setup() {
-    const sidebarItems = ref([
-      {
-        text: 'Products',
-        path: '/admin/products',
-        isSelected: false,
-      },
-      {
-        text: 'Orders',
-        path: '/admin/orders',
-        isSelected: true,
-      },
-    ]);
+    const { sidebarItems, changeSelectedState } = useSidebarItems();
+
+    const { afterEach } = useRouter();
+    afterEach(() => {
+      changeSelectedState();
+    });
+
+    onMounted(() => changeSelectedState());
 
     return {
       sidebarItems,

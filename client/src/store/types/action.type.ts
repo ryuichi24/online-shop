@@ -1,3 +1,8 @@
+// user
+export const SIGN_UP_USER = 'singUpUser';
+export const LOGIN_USER = 'loginUser';
+export const LOGOUT_USER = 'logoutUser';
+export const CHECK_AUTH = 'checkAuth';
 // admin
 export const LOGIN_ADMIN = 'loginAdmin';
 export const CHECK_ADMIN_AUTH = 'checkAdminAuth';

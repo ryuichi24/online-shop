@@ -6,7 +6,16 @@ import {
   NavigationGuardNext,
 } from 'vue-router';
 // views
-import { HomePage, AdminPage, ProductSection, OrderSection } from '@/views';
+import {
+  HomePage,
+  AdminPage,
+  ProductSection,
+  OrderSection,
+  SignUpForm,
+  LoginForm,
+  AccountPage,
+  CartItemsPage,
+} from '@/views';
 // vuex
 import store from '@/store';
 import { CHECK_ADMIN_AUTH } from '@/store/types/action.type';
@@ -16,6 +25,26 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'HomePage',
     component: HomePage,
+  },
+  {
+    path: '/sign-up',
+    name: 'SignUpForm',
+    component: SignUpForm,
+  },
+  {
+    path: '/login',
+    name: 'LoginForm',
+    component: LoginForm,
+  },
+  {
+    path: '/account',
+    name: 'AccountPage',
+    component: AccountPage,
+  },
+  {
+    path: '/cart-items',
+    name: 'CartItemsPage',
+    component: CartItemsPage,
   },
   {
     path: '/admin',
@@ -46,7 +75,7 @@ router.beforeEach(
     // admin auth check
     await store.dispatch(CHECK_ADMIN_AUTH);
     next();
-  }
+  },
 );
 
 export default router;

@@ -1,5 +1,5 @@
 <template>
-  <teleport to="#teleportCreateProduct">
+  <teleport to="#teleportTarget">
     <modal-wrapper>
       <span class="close-btn" @click="toggleForm">&times;</span>
       <form @submit.prevent="addNewProduct" class="product-form">

@@ -13,7 +13,8 @@
           >
         </router-link>
       </li>
-      <ProductFormToggleBtn />
+      <ProductForm v-if="isModalOpen" :toggleForm="toggle" />
+      <button @click="toggle">Add Product</button>
     </ul>
   </nav>
 </template>
@@ -22,13 +23,13 @@
 import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 // hooks
-import { useSidebarItems } from '../../../../hooks';
+import { useSidebarItems, useModalToggle } from '../../../../hooks';
 // components
-import ProductFormToggleBtn from '../product-form/ProductFormToggleBtn';
+import ProductForm from '../product-form/ProductForm';
 
 export default defineComponent({
   components: {
-    ProductFormToggleBtn,
+    ProductForm,
   },
   setup() {
     const { sidebarItems, changeSelectedState } = useSidebarItems();
@@ -38,8 +39,12 @@ export default defineComponent({
       changeSelectedState();
     });
 
+    const { isModalOpen, toggle } = useModalToggle();
+
     return {
       sidebarItems,
+      isModalOpen,
+      toggle,
     };
   },
 });

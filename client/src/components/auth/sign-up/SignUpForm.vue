@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent>
+  <form class="container" style="margin-bottom: 10rem;" @submit.prevent>
     <div>
       <label for="">First Name</label>
       <input v-model="firstName" type="text" />

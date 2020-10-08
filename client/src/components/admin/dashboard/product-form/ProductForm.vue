@@ -2,7 +2,7 @@
   <teleport to="#teleportTarget">
     <modal-wrapper>
       <span class="close-btn" @click="toggleForm">&times;</span>
-      <form @submit.prevent="addNewProduct" class="product-form">
+      <form @submit.prevent="submitHandle" class="product-form">
         <div class="product-form__input-container">
           <label for="name">Name</label>
           <input v-model="name" name="name" type="text" />
@@ -42,7 +42,7 @@
 import { defineComponent, computed, onMounted, reactive, toRefs } from 'vue';
 // vuex
 import { useStore } from 'vuex';
-import { GET_CATEGORIES, ADD_PRODUCT } from '../../../../store/types/action.type';
+import { GET_CATEGORIES, ADD_PRODUCT, SELECT_PRODUCT, UPDATE_PRODUCT } from '../../../../store/types/action.type';
 // components
 import ModalWrapper from '../../../common/modal/ModalWrapper.vue';
 import CategoryForm from './category-form/CategoryForm.vue';
@@ -50,23 +50,26 @@ import CategoryForm from './category-form/CategoryForm.vue';
 export default defineComponent({
   props: {
     toggleForm: Function,
+    productId: Number,
   },
   components: {
     ModalWrapper,
     CategoryForm,
   },
-  setup() {
+  setup({ productId }) {
     const { getters, dispatch } = useStore();
 
-    const productInputs = reactive({
-      name: '',
-      price: '',
-      description: '',
-      inventory: '',
-      categoryId: '',
-    });
+    const productInputs = productId
+      ? computed<any>(() => getters.selectedProduct)
+      : reactive<any>({
+          name: '',
+          price: '',
+          description: '',
+          inventory: '',
+          categoryId: '',
+        });
 
-    const addNewProduct = () => {
+    const submitHandle = () => {
       const parsed = {
         name: productInputs.name,
         price: parseInt(productInputs.price, 10),
@@ -74,19 +77,22 @@ export default defineComponent({
         inventory: parseInt(productInputs.inventory, 10),
         categoryId: parseInt(productInputs.categoryId, 10),
       };
-      dispatch(ADD_PRODUCT, parsed);
+      if (!productId) return dispatch(ADD_PRODUCT, parsed);
+
+      dispatch(UPDATE_PRODUCT, parsed);
     };
 
     const categories = computed(() => getters.categories);
 
     onMounted(() => {
       dispatch(GET_CATEGORIES);
+      if (productId) dispatch(SELECT_PRODUCT, productId);
     });
 
     return {
       categories,
       ...toRefs(productInputs),
-      addNewProduct,
+      submitHandle,
     };
   },
 });

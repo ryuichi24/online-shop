@@ -40,6 +40,13 @@ const actions = {
       console.log(err.message);
     }
   },
+  async updateProduct({ commit }: { commit: Commit }, productToUpdate: Product) {
+    try {
+      console.log(productToUpdate);
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
   selectProduct({ commit }: { commit: Commit }, productId: number) {
     if (!productId || typeof productId !== 'number') return;
 

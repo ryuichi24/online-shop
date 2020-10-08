@@ -3,14 +3,22 @@ import { ref } from 'vue';
 const useNavItems = () => {
   const navItems = ref([
     {
+      text: 'Cart Items',
+      path: '/cart-items',
+      isSelected: false,
+      isForGuest: false,
+    },
+    {
       text: 'Login',
       path: '/login',
       isSelected: false,
+      isForGuest: true,
     },
     {
-      text: 'Contact us',
-      path: '/contact-us',
+      text: 'Account',
+      path: '/account',
       isSelected: false,
+      isForGuest: false,
     },
   ]);
 

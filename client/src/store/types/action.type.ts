@@ -7,3 +7,4 @@ export const ADD_CATEGORY = 'addCategory';
 // product
 export const GET_PRODUCTS = 'getProducts';
 export const ADD_PRODUCT = 'addProduct';
+export const SELECT_PRODUCT = 'selectProduct';

@@ -4,7 +4,7 @@ import { ProductController } from '@/controllers';
 // type
 import { Product } from '@/types';
 // mutation types
-import { SET_PRODUCTS, ADD_PRODUCT } from '../types/mutation.type';
+import { SET_PRODUCTS, ADD_PRODUCT, SET_SELECTED_PRODUCT } from '../types/mutation.type';
 
 interface ProductState {
   selectedProduct: Product | null;
@@ -40,6 +40,11 @@ const actions = {
       console.log(err.message);
     }
   },
+  selectProduct({ commit }: { commit: Commit }, productId: number) {
+    if (!productId || typeof productId !== 'number') return;
+
+    commit(SET_SELECTED_PRODUCT, productId);
+  },
 };
 
 const mutations = {
@@ -48,6 +53,12 @@ const mutations = {
   },
   ADD_PRODUCT: (state: ProductState, addedProduct: Product) => {
     state.products.push(addedProduct);
+  },
+  SET_SELECTED_PRODUCT: (state: ProductState, productId: number) => {
+    const selected = state.products.find((p: Product) => p.productId === productId);
+    if (!selected) return;
+
+    state.selectedProduct = selected;
   },
 };
 

@@ -1,8 +1,8 @@
 <template>
   <teleport to="#teleportTarget">
     <modal-wrapper>
-      <span class="close-btn" @click="toggleForm">&times;</span>
-      <form @submit.prevent="submitHandle" class="product-form">
+      <span class="close-btn" @click="toggle">&times;</span>
+      <form @submit.prevent class="product-form">
         <div class="product-form__input-container">
           <label for="name">Name</label>
           <input v-model="name" name="name" type="text" />
@@ -13,7 +13,12 @@
         </div>
         <div class="product-form__input-container">
           <label for="description">Description</label>
-          <textarea v-model="description" name="description" cols="30" rows="10"></textarea>
+          <textarea
+            v-model="description"
+            name="description"
+            cols="30"
+            rows="10"
+          ></textarea>
         </div>
         <div class="product-form__input-container">
           <label for="inventory">Inventory</label>
@@ -32,7 +37,7 @@
           </select>
           <CategoryForm />
         </div>
-        <button type="submit">Create</button>
+        <button @click="submitHandle" type="submit">Create</button>
       </form>
     </modal-wrapper>
   </teleport>
@@ -42,26 +47,26 @@
 import { defineComponent, computed, onMounted, reactive, toRefs } from 'vue';
 // vuex
 import { useStore } from 'vuex';
-import { GET_CATEGORIES, ADD_PRODUCT, SELECT_PRODUCT, UPDATE_PRODUCT } from '../../../../store/types/action.type';
+import {
+  GET_CATEGORIES,
+  ADD_PRODUCT,
+} from '../../../../../store/types/action.type';
 // components
-import ModalWrapper from '../../../common/modal/ModalWrapper.vue';
-import CategoryForm from './category-form/CategoryForm.vue';
+import ModalWrapper from '../../../../common/modal/ModalWrapper.vue';
+import CategoryForm from '../category-form/CategoryForm.vue';
 
 export default defineComponent({
   props: {
-    toggleForm: Function,
-    productId: Number,
+    toggle: Function,
   },
   components: {
     ModalWrapper,
     CategoryForm,
   },
-  setup({ productId }) {
+  setup() {
     const { getters, dispatch } = useStore();
 
-    const productInputs = productId
-      ? computed<any>(() => getters.selectedProduct)
-      : reactive<any>({
+    const productInputs = reactive({
           name: '',
           price: '',
           description: '',
@@ -77,16 +82,14 @@ export default defineComponent({
         inventory: parseInt(productInputs.inventory, 10),
         categoryId: parseInt(productInputs.categoryId, 10),
       };
-      if (!productId) return dispatch(ADD_PRODUCT, parsed);
 
-      dispatch(UPDATE_PRODUCT, parsed);
+      dispatch(ADD_PRODUCT, parsed);
     };
 
     const categories = computed(() => getters.categories);
 
     onMounted(() => {
       dispatch(GET_CATEGORIES);
-      if (productId) dispatch(SELECT_PRODUCT, productId);
     });
 
     return {

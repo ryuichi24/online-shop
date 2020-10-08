@@ -6,7 +6,7 @@ namespace server.Models
     public class Product
     {
         [Key]
-        public int ProdcutId { get; set; }
+        public int ProductId { get; set; }
 
         [Required]
         [MaxLength(150)]

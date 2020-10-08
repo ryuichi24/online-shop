@@ -5,8 +5,7 @@
     </div>
     <div class="product-section__product-list-container">
       <div class="product-section__product" v-for="(product, index) in products" :key="index">
-        <ProductForm v-if="isModalOpen" :productId="product.productId" :toggleForm="toggle" :key="index" />
-        <button @click="toggle">Edit</button>
+        <div>{{ product.productId }}</div>
         <div>{{ product.name }}</div>
         <div>{{ product.price }}</div>
         <div>{{ product.description }}</div>
@@ -16,27 +15,21 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, ref, computed, onMounted } from 'vue';
+<script lang="ts">
+import { defineComponent, computed, onMounted, ref } from 'vue';
 // vuex
 import { useStore } from 'vuex';
 import { GET_PRODUCTS } from '../../../../store/types/action.type';
-// components
-import ProductForm from '../product-form/ProductForm.vue';
 
 export default defineComponent({
-  components: {
-    ProductForm,
-  },
   setup() {
     const { dispatch, getters } = useStore();
 
     const products = computed(() => getters.products);
 
-    const isModalOpen = ref(false);
-
-    const toggle = () => {
-      isModalOpen.value = !isModalOpen.value;
+    const whichProductId = ref();
+    const toggle = (productId: number) => {
+      whichProductId.value = productId;
     };
 
     onMounted(() => {
@@ -45,7 +38,7 @@ export default defineComponent({
 
     return {
       products,
-      isModalOpen,
+      whichProductId,
       toggle,
     };
   },

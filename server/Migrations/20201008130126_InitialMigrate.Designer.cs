@@ -10,8 +10,8 @@ using server.DataAccess;
 namespace server.Migrations
 {
     [DbContext(typeof(OnlineShopDbContext))]
-    [Migration("20201005213211_AddInventory")]
-    partial class AddInventory
+    [Migration("20201008130126_InitialMigrate")]
+    partial class InitialMigrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -181,7 +181,7 @@ namespace server.Migrations
 
             modelBuilder.Entity("server.Models.Product", b =>
                 {
-                    b.Property<int>("ProdcutId")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -204,7 +204,7 @@ namespace server.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.HasKey("ProdcutId");
+                    b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
 

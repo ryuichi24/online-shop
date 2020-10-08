@@ -179,7 +179,7 @@ namespace server.Migrations
 
             modelBuilder.Entity("server.Models.Product", b =>
                 {
-                    b.Property<int>("ProdcutId")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -202,7 +202,7 @@ namespace server.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.HasKey("ProdcutId");
+                    b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
 

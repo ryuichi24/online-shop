@@ -13,23 +13,23 @@
           >
         </router-link>
       </li>
-      <ProductForm v-if="isModalOpen" :toggleForm="toggle" />
+      <CreateProductForm v-if="isModalOpen" :toggle="toggle" />
       <button @click="toggle">Add Product</button>
     </ul>
   </nav>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
 // hooks
-import { useSidebarItems, useModalToggle } from '../../../../hooks';
+import { useSidebarItems } from '../../../../hooks';
 // components
-import ProductForm from '../product-form/ProductForm';
+import CreateProductForm from '../form/create-product/CreateProductForm.vue';
 
 export default defineComponent({
   components: {
-    ProductForm,
+    CreateProductForm,
   },
   setup() {
     const { sidebarItems, changeSelectedState } = useSidebarItems();
@@ -39,7 +39,10 @@ export default defineComponent({
       changeSelectedState();
     });
 
-    const { isModalOpen, toggle } = useModalToggle();
+    const isModalOpen = ref(false);
+    const toggle = () => {
+      isModalOpen.value = !isModalOpen.value;
+    };
 
     return {
       sidebarItems,

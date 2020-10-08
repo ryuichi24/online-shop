@@ -26,7 +26,7 @@ namespace server.Controllers.ProductCntlr
             this._repository.Add(newProduct);
             this._repository.SaveChanges();
 
-            return this.CreatedAtRoute(new { Id = newProduct.ProdcutId }, newProduct);
+            return this.CreatedAtRoute(new { Id = newProduct.ProductId }, newProduct);
         }
 
         [HttpPut("{id}")]

@@ -50,6 +50,8 @@ const actions = {
   selectProduct({ commit }: { commit: Commit }, productId: number) {
     if (!productId || typeof productId !== 'number') return;
 
+    console.log(productId);
+
     commit(SET_SELECTED_PRODUCT, productId);
   },
 };

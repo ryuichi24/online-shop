@@ -25,7 +25,7 @@ namespace server.Controllers.UserCntlr
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult<User> AddNewUser([FromBody] UserCreateParameter userCreateParameter)
+        public ActionResult<SignUpUserSuccessResponse> AddNewUser([FromBody] UserCreateParameter userCreateParameter)
         {
             User existingUser = this._repository.GetUserByEmail(userCreateParameter.Email);
             if (existingUser != null) return this.BadRequest();
@@ -41,7 +41,9 @@ namespace server.Controllers.UserCntlr
 
             this._repository.Add(newUser);
             this._repository.SaveChanges();
-            return this.CreatedAtRoute(new { Id = newUser.UserId }, newUser);
+
+            string token = this._authManager.GenerateJwt(newUser.UserId.ToString(), newUser.Email, AuthRole.User);
+            return this.CreatedAtRoute(new { Id = newUser.UserId }, new SignUpUserSuccessResponse { Token = token, User = newUser });
         }
 
 

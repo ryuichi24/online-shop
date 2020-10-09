@@ -7,7 +7,7 @@ namespace server.Controllers.UserCntlr
 {
     public interface IUserController
     {
-        public ActionResult<User> AddNewUser([FromBody] UserCreateParameter userCreateParameter);
+        public ActionResult<SignUpUserSuccessResponse> AddNewUser([FromBody] UserCreateParameter userCreateParameter);
 
         public ActionResult<User> UpdateUser(int id, [FromBody] UserUpdateParameter userUpdateParameter);
 

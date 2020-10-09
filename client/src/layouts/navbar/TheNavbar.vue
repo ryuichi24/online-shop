@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, registerRuntimeCompiler } from 'vue';
 import { useRouter } from 'vue-router';
 // hooks
 import { useNavItems } from '../../hooks';
@@ -30,6 +30,7 @@ export default defineComponent({
     const { navItems, changeSelectedState, resetSelectedState } = useNavItems();
     const { afterEach } = useRouter();
     afterEach(() => {
+      if (`${document.location.origin}/` === document.location.href) return;
       changeSelectedState();
     });
     return {

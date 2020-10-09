@@ -14,6 +14,8 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from 'vue';
+// router
+import { useRouter } from 'vue-router';
 // vuex
 import { useStore } from 'vuex';
 import { LOGIN_USER } from '../../../store/types/action.type';
@@ -21,6 +23,7 @@ import { LOGIN_USER } from '../../../store/types/action.type';
 export default defineComponent({
   setup() {
     const { dispatch } = useStore();
+    const { push } = useRouter();
 
     const userInputs = reactive({
       email: '',
@@ -28,7 +31,9 @@ export default defineComponent({
     });
 
     const login = () => {
-      dispatch(LOGIN_USER, userInputs);
+      dispatch(LOGIN_USER, userInputs).then(() => {
+        push({ name: 'HomePage' });
+      });
     };
 
     return {

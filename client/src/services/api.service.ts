@@ -15,7 +15,15 @@ const setToken = () => {
   };
 };
 
+const setAdminToken = () => {
+  if (!jwtService.getAdminToken()) return;
+  API.defaults.headers.common = {
+    Authorization: `bearer ${jwtService.getAdminToken()}`,
+  };
+};
+
 export default {
   API,
   setToken,
+  setAdminToken,
 };

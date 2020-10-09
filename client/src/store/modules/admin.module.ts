@@ -40,7 +40,7 @@ const actions = {
   },
   async checkAdminAuth({ commit }: { commit: Commit }) {
     try {
-      if (!JwtService.getToken()) return commit(CLEAR_ADMIN_AUTH);
+      if (!JwtService.getAdminToken()) return commit(CLEAR_ADMIN_AUTH);
       const admin = await AdminController.checkAdminAuth();
       if (!admin) return commit(CLEAR_ADMIN_AUTH);
 
@@ -55,12 +55,12 @@ const mutations = {
   SET_ADMIN_AUTH: (state: AdminState, { admin, token }: { admin: Admin; token: string }) => {
     state.currentAdmin = admin;
     state.isAdmin = true;
-    if (token) JwtService.saveToken(token);
+    if (token) JwtService.saveAdminToken(token);
   },
   CLEAR_ADMIN_AUTH: (state: AdminState) => {
     state.currentAdmin = null;
     state.isAdmin = false;
-    JwtService.destroyToken();
+    JwtService.destroyAdminToken();
   },
 };
 

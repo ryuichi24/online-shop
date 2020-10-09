@@ -40,11 +40,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/account',
     name: 'AccountPage',
     component: AccountPage,
+    meta: {
+      requiredAuth: true,
+    },
   },
   {
     path: '/cart-items',
     name: 'CartItemsPage',
     component: CartItemsPage,
+    meta: {
+      requiredAuth: true,
+    },
   },
   {
     path: '/admin',

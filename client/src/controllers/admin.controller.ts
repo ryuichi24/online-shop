@@ -22,7 +22,7 @@ const loginAdmin = async (adminCredentials: { email: string; password: string })
 
 const checkAdminAuth = async () => {
   try {
-    ApiService.setToken();
+    ApiService.setAdminToken();
 
     const { data } = await ApiService.API.get<Admin>('/admin/check-auth');
     return data;

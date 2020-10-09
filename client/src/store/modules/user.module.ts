@@ -35,7 +35,7 @@ const actions = {
   },
   async loginUser(
     { commit }: { commit: Commit },
-    userCredentials: { email: string; password: string }
+    userCredentials: { email: string; password: string },
   ) {
     try {
       const res = await UserController.loginUser(userCredentials);

@@ -1,5 +1,5 @@
 // user
-export const SIGN_UP_USER = 'singUpUser';
+export const SIGN_UP_USER = 'signUpUser';
 export const LOGIN_USER = 'loginUser';
 export const LOGOUT_USER = 'logoutUser';
 export const CHECK_AUTH = 'checkAuth';

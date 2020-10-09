@@ -28,6 +28,7 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 // vuex
 import { useStore } from 'vuex';
+import { SIGN_UP_USER } from '../../../store/types/action.type';
 
 export default defineComponent({
   setup() {
@@ -42,7 +43,7 @@ export default defineComponent({
     });
 
     const signUp = () => {
-      console.log(userInputs);
+      dispatch(SIGN_UP_USER, userInputs);
     };
 
     return {

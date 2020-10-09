@@ -6,7 +6,7 @@ import { User, ServerError } from '@/types';
 
 const createUser = async (user: User) => {
   try {
-    const { data } = await ApiService.API.post<{ user: User, token: string }>('/user', user);
+    const { data } = await ApiService.API.post<{ user: User; token: string }>('/user', user);
 
     return data;
   } catch (err) {
@@ -20,7 +20,10 @@ const createUser = async (user: User) => {
 
 const loginUser = async (userCredentials: { email: string; password: string }) => {
   try {
-    const { data } = await ApiService.API.post<{ user: User, token: string }>('user', userCredentials);
+    const { data } = await ApiService.API.post<{ user: User; token: string }>(
+      '/user/login',
+      userCredentials,
+    );
 
     return data;
   } catch (err) {
@@ -36,7 +39,7 @@ const checkUserAuth = async () => {
   try {
     ApiService.setToken();
 
-    const { data } = await ApiService.API.get<User>('user/check-auth');
+    const { data } = await ApiService.API.get<User>('/user/check-auth');
 
     return data;
   } catch (err) {

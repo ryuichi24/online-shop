@@ -16,6 +16,7 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 // vuex
 import { useStore } from 'vuex';
+import { LOGIN_USER } from '../../../store/types/action.type';
 
 export default defineComponent({
   setup() {
@@ -27,7 +28,7 @@ export default defineComponent({
     });
 
     const login = () => {
-      console.log(userInputs);
+      dispatch(LOGIN_USER, userInputs);
     };
 
     return {

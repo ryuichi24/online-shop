@@ -30,6 +30,8 @@ const actions = {
   ) {
     try {
       const { admin, token } = await AdminController.loginAdmin(adminCredentials);
+      // TODO: make error message
+      if ((!admin) || (!token)) return;
 
       commit(SET_ADMIN_AUTH, { admin, token });
     } catch (err) {

@@ -30,7 +30,6 @@ export default defineComponent({
     const { navItems, changeSelectedState, resetSelectedState } = useNavItems();
     const { afterEach } = useRouter();
     afterEach(() => {
-      if (`${document.location.origin}/` === document.location.href) return;
       changeSelectedState();
     });
     return {

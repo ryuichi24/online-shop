@@ -31,6 +31,8 @@ const useNavItems = () => {
   const changeSelectedState = () => {
     resetSelectedState();
 
+    if (`${document.location.origin}/` === document.location.href) return;
+
     const { href } = document.location;
     const reg = /([^/]*)\/*$/;
     const result = href.match(reg);

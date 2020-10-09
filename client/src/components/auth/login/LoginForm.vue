@@ -1,15 +1,25 @@
 <template>
-  <form class="container" style="margin-bottom: 10rem;" @submit.prevent>
+  <div class="container" style="margin-bottom: 10rem;">
+    <form @submit.prevent>
+      <div>
+        <label for="">Email</label>
+        <input v-model="email" type="text" />
+      </div>
+      <div>
+        <label for="">password</label>
+        <input v-model="password" type="text" />
+      </div>
+      <button @click="login">Login</button>
+    </form>
     <div>
-      <label for="">Email</label>
-      <input v-model="email" type="text" />
+      <span>Don't have an account yet?</span>
+      <router-link to="/sign-up">
+        <span>
+          Create an account
+        </span>
+      </router-link>
     </div>
-    <div>
-      <label for="">password</label>
-      <input v-model="password" type="text" />
-    </div>
-    <button @click="login">Login</button>
-  </form>
+  </div>
 </template>
 
 <script lang="ts">

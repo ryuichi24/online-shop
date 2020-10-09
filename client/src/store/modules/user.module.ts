@@ -51,6 +51,7 @@ const actions = {
   async checkAuth({ commit }: { commit: Commit }) {
     try {
       const user = await UserController.checkUserAuth();
+      if (!user) return JwtService.destroyToken();
 
       commit(SET_AUTH, { user });
     } catch (err) {

@@ -18,7 +18,7 @@ import {
 } from '@/views';
 // vuex
 import store from '@/store';
-import { CHECK_ADMIN_AUTH } from '@/store/types/action.type';
+import { CHECK_ADMIN_AUTH, CHECK_AUTH } from '@/store/types/action.type';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -78,9 +78,26 @@ const router = createRouter({
 
 router.beforeEach(
   async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    const requiredAuth = to.matched.some((route) => route.meta.requiredAuth);
+
+    await store.dispatch(CHECK_AUTH);
+    const isAuthenticated = store.getters.isAuthenticated;
+
     // admin auth check
     await store.dispatch(CHECK_ADMIN_AUTH);
-    next();
+
+    console.log(requiredAuth);
+    console.log(isAuthenticated);
+
+    if (requiredAuth && !isAuthenticated) {
+      // TODO: dispatch message saying you need to login
+      alert('Please login to access');
+      next('/login');
+    } else if (requiredAuth && isAuthenticated) {
+      next();
+    } else {
+      next();
+    }
   },
 );
 

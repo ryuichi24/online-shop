@@ -2,9 +2,11 @@ import { Commit } from 'vuex';
 // types
 import { User } from '@/types';
 // mutation types
-import { CLEAR_AUTH } from '@/store/types/mutation.type';
+import { CLEAR_AUTH, SET_AUTH } from '@/store/types/mutation.type';
 // services
 import JwtService from '@/services/jwt.service';
+// controller
+import { UserController } from '@/controllers';
 
 interface UserState {
   currentUser: User | null;
@@ -24,8 +26,9 @@ const getters = {
 const actions = {
   async signUpUser({ commit }: { commit: Commit }, newUser: User) {
     try {
-      // do api call
-      // commit
+      const res = await UserController.createUser(newUser);
+
+      commit(SET_AUTH, res);
     } catch (err) {
       console.log(err.message);
     }
@@ -35,8 +38,9 @@ const actions = {
     userCredentials: { email: string; password: string }
   ) {
     try {
-      // do api
-      // commit
+      const res = await UserController.loginUser(userCredentials);
+
+      commit(SET_AUTH, res);
     } catch (err) {
       console.log(err.message);
     }
@@ -44,18 +48,19 @@ const actions = {
   async logoutUser({ commit }: { commit: Commit }) {
     commit(CLEAR_AUTH);
   },
-  async checkAuth() {
+  async checkAuth({ commit }: { commit: Commit }) {
     try {
-      // do api call
-      // commit
+      const user = await UserController.checkUserAuth();
+
+      commit(SET_AUTH, { user });
     } catch (err) {
       console.log(err.message);
     }
-  }
+  },
 };
 
 const mutations = {
-  SET_AUTH: (state: UserState, { user, token }: { user: User, token: string }) => {
+  SET_AUTH: (state: UserState, { user, token }: { user: User; token: string }) => {
     state.currentUser = user;
     state.isAuthenticated = true;
     if (token) JwtService.saveToken(token);
@@ -64,7 +69,7 @@ const mutations = {
     JwtService.destroyToken();
     state.currentUser = null;
     state.isAuthenticated = false;
-  }
+  },
 };
 
 export default {

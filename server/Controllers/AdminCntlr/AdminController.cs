@@ -57,7 +57,7 @@ namespace server.Controllers.AdminCntlr
             this._repository.Update(existingAdmin);
             this._repository.SaveChanges();
 
-            return NoContent();
+            return this.NoContent();
         }
 
         [AllowAnonymous]

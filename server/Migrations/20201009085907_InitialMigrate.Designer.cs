@@ -10,7 +10,7 @@ using server.DataAccess;
 namespace server.Migrations
 {
     [DbContext(typeof(OnlineShopDbContext))]
-    [Migration("20201008130126_InitialMigrate")]
+    [Migration("20201009085907_InitialMigrate")]
     partial class InitialMigrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -238,8 +238,8 @@ namespace server.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<int>("Phone")
-                        .HasColumnType("int")
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
                     b.HasKey("UserId");

@@ -46,7 +46,7 @@ namespace server.Migrations
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     Email = table.Column<string>(maxLength: 50, nullable: false),
                     Password = table.Column<string>(maxLength: 250, nullable: false),
-                    Phone = table.Column<int>(maxLength: 50, nullable: false)
+                    Phone = table.Column<string>(maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {

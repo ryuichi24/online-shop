@@ -17,6 +17,6 @@ namespace server.Helpers.ParameterClass
         public string Password { get; set; }
 
         [MaxLength(50)]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
     }
 }

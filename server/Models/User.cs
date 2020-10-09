@@ -26,7 +26,7 @@ namespace server.Models
         public string Password { get; set; }
 
         [MaxLength(50)]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
 
         public List<Address> Addresses { get; set; } = new List<Address>();
 

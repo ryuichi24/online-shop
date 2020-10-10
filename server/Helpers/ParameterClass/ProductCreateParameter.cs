@@ -17,6 +17,8 @@ namespace server.Helpers.ParameterClass
         [Required]
         public int Inventory { get; set; }
 
+        public string Image { get; set; }
+
         [Required]
         public int CategoryId { get; set; }
     }

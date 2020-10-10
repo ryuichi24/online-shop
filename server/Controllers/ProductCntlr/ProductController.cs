@@ -20,7 +20,8 @@ namespace server.Controllers.ProductCntlr
                 Price = productCreateParameter.Price,
                 Description = productCreateParameter.Description,
                 Inventory = productCreateParameter.Inventory,
-                CategoryId = productCreateParameter.CategoryId
+                CategoryId = productCreateParameter.CategoryId,
+                Image = productCreateParameter.Image
             };
 
             this._repository.Add(newProduct);
@@ -35,11 +36,12 @@ namespace server.Controllers.ProductCntlr
             Product existingProduct = this._repository.GetById(id);
             if (existingProduct == null) return this.NotFound();
 
-            if(productUpdateParameter.Name != null) existingProduct.Name = productUpdateParameter.Name;
-            if(!productUpdateParameter.Price.Equals(null)) existingProduct.Price = productUpdateParameter.Price;
-            if(productUpdateParameter.Description != null) existingProduct.Description = productUpdateParameter.Description;
-            if(!productUpdateParameter.Inventory.Equals(null)) existingProduct.Inventory = productUpdateParameter.Inventory;
-            if(!productUpdateParameter.CategoryId.Equals(null)) existingProduct.CategoryId = productUpdateParameter.CategoryId;
+            if (productUpdateParameter.Name != null) existingProduct.Name = productUpdateParameter.Name;
+            if (!productUpdateParameter.Price.Equals(null)) existingProduct.Price = productUpdateParameter.Price;
+            if (productUpdateParameter.Description != null) existingProduct.Description = productUpdateParameter.Description;
+            if (!productUpdateParameter.Inventory.Equals(null)) existingProduct.Inventory = productUpdateParameter.Inventory;
+            if (productUpdateParameter.Image != null) existingProduct.Image = productUpdateParameter.Image;
+            if (!productUpdateParameter.CategoryId.Equals(null)) existingProduct.CategoryId = productUpdateParameter.CategoryId;
 
             this._repository.Update(existingProduct);
             this._repository.SaveChanges();

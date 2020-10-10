@@ -15,6 +15,7 @@ import {
   LoginForm,
   AccountPage,
   CartItemsPage,
+  ProductPage,
 } from '@/views';
 // vuex
 import store from '@/store';
@@ -25,6 +26,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'HomePage',
     component: HomePage,
+  },
+  {
+    path: '/product/:id',
+    name: 'ProductPage',
+    component: ProductPage,
   },
   {
     path: '/sign-up',
@@ -85,9 +91,6 @@ router.beforeEach(
 
     // admin auth check
     await store.dispatch(CHECK_ADMIN_AUTH);
-
-    console.log(requiredAuth);
-    console.log(isAuthenticated);
 
     if (requiredAuth && !isAuthenticated) {
       // TODO: dispatch message saying you need to login

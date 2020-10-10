@@ -1,4 +1,5 @@
 const HomePage = () => import('@/components/home/HomePage.vue');
+const ProductPage = () => import('@/components/home/product/ProductPage.vue');
 // admin
 const AdminPage = () => import('@/components/admin/AdminPage.vue');
 const ProductSection = () => import('@/components/admin/dashboard/product/ProductSection.vue');
@@ -20,4 +21,5 @@ export {
   LoginForm,
   AccountPage,
   CartItemsPage,
+  ProductPage,
 };

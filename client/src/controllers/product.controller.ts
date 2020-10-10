@@ -18,6 +18,20 @@ const getProducts = async () => {
   }
 };
 
+const getProductById = async (id: number) => {
+  try {
+    const { data } = await ApiService.API.get<Product>(`/product/${id}`);
+
+    return data;
+  } catch (err) {
+    if (err && err.response) {
+      const axiosError = err as AxiosError<ServerError>;
+      if (axiosError.response) return axiosError.response.data;
+    }
+    throw err;
+  }
+};
+
 const addProduct = async (product: Product) => {
   try {
     const { data } = await ApiService.API.post<Product>('/product', product);
@@ -34,5 +48,6 @@ const addProduct = async (product: Product) => {
 
 export default {
   getProducts,
+  getProductById,
   addProduct,
 };

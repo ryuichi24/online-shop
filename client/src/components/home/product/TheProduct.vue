@@ -1,7 +1,9 @@
 <template>
   <div class="product">
-      <div>{{ product.name }}</div>
-      <div>{{ product.price }}</div>
+    <router-link :to="`/product/${product.productId}`">
+      <span>{{ product.name }}</span>
+    </router-link>
+    <div>{{ product.price }}</div>
   </div>
 </template>
 

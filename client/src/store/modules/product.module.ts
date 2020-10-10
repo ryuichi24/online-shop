@@ -22,7 +22,7 @@ const state: ProductState = {
 };
 
 const getters = {
-  selectedProduct: (state: ProductState) => state.product,
+  product: (state: ProductState) => state.product,
   products: (state: ProductState) => state.products,
 };
 

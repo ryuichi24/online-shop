@@ -1,9 +1,17 @@
 <template>
   <div class="container" style="margin-bottom: 10rem;">
-    Home
+    <ProductList />
   </div>
 </template>
 
 <script>
-export default {};
+import { defineComponent } from 'vue';
+// components
+import ProductList from './product/ProductList.vue';
+
+export default defineComponent({
+  components: {
+    ProductList,
+  },
+});
 </script>

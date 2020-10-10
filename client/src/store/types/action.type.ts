@@ -11,6 +11,7 @@ export const GET_CATEGORIES = 'getCategories';
 export const ADD_CATEGORY = 'addCategory';
 // product
 export const GET_PRODUCTS = 'getProducts';
+export const GET_PRODUCT_BY_ID = 'getProductById';
 export const ADD_PRODUCT = 'addProduct';
 export const SELECT_PRODUCT = 'selectProduct';
 export const UPDATE_PRODUCT = 'updateProduct';

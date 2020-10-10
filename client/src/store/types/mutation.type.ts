@@ -9,5 +9,6 @@ export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 // product
 export const SET_PRODUCTS = 'SET_PRODUCTS';
+export const SET_PRODUCT = 'SET_PRODUCT';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const SET_SELECTED_PRODUCT = 'SET_SELECTED_PRODUCT';

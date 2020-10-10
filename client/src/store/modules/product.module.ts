@@ -4,20 +4,25 @@ import { ProductController } from '@/controllers';
 // type
 import { Product } from '@/types';
 // mutation types
-import { SET_PRODUCTS, ADD_PRODUCT, SET_SELECTED_PRODUCT } from '../types/mutation.type';
+import {
+  SET_PRODUCTS,
+  SET_PRODUCT,
+  ADD_PRODUCT,
+  SET_SELECTED_PRODUCT,
+} from '../types/mutation.type';
 
 interface ProductState {
-  selectedProduct: Product | null;
+  product: Product | null;
   products: Product[];
 }
 
 const state: ProductState = {
-  selectedProduct: null,
+  product: null,
   products: [],
 };
 
 const getters = {
-  selectedProduct: (state: ProductState) => state.selectedProduct,
+  selectedProduct: (state: ProductState) => state.product,
   products: (state: ProductState) => state.products,
 };
 
@@ -40,6 +45,16 @@ const actions = {
       console.log(err.message);
     }
   },
+  async getProductById({ commit }: { commit: Commit }, productId: number) {
+    try {
+      const product = await ProductController.getProductById(productId);
+      if (!product) return;
+
+      commit(SET_PRODUCT, product);
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
   async updateProduct({ commit }: { commit: Commit }, productToUpdate: Product) {
     try {
       console.log(productToUpdate);
@@ -58,6 +73,9 @@ const mutations = {
   SET_PRODUCTS: (state: ProductState, products: Product[]) => {
     state.products = products;
   },
+  SET_PRODUCT: (state: ProductState, product: Product) => {
+    state.product = product;
+  },
   ADD_PRODUCT: (state: ProductState, addedProduct: Product) => {
     state.products.push(addedProduct);
   },
@@ -65,7 +83,7 @@ const mutations = {
     const selected = state.products.find((p: Product) => p.productId === productId);
     if (!selected) return;
 
-    state.selectedProduct = selected;
+    state.product = selected;
   },
 };
 

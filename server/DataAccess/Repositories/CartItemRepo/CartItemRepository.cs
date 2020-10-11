@@ -11,7 +11,7 @@ namespace server.DataAccess.Repositories.CartItemRepo
     {
         public CartItemRepository(OnlineShopDbContext dbContext) : base(dbContext) { }
 
-        public IEnumerable<CartItem> GetAllCategoriesByUserId(int userId)
+        public IEnumerable<CartItem> GetAllCartItemsByUserId(int userId)
         {
             return this._DbContext.Set<CartItem>().Where(c => c.UserId == userId)
             .Include( c => c.Product )

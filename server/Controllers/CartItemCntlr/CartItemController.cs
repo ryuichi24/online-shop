@@ -49,7 +49,7 @@ namespace server.Controllers.CartItemCntlr
         [HttpGet("all-by-user/{id}")]
         public ActionResult<IEnumerable<CartItem>> GetAllCartItemsByUserId(int id)
         {
-            return this.Ok(this._repository.GetAllCategoriesByUserId(id));
+            return this.Ok(this._repository.GetAllCartItemsByUserId(id));
         }
 
         [HttpGet("{id}")]

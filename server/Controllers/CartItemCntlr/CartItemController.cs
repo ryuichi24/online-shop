@@ -2,14 +2,20 @@ using Microsoft.AspNetCore.Mvc;
 using server.Models;
 using server.DataAccess.Repositories.CartItemRepo;
 using server.Helpers.ParameterClass;
+using System.Collections.Generic;
 
 namespace server.Controllers.CartItemCntlr
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CartItemController : RootController<CartItem, ICartItemRepository>, ICartItemController
+    public class CartItemController : ControllerBase, ICartItemController
     {
-        public CartItemController(ICartItemRepository repository) : base(repository) { }
+        private readonly ICartItemRepository _repository;
+
+        public CartItemController(ICartItemRepository repository)
+        {
+            this._repository = repository;
+        }
 
         [HttpPost]
         public ActionResult<CartItem> AddNewCartItem([FromBody] CartItemCreateParameter cartItemCreateParameter)
@@ -25,6 +31,34 @@ namespace server.Controllers.CartItemCntlr
             this._repository.SaveChanges();
 
             return this.CreatedAtRoute(new { Id = newCartItem.CardItemId }, newCartItem);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCartItem(int id)
+        {
+            CartItem cartItem = this._repository.GetById(id);
+            if (cartItem == null) return NotFound();
+
+            this._repository.Remove(cartItem);
+            this._repository.SaveChanges();
+
+            return this.NoContent();
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<CartItem>> GetAllCartItems()
+        {
+            return this.Ok(this._repository.GetAll());
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<CartItem> GetCartItemById(int id)
+        {
+            CartItem cartItem = this._repository.GetById(id);
+
+            if (cartItem == null) return NotFound();
+
+            return this.Ok(cartItem);
         }
 
         [HttpPut("{id}")]

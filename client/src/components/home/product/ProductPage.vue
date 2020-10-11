@@ -13,6 +13,7 @@
         <p>{{ product.description }}</p>
         <p v-if="product.inventory > 0">In stock</p>
         <p v-else>Out of stock</p>
+        <div>{{ isInCart }}</div>
         <form @submit.prevent>
           <div>
             <label for="cartItemCount">Item Count</label>
@@ -30,7 +31,12 @@ import { defineComponent, onMounted, computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 // vuex
 import { useStore } from 'vuex';
-import { GET_PRODUCT_BY_ID, ADD_CART_ITEM } from '../../../store/types/action.type';
+import {
+  GET_PRODUCT_BY_ID,
+  ADD_CART_ITEM,
+  GET_ALL_CART_ITEMS_BY_USER_ID,
+  CHECK_IS_IN_CART,
+} from '../../../store/types/action.type';
 
 export default defineComponent({
   setup() {
@@ -39,6 +45,7 @@ export default defineComponent({
 
     const product = computed(() => getters.product);
     const userId = computed(() => getters.userId);
+    const isInCart = computed(() => getters.isInCart);
 
     const cartItemCount = ref(0);
 
@@ -51,13 +58,16 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      dispatch(GET_PRODUCT_BY_ID, params.id);
+      dispatch(GET_PRODUCT_BY_ID, params.id)
+        .then(() => dispatch(GET_ALL_CART_ITEMS_BY_USER_ID, userId.value))
+        .then(() => dispatch(CHECK_IS_IN_CART, parseInt(params.id, 10)));
     });
 
     return {
       product,
       addCartItem,
       cartItemCount,
+      isInCart,
     };
   },
 });

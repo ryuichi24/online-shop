@@ -45,7 +45,8 @@ namespace server.Controllers.CartItemCntlr
             return this.NoContent();
         }
 
-        [HttpGet("/all-by-user/{id}")]
+
+        [HttpGet("all-by-user/{id}")]
         public ActionResult<IEnumerable<CartItem>> GetAllCartItemsByUserId(int id)
         {
             return this.Ok(this._repository.GetAllCategoriesByUserId(id));

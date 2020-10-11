@@ -52,7 +52,7 @@ const updateCartItemCount = async (id: number, cartItemCount: number) => {
 
 const getAllCartItemsByUserId = async (id: number) => {
   try {
-    const { data } = await ApiService.API.get(`/cartitems/all-by-user/${id}`);
+    const { data } = await ApiService.API.get(`/cartitem/all-by-user/${id}`);
 
     return data;
   } catch (err) {

@@ -7,6 +7,7 @@ import {
   REMOVE_CART_ITEM,
   UPDATE_CART_ITEM_COUNT,
   SET_CART_ITEMS,
+  SET_IS_IN_CART,
 } from '@/store/types/mutation.type';
 // controller
 import { CartItemController } from '@/controllers';
@@ -15,18 +16,21 @@ interface CartItemState {
   cartItem: CartItem | null;
   cartItems: CartItem[];
   cartItemsCount: number;
+  isInCart: boolean;
 }
 
 const state: CartItemState = {
   cartItem: null,
   cartItems: [],
   cartItemsCount: 0,
+  isInCart: false,
 };
 
 const getters = {
   cartItem: (state: CartItemState) => state.cartItem,
   cartItems: (state: CartItemState) => state.cartItems,
   cartItemsCount: (state: CartItemState) => state.cartItemsCount,
+  isInCart: (state: CartItemState) => state.isInCart,
 };
 
 const actions = {
@@ -73,6 +77,9 @@ const actions = {
       console.log(err.message);
     }
   },
+  checkIsInCart({ commit }: { commit: Commit }, productId: number) {
+    commit(SET_IS_IN_CART, productId);
+  },
 };
 
 const mutations = {
@@ -93,6 +100,10 @@ const mutations = {
   },
   SET_CART_ITEMS: (state: CartItemState, cartItems: CartItem[]) => {
     state.cartItems = cartItems;
+  },
+  SET_IS_IN_CART: (state: CartItemState, productId: number) => {
+    const isInCart = state.cartItems.some((c: CartItem) => c.productId === productId);
+    state.isInCart = isInCart;
   },
 };
 

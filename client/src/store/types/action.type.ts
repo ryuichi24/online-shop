@@ -19,3 +19,4 @@ export const UPDATE_PRODUCT = 'updateProduct';
 export const ADD_CART_ITEM = 'addCartItem';
 export const REMOVE_CART_ITEM = 'removeCartItem';
 export const UPDATE_CART_ITEM_COUNT = 'updateCartItemCount';
+export const GET_ALL_CART_ITEMS_BY_USER_ID = 'getAllCartItemsByUserId';

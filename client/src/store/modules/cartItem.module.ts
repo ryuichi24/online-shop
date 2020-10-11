@@ -6,6 +6,7 @@ import {
   ADD_CART_ITEM,
   REMOVE_CART_ITEM,
   UPDATE_CART_ITEM_COUNT,
+  SET_CART_ITEMS,
 } from '@/store/types/mutation.type';
 // controller
 import { CartItemController } from '@/controllers';
@@ -63,6 +64,15 @@ const actions = {
       console.log(err.message);
     }
   },
+  async getAllCartItemsByUserId({ commit }: { commit: Commit }, userId: number) {
+    try {
+      const cartItems = await CartItemController.getAllCartItemsByUserId(userId);
+
+      commit(SET_CART_ITEMS, cartItems);
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
 };
 
 const mutations = {
@@ -80,6 +90,9 @@ const mutations = {
   ) => {
     const indexToUpdate = state.cartItems.findIndex((c: CartItem) => c.cartItemId === cartItemId);
     state.cartItems[indexToUpdate].cartItemCount = cartItemCount;
+  },
+  SET_CART_ITEMS: (state: CartItemState, cartItems: CartItem[]) => {
+    state.cartItems = cartItems;
   },
 };
 

@@ -47,7 +47,10 @@ namespace server
             IConfigurationSection appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson
+            (
+                options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             // dependency injections
             services.AddScoped<IAddressRepository, AddressRepository>();

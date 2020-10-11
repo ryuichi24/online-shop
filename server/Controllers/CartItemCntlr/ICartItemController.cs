@@ -7,7 +7,7 @@ namespace server.Controllers.CartItemCntlr
 {
     public interface ICartItemController
     {
-        public ActionResult<IEnumerable<CartItem>> GetAllCartItems();
+        public ActionResult<IEnumerable<CartItem>> GetAllCartItemsByUserId(int id);
 
         public ActionResult<CartItem> GetCartItemById(int id);
 

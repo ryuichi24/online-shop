@@ -45,10 +45,10 @@ namespace server.Controllers.CartItemCntlr
             return this.NoContent();
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<CartItem>> GetAllCartItems()
+        [HttpGet("/all-by-user/{id}")]
+        public ActionResult<IEnumerable<CartItem>> GetAllCartItemsByUserId(int id)
         {
-            return this.Ok(this._repository.GetAll());
+            return this.Ok(this._repository.GetAllCategoriesByUserId(id));
         }
 
         [HttpGet("{id}")]

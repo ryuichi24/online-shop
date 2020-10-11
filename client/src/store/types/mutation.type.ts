@@ -14,3 +14,5 @@ export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const SET_SELECTED_PRODUCT = 'SET_SELECTED_PRODUCT';
 // cart item
 export const ADD_CART_ITEM = 'ADD_CART_ITEM';
+export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
+export const UPDATE_CART_ITEM_COUNT = 'UPDATE_CART_ITEM_COUNT';

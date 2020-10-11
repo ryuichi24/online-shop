@@ -18,6 +18,38 @@ const addCartItem = async (cartItem: CartItem) => {
   }
 };
 
+const removeCartItem = async (id: number) => {
+  try {
+    const { data, status, statusText } = await ApiService.API.delete(`/cartitem/${id}`);
+    console.log('removeCartItem', status, statusText);
+
+    return data;
+  } catch (err) {
+    if (err && err.response) {
+      const axiosError = err as AxiosError<ServerError>;
+      if (axiosError.response) return axiosError.response.data;
+    }
+    throw err;
+  }
+};
+
+const updateCartItemCount = async (id: number, cartItemCount: number) => {
+  try {
+    const { data, status, statusText } = await ApiService.API.put(`/cartitem/${id}`, { cartItemCount });
+    console.log('updateCartItemCount', status, statusText);
+
+    return data;
+  } catch (err) {
+    if (err && err.response) {
+      const axiosError = err as AxiosError<ServerError>;
+      if (axiosError.response) return axiosError.response.data;
+    }
+    throw err;
+  }
+};
+
 export default {
   addCartItem,
+  removeCartItem,
+  updateCartItemCount,
 };

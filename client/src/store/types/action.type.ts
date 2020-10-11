@@ -15,3 +15,5 @@ export const GET_PRODUCT_BY_ID = 'getProductById';
 export const ADD_PRODUCT = 'addProduct';
 export const SELECT_PRODUCT = 'selectProduct';
 export const UPDATE_PRODUCT = 'updateProduct';
+// cart item
+export const ADD_CART_ITEM = 'addCartItem';

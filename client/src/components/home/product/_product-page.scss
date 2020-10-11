@@ -1,0 +1,12 @@
+.product-page {
+    $self: &;
+
+    display: flex;
+    margin-top: 5rem;
+
+    &__section {
+        width: 50%;
+        min-height: 800px;
+        background-color: white;
+    }
+}

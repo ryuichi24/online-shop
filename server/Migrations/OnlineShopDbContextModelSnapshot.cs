@@ -191,6 +191,9 @@ namespace server.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Inventory")
                         .HasColumnType("int");
 

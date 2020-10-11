@@ -63,6 +63,7 @@ namespace server.Migrations
                     Price = table.Column<float>(nullable: false),
                     Description = table.Column<string>(maxLength: 250, nullable: true),
                     Inventory = table.Column<int>(nullable: false),
+                    Image = table.Column<string>(nullable: true),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

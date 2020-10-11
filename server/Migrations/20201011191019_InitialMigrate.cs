@@ -104,7 +104,7 @@ namespace server.Migrations
                 name: "CartItem",
                 columns: table => new
                 {
-                    CardItemId = table.Column<int>(nullable: false)
+                    CartItemId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(nullable: false),
                     CartItemCount = table.Column<int>(nullable: false),
@@ -112,7 +112,7 @@ namespace server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CartItem", x => x.CardItemId);
+                    table.PrimaryKey("PK_CartItem", x => x.CartItemId);
                     table.ForeignKey(
                         name: "FK_CartItem_Products_ProductId",
                         column: x => x.ProductId,

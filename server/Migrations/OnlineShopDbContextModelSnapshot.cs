@@ -87,7 +87,7 @@ namespace server.Migrations
 
             modelBuilder.Entity("server.Models.CartItem", b =>
                 {
-                    b.Property<int>("CardItemId")
+                    b.Property<int>("CartItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -101,7 +101,7 @@ namespace server.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("CardItemId");
+                    b.HasKey("CartItemId");
 
                     b.HasIndex("ProductId");
 

@@ -32,6 +32,7 @@ const useNavItems = () => {
     resetSelectedState();
 
     if (`${document.location.origin}/` === document.location.href) return;
+    if (document.location.href.indexOf('product') > -1) return;
 
     const { href } = document.location;
     const reg = /([^/]*)\/*$/;

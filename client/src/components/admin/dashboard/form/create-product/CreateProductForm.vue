@@ -21,6 +21,10 @@
           ></textarea>
         </div>
         <div class="product-form__input-container">
+          <label for="image">Image (URL)</label>
+          <input v-model="image" name="image" type="text" />
+        </div>
+        <div class="product-form__input-container">
           <label for="inventory">Inventory</label>
           <input v-model="inventory" name="inventory" type="number" />
         </div>
@@ -70,6 +74,7 @@ export default defineComponent({
           name: '',
           price: '',
           description: '',
+          image: '',
           inventory: '',
           categoryId: '',
         });
@@ -79,6 +84,7 @@ export default defineComponent({
         name: productInputs.name,
         price: parseInt(productInputs.price, 10),
         description: productInputs.description,
+        image: productInputs.image,
         inventory: parseInt(productInputs.inventory, 10),
         categoryId: parseInt(productInputs.categoryId, 10),
       };

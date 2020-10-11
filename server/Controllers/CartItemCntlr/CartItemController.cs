@@ -30,7 +30,7 @@ namespace server.Controllers.CartItemCntlr
             this._repository.Add(newCartItem);
             this._repository.SaveChanges();
 
-            return this.CreatedAtRoute(new { Id = newCartItem.CardItemId }, newCartItem);
+            return this.CreatedAtRoute(new { Id = newCartItem.CartItemId }, newCartItem);
         }
 
         [HttpDelete("{id}")]

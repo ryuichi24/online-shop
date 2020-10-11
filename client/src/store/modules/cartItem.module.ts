@@ -59,6 +59,7 @@ const actions = {
     { cartItemId, cartItemCount }: { cartItemId: number; cartItemCount: number },
   ) {
     try {
+      console.log(cartItemId, cartItemCount);
       const res = await CartItemController.updateCartItemCount(cartItemId, cartItemCount);
       // TODO: remove
       console.log(res);

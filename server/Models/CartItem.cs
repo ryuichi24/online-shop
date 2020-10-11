@@ -7,7 +7,7 @@ namespace server.Models
     public class CartItem
     {
         [Key]
-        public int CardItemId { get; set; }
+        public int CartItemId { get; set; }
 
         public int ProductId { get; set; }
 

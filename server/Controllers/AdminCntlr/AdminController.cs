@@ -8,18 +8,22 @@ using server.Models;
 using server.DataAccess.Repositories.AdminRepo;
 using server.Services.Auth;
 using System;
+using System.Collections.Generic;
 
 namespace server.Controllers.AdminCntlr
 {
     [Authorize(Roles = AuthRole.Admin)]
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminController : RootController<Admin, IAdminRepository>, IAdminController
+    public class AdminController : ControllerBase, IAdminController
     {
+        private readonly IAdminRepository _repository;
+
         private readonly IAuthManager _authManager;
 
-        public AdminController(IAdminRepository repository, IAuthManager authManager) : base(repository)
+        public AdminController(IAdminRepository repository, IAuthManager authManager)
         {
+            this._repository = repository;
             this._authManager = authManager;
         }
 
@@ -89,6 +93,34 @@ namespace server.Controllers.AdminCntlr
             if(currentAdmin == null) return this.Unauthorized();
 
             return this.Ok(currentAdmin);
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Admin>> GetAllAdmin()
+        {
+            return this.Ok(this._repository.GetAll());
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Admin> GetAdminById(int id)
+        {
+           Admin admin = this._repository.GetById(id);
+
+            if (admin == null) return NotFound();
+
+            return this.Ok(admin);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteAdmin(int id)
+        {
+            Admin admin = this._repository.GetById(id);
+            if (admin == null) return NotFound();
+
+            this._repository.Remove(admin);
+            this._repository.SaveChanges();
+
+            return this.NoContent();
         }
     }
 }

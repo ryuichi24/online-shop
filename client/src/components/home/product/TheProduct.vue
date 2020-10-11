@@ -3,7 +3,7 @@
     <router-link :to="`/product/${product.productId}`">
       <span>{{ product.name }}</span>
     </router-link>
-    <div>{{ product.price }}</div>
+    <div>€{{ product.price }}</div>
   </div>
 </template>
 

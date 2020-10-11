@@ -2,14 +2,20 @@ using Microsoft.AspNetCore.Mvc;
 using server.Helpers.ParameterClass;
 using server.Models;
 using server.DataAccess.Repositories.ProductRepo;
+using System.Collections.Generic;
 
 namespace server.Controllers.ProductCntlr
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : RootController<Product, IProductRepository>, IProductController
+    public class ProductController : ControllerBase, IProductController
     {
-        public ProductController(IProductRepository repository) : base(repository) { }
+        private readonly IProductRepository _repository;
+
+        public ProductController(IProductRepository repository)
+        {
+            this._repository = repository;
+        }
 
         [HttpPost]
         public ActionResult<Product> AddNewProduct([FromBody] ProductCreateParameter productCreateParameter)
@@ -28,6 +34,34 @@ namespace server.Controllers.ProductCntlr
             this._repository.SaveChanges();
 
             return this.CreatedAtRoute(new { Id = newProduct.ProductId }, newProduct);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteProduct(int id)
+        {
+            Product product = this._repository.GetById(id);
+            if (product == null) return NotFound();
+
+            this._repository.Remove(product);
+            this._repository.SaveChanges();
+
+            return this.NoContent();
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Product>> GetAllProduct()
+        {
+            return this.Ok(this._repository.GetAll());
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Product> GetProductById(int id)
+        {
+            Product product = this._repository.GetById(id);
+
+            if (product == null) return NotFound();
+
+            return this.Ok(product);
         }
 
         [HttpPut("{id}")]

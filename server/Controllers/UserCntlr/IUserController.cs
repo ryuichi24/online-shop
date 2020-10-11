@@ -7,6 +7,10 @@ namespace server.Controllers.UserCntlr
 {
     public interface IUserController
     {
+        public ActionResult<User> GetUserById(int id);
+
+        public ActionResult DeleteUser(int id);
+
         public ActionResult<SignUpUserSuccessResponse> AddNewUser([FromBody] UserCreateParameter userCreateParameter);
 
         public ActionResult<User> UpdateUser(int id, [FromBody] UserUpdateParameter userUpdateParameter);

@@ -14,12 +14,15 @@ namespace server.Controllers.UserCntlr
     [Authorize(Roles = AuthRole.User)]
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : RootController<User, IUserRepository>, IUserController
+    public class UserController : ControllerBase, IUserController
     {
+        private readonly IUserRepository _repository;
+
         private readonly IAuthManager _authManager;
 
-        public UserController(IUserRepository repository, IAuthManager authManager) : base(repository)
+        public UserController(IUserRepository repository, IAuthManager authManager)
         {
+            this._repository = repository;
             this._authManager = authManager;
         }
 
@@ -94,6 +97,28 @@ namespace server.Controllers.UserCntlr
             if (currentUser == null) return this.Unauthorized();
 
             return this.Ok(currentUser);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<User> GetUserById(int id)
+        {
+           User user = this._repository.GetById(id);
+
+            if (user == null) return NotFound();
+
+            return this.Ok(user);
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteUser(int id)
+        {
+            User user = this._repository.GetById(id);
+            if (user == null) return NotFound();
+
+            this._repository.Remove(user);
+            this._repository.SaveChanges();
+
+            return this.NoContent();
         }
     }
 }

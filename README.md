@@ -25,3 +25,5 @@ dotnet ef migrations remove
 - [Fetch foreign key table data](https://entityframework.net/knowledge-base/52352970/fetch-foreign-key-table-data)
 - [Request header field content-type is not allowed by Access-Control-Allow-Headers in preflight response](https://forums.asp.net/t/2168883.aspx?Request+header+field+content+type+is+not+allowed+by+Access+Control+Allow+Headers+in+preflight+response+)
 - [22 - Nested Routes in Vuejs and Some Cool Design Technique](https://www.youtube.com/watch?v=cSOVG_utfn8)
+- [How to omit methods from Swagger documentation on WebAPI using Swashbuckle](https://stackoverflow.com/questions/29701573/how-to-omit-methods-from-swagger-documentation-on-webapi-using-swashbuckle)
+- [How to configure Swashbuckle to ignore property on model](https://stackoverflow.com/questions/41005730/how-to-configure-swashbuckle-to-ignore-property-on-model)

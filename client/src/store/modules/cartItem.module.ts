@@ -47,7 +47,8 @@ const actions = {
   async removeCartItem({ commit }: { commit: Commit }, cartItemId: number) {
     try {
       const res = await CartItemController.removeCartItem(cartItemId);
-      console.log('removeCartItem', res);
+      // TODO populate error message
+      if (!res) return;
 
       commit(REMOVE_CART_ITEM, cartItemId);
     } catch (err) {
@@ -59,10 +60,9 @@ const actions = {
     { cartItemId, cartItemCount }: { cartItemId: number; cartItemCount: number },
   ) {
     try {
-      console.log(cartItemId, cartItemCount);
       const res = await CartItemController.updateCartItemCount(cartItemId, cartItemCount);
-      // TODO: remove
-      console.log(res);
+      // TODO populate error message
+      if (!res) return;
 
       commit(UPDATE_CART_ITEM_COUNT, { cartItemId, cartItemCount });
     } catch (err) {

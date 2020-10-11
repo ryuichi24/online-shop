@@ -20,10 +20,10 @@ const addCartItem = async (cartItem: CartItem) => {
 
 const removeCartItem = async (id: number) => {
   try {
-    const { data, status, statusText } = await ApiService.API.delete(`/cartitem/${id}`);
-    console.log('removeCartItem', status, statusText);
+    const { status } = await ApiService.API.delete(`/cartitem/${id}`);
+    if (status !== 204) return null;
 
-    return data;
+    return true;
   } catch (err) {
     if (err && err.response) {
       const axiosError = err as AxiosError<ServerError>;
@@ -35,12 +35,12 @@ const removeCartItem = async (id: number) => {
 
 const updateCartItemCount = async (id: number, cartItemCount: number) => {
   try {
-    const { data, status, statusText } = await ApiService.API.put(`/cartitem/${id}`, {
+    const { status } = await ApiService.API.put(`/cartitem/${id}`, {
       cartItemCount,
     });
-    console.log('updateCartItemCount', status, statusText);
+    if (status !== 204) return null;
 
-    return data;
+    return true;
   } catch (err) {
     if (err && err.response) {
       const axiosError = err as AxiosError<ServerError>;

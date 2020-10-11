@@ -1,13 +1,14 @@
 <template>
-  <div class="cart-item">
+  <div v-if="cartItem.product" class="cart-item">
     <h2>{{ cartItem.product.name }}</h2>
     <p>{{ cartItem.cartItemCount }}</p>
-    <form>
+    <form @submit.prevent>
       <div>
         <label for="itemCount">Quantity</label>
         <input @change="updateItemCount" v-model.number="itemCount" type="number" step="1" />
       </div>
     </form>
+    <button @click="deleteItem">Delete</button>
   </div>
 </template>
 
@@ -28,16 +29,20 @@ export default defineComponent({
     const itemCount = ref(cartItem.cartItemCount);
 
     const updateItemCount = () => {
-        console.log(cartItem.cartItemId);
       dispatch(UPDATE_CART_ITEM_COUNT, {
         cartItemId: cartItem.cartItemId,
         cartItemCount: itemCount.value,
       });
     };
 
+    const deleteItem = () => {
+      dispatch(REMOVE_CART_ITEM, cartItem.cartItemId);
+    };
+
     return {
       itemCount,
       updateItemCount,
+      deleteItem,
     };
   },
 });

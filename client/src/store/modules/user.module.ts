@@ -43,6 +43,8 @@ const actions = {
     try {
       const res = await UserController.loginUser(userCredentials);
 
+      if (!res.user || !res.token) return commit(CLEAR_AUTH);
+
       commit(SET_AUTH, res);
     } catch (err) {
       console.log(err.message);

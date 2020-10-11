@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue';
+import { defineComponent, reactive, toRefs, computed } from 'vue';
 // router
 import { useRouter } from 'vue-router';
 // vuex
@@ -32,7 +32,7 @@ import { LOGIN_USER } from '../../../store/types/action.type';
 
 export default defineComponent({
   setup() {
-    const { dispatch } = useStore();
+    const { dispatch, getters } = useStore();
     const { push } = useRouter();
 
     const userInputs = reactive({
@@ -40,8 +40,11 @@ export default defineComponent({
       password: '',
     });
 
+    const isAutheticated = computed(() => getters.isAuthenticated);
     const login = () => {
       dispatch(LOGIN_USER, userInputs).then(() => {
+        if (!isAutheticated.value) return push({ name: 'LoginForm' });
+
         push({ name: 'HomePage' });
       });
     };

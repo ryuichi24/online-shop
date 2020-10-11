@@ -17,3 +17,5 @@ export const SELECT_PRODUCT = 'selectProduct';
 export const UPDATE_PRODUCT = 'updateProduct';
 // cart item
 export const ADD_CART_ITEM = 'addCartItem';
+export const REMOVE_CART_ITEM = 'removeCartItem';
+export const UPDATE_CART_ITEM_COUNT = 'updateCartItemCount';

@@ -11,16 +11,19 @@ import { UserController } from '@/controllers';
 interface UserState {
   currentUser: User | null;
   isAuthenticated: boolean;
+  userId: null;
 }
 
 const state: UserState = {
   currentUser: null,
   isAuthenticated: false,
+  userId: null,
 };
 
 const getters = {
   currentUser: (state: UserState) => state.currentUser,
   isAuthenticated: (state: UserState) => state.isAuthenticated,
+  userId: (state: UserState) => state.currentUser?.userId,
 };
 
 const actions = {

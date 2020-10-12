@@ -11,6 +11,8 @@ const LoginForm = () => import('@/components/auth/login/LoginForm.vue');
 const AccountPage = () => import('@/components/account/AccountPage.vue');
 // cart items
 const CartItemsPage = () => import('@/components/cart-items/CartItemsPage.vue');
+// checkout
+const CheckoutPage = () => import('@/components/checkout/CheckoutPage.vue');
 
 export {
   HomePage,
@@ -22,4 +24,5 @@ export {
   AccountPage,
   CartItemsPage,
   ProductPage,
+  CheckoutPage,
 };

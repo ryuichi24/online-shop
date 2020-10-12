@@ -16,6 +16,7 @@ import {
   AccountPage,
   CartItemsPage,
   ProductPage,
+  CheckoutPage,
 } from '@/views';
 // vuex
 import store from '@/store';
@@ -46,6 +47,14 @@ const routes: Array<RouteRecordRaw> = [
     path: '/account',
     name: 'AccountPage',
     component: AccountPage,
+    meta: {
+      requiredAuth: true,
+    },
+  },
+  {
+    path: '/checkout',
+    name: 'CheckoutPage',
+    component: CheckoutPage,
     meta: {
       requiredAuth: true,
     },

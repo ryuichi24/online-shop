@@ -2,6 +2,7 @@
   <div v-if="cartItem.product" class="cart-item">
     <h2>{{ cartItem.product.name }}</h2>
     <p>{{ cartItem.cartItemCount }}</p>
+    <p>€{{ cartItem.product.price }}</p>
     <form @submit.prevent>
       <div>
         <label for="itemCount">Quantity</label>
@@ -26,17 +27,17 @@ export default defineComponent({
   },
   setup({ cartItem }) {
     const { dispatch } = useStore();
-    const itemCount = ref(cartItem.cartItemCount);
+    const itemCount = ref(cartItem!.cartItemCount!);
 
     const updateItemCount = () => {
       dispatch(UPDATE_CART_ITEM_COUNT, {
-        cartItemId: cartItem.cartItemId,
+        cartItemId: cartItem!.cartItemId,
         cartItemCount: itemCount.value,
       });
     };
 
     const deleteItem = () => {
-      dispatch(REMOVE_CART_ITEM, cartItem.cartItemId);
+      dispatch(REMOVE_CART_ITEM, cartItem!.cartItemId);
     };
 
     return {

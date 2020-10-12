@@ -28,3 +28,4 @@ dotnet ef migrations remove
 - [How to omit methods from Swagger documentation on WebAPI using Swashbuckle](https://stackoverflow.com/questions/29701573/how-to-omit-methods-from-swagger-documentation-on-webapi-using-swashbuckle)
 - [How to configure Swashbuckle to ignore property on model](https://stackoverflow.com/questions/41005730/how-to-configure-swashbuckle-to-ignore-property-on-model)
 - [.Net Core 3.0 possible object cycle was detected which is not supported](https://entityframeworkcore.com/knowledge-base/59199593/-net-core-3-0-possible-object-cycle-was-detected-which-is-not-supported)
+- [Include->ThenInclude for a collection](https://github.com/dotnet/efcore/issues/6560)

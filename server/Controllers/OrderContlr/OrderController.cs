@@ -66,7 +66,7 @@ namespace server.Controllers.OrderContlr
         [HttpGet("all-by-user/{id}")]
         public ActionResult<IEnumerable<Order>> GetAllOrdersByUserId(int id)
         {
-            throw new System.NotImplementedException();
+            return this.Ok(this._orderRepository.GetAllOrdersByUserId(id));
         }
 
         [HttpGet("{id}")]

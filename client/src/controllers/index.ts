@@ -3,6 +3,7 @@ import AdminController from './admin.controller';
 import CategoryController from './category.controller';
 import ProductController from './product.controller';
 import CartItemController from './cartItem.controller';
+import AddressController from './address.controller';
 
 export {
   UserController,
@@ -10,4 +11,5 @@ export {
   CategoryController,
   ProductController,
   CartItemController,
+  AddressController,
 };

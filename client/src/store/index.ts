@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 // modules
-import { user, admin, category, product, cartItem } from './modules';
+import { user, admin, category, product, cartItem, address } from './modules';
 
 export default createStore({
   modules: {
@@ -9,5 +9,6 @@ export default createStore({
     product,
     user,
     cartItem,
+    address,
   },
 });

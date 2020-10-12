@@ -23,5 +23,6 @@ module.exports = {
     'consistent-return': 'off',
     'prefer-destructuring': 'off',
     'no-alert': 'off',
+    'no-unused-expressions': 'off',
   },
 };

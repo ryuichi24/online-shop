@@ -37,6 +37,7 @@ const actions = {
   async addCartItem({ commit }: { commit: Commit }, newCartItem: CartItem) {
     try {
       const addedCartItem = await CartItemController.addCartItem(newCartItem);
+      // TODO: make error message
       if (!addedCartItem) return;
 
       commit(ADD_CART_ITEM, addedCartItem);

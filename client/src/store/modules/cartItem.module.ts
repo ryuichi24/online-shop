@@ -8,6 +8,7 @@ import {
   UPDATE_CART_ITEM_COUNT,
   SET_CART_ITEMS,
   SET_IS_IN_CART,
+  SET_TOTAL_PAYMENT,
 } from '@/store/types/mutation.type';
 // controller
 import { CartItemController } from '@/controllers';
@@ -17,6 +18,7 @@ interface CartItemState {
   cartItems: CartItem[];
   cartItemsCount: number;
   isInCart: boolean;
+  totalPayment: number;
 }
 
 const state: CartItemState = {
@@ -24,6 +26,7 @@ const state: CartItemState = {
   cartItems: [],
   cartItemsCount: 0,
   isInCart: false,
+  totalPayment: 0,
 };
 
 const getters = {
@@ -31,6 +34,7 @@ const getters = {
   cartItems: (state: CartItemState) => state.cartItems,
   cartItemsCount: (state: CartItemState) => state.cartItemsCount,
   isInCart: (state: CartItemState) => state.isInCart,
+  totalPayment: (state: CartItemState) => state.totalPayment,
 };
 
 const actions = {
@@ -82,6 +86,9 @@ const actions = {
   checkIsInCart({ commit }: { commit: Commit }, productId: number) {
     commit(SET_IS_IN_CART, productId);
   },
+  calculatePayment({ commit }: { commit: Commit }) {
+    commit(SET_TOTAL_PAYMENT);
+  },
 };
 
 const mutations = {
@@ -106,6 +113,14 @@ const mutations = {
   SET_IS_IN_CART: (state: CartItemState, productId: number) => {
     const isInCart = state.cartItems.some((c: CartItem) => c.productId === productId);
     state.isInCart = isInCart;
+  },
+  SET_TOTAL_PAYMENT: (state: CartItemState) => {
+    state.totalPayment = state.cartItems
+      .map((c: CartItem) => {
+        if (!c.product?.price) return 0;
+        return c.product!.price * c.cartItemCount;
+      })
+      .reduce((accum: number, current: number) => accum + current);
   },
 };
 

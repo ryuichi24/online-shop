@@ -14,8 +14,6 @@ namespace server.Helpers.ParameterClass
         public string City { get; set; }
 
         [MaxLength(50)]
-        public int PostCode { get; set; }
-
-        public int UserId { get; set; }
+        public string PostCode { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace server.Helpers.ParameterClass
 
         [Required]
         [MaxLength(50)]
-        public int PostCode { get; set; }
+        public string PostCode { get; set; }
 
         [Required]
         public int UserId { get; set; }

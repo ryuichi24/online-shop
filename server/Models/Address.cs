@@ -21,7 +21,7 @@ namespace server.Models
 
         [Required]
         [MaxLength(50)]
-        public int PostCode { get; set; }
+        public string PostCode { get; set; }
 
         public int UserId { get; set; }
 

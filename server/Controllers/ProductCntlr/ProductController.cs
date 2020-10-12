@@ -59,7 +59,7 @@ namespace server.Controllers.ProductCntlr
         {
             Product product = this._repository.GetById(id);
 
-            if (product == null) return NotFound();
+            if (product == null) return this.NotFound();
 
             return this.Ok(product);
         }

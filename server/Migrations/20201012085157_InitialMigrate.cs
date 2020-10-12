@@ -86,7 +86,7 @@ namespace server.Migrations
                     Address1 = table.Column<string>(maxLength: 150, nullable: false),
                     Address2 = table.Column<string>(maxLength: 150, nullable: true),
                     City = table.Column<string>(maxLength: 50, nullable: false),
-                    PostCode = table.Column<int>(maxLength: 50, nullable: false),
+                    PostCode = table.Column<string>(maxLength: 50, nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

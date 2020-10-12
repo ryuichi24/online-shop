@@ -59,7 +59,7 @@ namespace server.Controllers.AddressCntlr
         [HttpGet("all-by-user/{id}")]
         public ActionResult<IEnumerable<Address>> GetAllAddressByUserId(int id)
         {
-            throw new System.NotImplementedException();
+            return this.Ok(this._repository.GetAllAddressesByUserId(id));
         }
 
         [HttpPut("{id}")]

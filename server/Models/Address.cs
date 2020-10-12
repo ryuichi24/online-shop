@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace server.Models
 {
@@ -25,6 +26,7 @@ namespace server.Models
 
         public int UserId { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("UserId")]
         public User User { get; set; }
     }

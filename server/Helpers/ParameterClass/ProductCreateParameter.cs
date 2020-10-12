@@ -11,7 +11,7 @@ namespace server.Helpers.ParameterClass
         [Required]
         public float Price { get; set; }
 
-        [MaxLength(250)]
+        [MaxLength(1000)]
         public string Description { get; set; }
 
         [Required]

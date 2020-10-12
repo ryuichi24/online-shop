@@ -9,7 +9,7 @@ namespace server.Helpers.ParameterClass
 
         public float Price { get; set; }
 
-        [MaxLength(250)]
+        [MaxLength(1000)]
         public string Description { get; set; }
 
         public int Inventory { get; set; }

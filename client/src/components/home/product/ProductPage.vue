@@ -2,25 +2,34 @@
   <div class="container">
     <div v-if="product" class="product-page">
       <div class="product-page__section">
-        <div>
-          <img src="https://source.unsplash.com/random" alt="product image" />
+        <div class="product-page__image-wrapper">
+          <img class="product-page__image" :src="product.image" alt="product image" />
         </div>
       </div>
       <div class="product-page__section">
-        <h2>{{ product.name }}</h2>
-        <hr />
-        <p>€{{ product.price }}</p>
-        <p>{{ product.description }}</p>
-        <p v-if="product.inventory > 0">In stock</p>
-        <p v-else>Out of stock</p>
-        <div>{{ isInCart }}</div>
-        <form @submit.prevent>
-          <div>
-            <label for="cartItemCount">Item Count</label>
-            <input v-model.number="cartItemCount" name="cartItemCount" type="number" />
+        <div class="product-page__text">
+          <h2>{{ product.name }}</h2>
+          <hr />
+          <p>{{ product.description }}</p>
+        </div>
+        <div class="product-page__actions">
+          <div class="product-page__price">
+            <span>€ {{ product.price }}</span>
           </div>
-          <button @click="addCartItem">Add to Cart</button>
-        </form>
+          <div class="product-page__stock" v-if="product.inventory > 0">
+            <span>In stock</span>
+          </div>
+          <div class="product-page__stock" v-else>
+            <span>Out of stock</span>
+          </div>
+          <form class="product-page__item-count-form" @submit.prevent>
+            <div class="product-page__input-wrapper">
+              <label for="cartItemCount">Item Count</label>
+              <input v-model.number="cartItemCount" name="cartItemCount" type="number" />
+            </div>
+            <span class="product-page__btn" @click="addCartItem">Add to Cart</span>
+          </form>
+        </div>
       </div>
     </div>
   </div>

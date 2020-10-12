@@ -1,9 +1,15 @@
 <template>
   <div class="product">
     <router-link :to="`/product/${product.productId}`">
-      <span>{{ product.name }}</span>
+      <div class="product__container" :style="`background-image: url(${product.image})`">
+        <div class="product__text-wrapper">
+          <span>€ {{ product.price }}</span>
+        </div>
+        <div class="product__text-wrapper">
+          <span>{{ product.name }}</span>
+        </div>
+      </div>
     </router-link>
-    <div>€{{ product.price }}</div>
   </div>
 </template>
 

@@ -1,7 +1,36 @@
 .product {
-    $self: &;
+  $self: &;
 
-    background-color: #fff;
+  border-radius: 0.5rem;
 
-    border-radius: 0.5rem;
+  &__container {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+
+    #{ $self }__text-wrapper {
+
+        span {
+            color: black;
+            background-color: rgba(255, 255, 255, 0.454);
+
+            padding: 0.6rem;
+
+            float: right;
+        }
+
+        &:first-child {
+            span {
+                font-size: 1.3rem;
+                font-weight: 100;
+            }
+        }
+
+    }
+  }
 }

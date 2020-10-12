@@ -134,6 +134,7 @@ namespace server.Migrations
                     OrderId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderedAt = table.Column<DateTime>(nullable: false),
+                    TotalPayment = table.Column<float>(nullable: false),
                     AddressId = table.Column<int>(nullable: true),
                     UserId = table.Column<int>(nullable: true)
                 },

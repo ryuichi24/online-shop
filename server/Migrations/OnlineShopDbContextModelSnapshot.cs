@@ -141,6 +141,9 @@ namespace server.Migrations
                     b.Property<DateTime>("OrderedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<float>("TotalPayment")
+                        .HasColumnType("real");
+
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 

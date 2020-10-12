@@ -10,7 +10,7 @@ using server.DataAccess;
 namespace server.Migrations
 {
     [DbContext(typeof(OnlineShopDbContext))]
-    [Migration("20201012085157_InitialMigrate")]
+    [Migration("20201012144906_InitialMigrate")]
     partial class InitialMigrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,6 +142,9 @@ namespace server.Migrations
 
                     b.Property<DateTime>("OrderedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<float>("TotalPayment")
+                        .HasColumnType("real");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");

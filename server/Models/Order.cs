@@ -13,6 +13,9 @@ namespace server.Models
         [Required]
         public DateTime OrderedAt { get; set; }
 
+        [Required]
+        public float TotalPayment { get; set; }
+
         public int? AddressId { get; set; }
 
         [ForeignKey("AddressId")]

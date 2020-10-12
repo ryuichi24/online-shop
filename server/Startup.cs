@@ -29,6 +29,7 @@ using server.DataAccess.Repositories.UserRepo;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using server.DataAccess.Repositories.OrderItemRepo;
 
 namespace server
 {
@@ -58,6 +59,7 @@ namespace server
             services.AddScoped<ICartItemRepository, CartItemRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 

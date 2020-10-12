@@ -24,5 +24,8 @@ module.exports = {
     'prefer-destructuring': 'off',
     'no-alert': 'off',
     'no-unused-expressions': 'off',
+    'no-confusing-arrow': 'off',
+    'implicit-arrow-linebreak': 'off',
+    'function-paren-newline': 'off',
   },
 };

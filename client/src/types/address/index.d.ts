@@ -4,5 +4,5 @@ export interface Address {
     address2?: string;
     city?: string;
     postCode?: string;
-    userId?: number;
+    userId?: number | null;
 }

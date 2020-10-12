@@ -24,6 +24,7 @@ export const ADD_ADDRESS = 'ADD_ADDRESS';
 export const REMOVE_ADDRESS = 'REMOVE_ADDRESS';
 export const UPDATE_ADDRESS = 'UPDATE_ADDRESS';
 export const SET_ADDRESSES = 'SET_ADDRESSES';
+export const SET_SELECTED_ADDRESS_ID = 'SET_SELECTED_ADDRESS_ID';
 // order
 export const ADD_ORDER = 'ADD_ORDER';
 export const SET_ORDERS = 'SET_ORDERS';

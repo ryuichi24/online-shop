@@ -4,21 +4,30 @@ import { AddressController } from '@/controllers';
 // types
 import { Address } from '@/types';
 // mutation types
-import { ADD_ADDRESS, REMOVE_ADDRESS, UPDATE_ADDRESS, SET_ADDRESSES } from '../types/mutation.type';
+import {
+  ADD_ADDRESS,
+  REMOVE_ADDRESS,
+  UPDATE_ADDRESS,
+  SET_ADDRESSES,
+  SET_SELECTED_ADDRESS_ID,
+} from '../types/mutation.type';
 
 interface AddressState {
   address: Address | null;
   addresses: Address[] | null;
+  selectedAddressId: number | null;
 }
 
 const state: AddressState = {
   address: null,
   addresses: [],
+  selectedAddressId: null,
 };
 
 const getters = {
   address: (state: AddressState) => state.address,
   addresses: (state: AddressState) => state.addresses,
+  selectedAddressId: (state: AddressState) => state.selectedAddressId,
 };
 
 const actions = {
@@ -69,6 +78,9 @@ const actions = {
       console.log(err.message);
     }
   },
+  selectAddress({ commit }: { commit: Commit }, addressId: number) {
+    commit(SET_SELECTED_ADDRESS_ID, addressId);
+  },
 };
 
 const mutations = {
@@ -88,6 +100,9 @@ const mutations = {
   },
   SET_ADDRESSES: (state: AddressState, addresses: Address[]) => {
     state.addresses = addresses;
+  },
+  SET_SELECTED_ADDRESS_ID: (state: AddressState, addressId: number) => {
+    state.selectedAddressId = addressId;
   },
 };
 

@@ -26,3 +26,6 @@ export const ADD_ADDRESS = 'addAddress';
 export const REMOVE_ADDRESS = 'removeAddress';
 export const UPDATE_ADDRESS = 'updateAddress';
 export const GET_ALL_ADDRESSES_BY_USER_ID = 'getAllAddressesByUserId';
+// orders
+export const ADD_ORDER = 'addOrder';
+export const GET_ALL_ORDERS_BY_USER_ID = 'getAllOrdersByUserId';

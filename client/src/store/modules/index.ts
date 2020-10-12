@@ -4,5 +4,6 @@ import category from './category.module';
 import product from './product.module';
 import cartItem from './cartItem.module';
 import address from './address.module';
+import order from './order.module';
 
-export { admin, category, product, user, cartItem, address };
+export { admin, category, product, user, cartItem, address, order };

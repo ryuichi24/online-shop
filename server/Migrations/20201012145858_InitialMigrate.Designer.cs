@@ -10,7 +10,7 @@ using server.DataAccess;
 namespace server.Migrations
 {
     [DbContext(typeof(OnlineShopDbContext))]
-    [Migration("20201012144906_InitialMigrate")]
+    [Migration("20201012145858_InitialMigrate")]
     partial class InitialMigrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -194,8 +194,8 @@ namespace server.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");

@@ -1,13 +1,12 @@
 <template>
   <TheNavbar v-if="!isAdmin" />
   <RouterView />
-  <TheFooter v-if="!isAdmin" />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 // layout components
-import { TheNavbar, TheFooter } from './layouts';
+import { TheNavbar } from './layouts';
 // hooks
 import { useUtils } from './hooks';
 
@@ -15,7 +14,6 @@ import { useUtils } from './hooks';
 export default defineComponent({
   components: {
     TheNavbar,
-    TheFooter,
   },
   setup() {
     const { evalURL } = useUtils();

@@ -8,13 +8,21 @@ namespace server.DataAccess.Repositories.OrderRepo
 {
     public class OrderRepository : Repository<Order>, IOrderRepository
     {
-        public OrderRepository(OnlineShopDbContext dbContext) : base(dbContext) {}
+        public OrderRepository(OnlineShopDbContext dbContext) : base(dbContext) { }
 
         public IEnumerable<Order> GetAllOrdersByUserId(int userId)
         {
             return this._DbContext.Set<Order>().Where(o => o.UserId == userId)
             .Include(o => o.Address)
-            .Include(o => o.OrderItems).ThenInclude( i => i.Product )
+            .Include(o => o.OrderItems).ThenInclude(i => i.Product)
+            .ToList();
+        }
+
+        public IEnumerable<Order> GetAllOrderWithPopulatedChildren()
+        {
+            return this._DbContext.Set<Order>()
+            .Include(o => o.Address)
+            .Include(o => o.OrderItems).ThenInclude(i => i.Product)
             .ToList();
         }
     }

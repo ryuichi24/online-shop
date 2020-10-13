@@ -63,6 +63,12 @@ namespace server.Controllers.OrderContlr
             return this.NoContent();
         }
 
+        [HttpGet]
+        public ActionResult<IEnumerable<Order>> GetAllOrders()
+        {
+            return this.Ok(this._orderRepository.GetAllOrderWithPopulatedChildren());
+        }
+
         [HttpGet("all-by-user/{id}")]
         public ActionResult<IEnumerable<Order>> GetAllOrdersByUserId(int id)
         {

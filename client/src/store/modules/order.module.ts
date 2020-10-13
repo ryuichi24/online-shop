@@ -43,7 +43,6 @@ const actions = {
     } catch (err) {
       console.log(err.message);
     }
-
   },
   async getAllOrdersByUserId({ commit }: { commit: Commit }, userId: number) {
     try {

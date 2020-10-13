@@ -13,7 +13,7 @@ namespace server.DataAccess.Repositories.OrderRepo
         public IEnumerable<Order> GetAllOrdersByUserId(int userId)
         {
             return this._DbContext.Set<Order>().Where(o => o.UserId == userId)
-            .Include(o => o.Address)
+            .Include(o => o.Address).Include(o => o.Address.User)
             .Include(o => o.OrderItems).ThenInclude(i => i.Product)
             .ToList();
         }
@@ -21,7 +21,7 @@ namespace server.DataAccess.Repositories.OrderRepo
         public IEnumerable<Order> GetAllOrderWithPopulatedChildren()
         {
             return this._DbContext.Set<Order>()
-            .Include(o => o.Address)
+            .Include(o => o.Address).Include(o => o.Address.User)
             .Include(o => o.OrderItems).ThenInclude(i => i.Product)
             .ToList();
         }

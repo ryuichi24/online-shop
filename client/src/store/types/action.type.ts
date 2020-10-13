@@ -30,4 +30,5 @@ export const GET_ALL_ADDRESSES_BY_USER_ID = 'getAllAddressesByUserId';
 export const SELECT_ADDRESS = 'selectAddress';
 // orders
 export const ADD_ORDER = 'addOrder';
+export const GET_ALL_ORDERS = 'getAllOrders';
 export const GET_ALL_ORDERS_BY_USER_ID = 'getAllOrdersByUserId';

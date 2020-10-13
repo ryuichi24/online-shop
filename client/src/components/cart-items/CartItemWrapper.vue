@@ -1,15 +1,20 @@
 <template>
   <div v-if="cartItem.product" class="cart-item">
-    <h2>{{ cartItem.product.name }}</h2>
-    <p>{{ cartItem.cartItemCount }}</p>
-    <p>€{{ cartItem.product.price }}</p>
-    <form @submit.prevent>
-      <div>
-        <label for="itemCount">Quantity</label>
-        <input @change="updateItemCount" v-model.number="itemCount" type="number" step="1" />
-      </div>
-    </form>
-    <button @click="deleteItem">Delete</button>
+    <div
+      class="cart-item__image"
+      :style="`background-image: url(${cartItem.product.image});`"
+    ></div>
+    <div class="cart-item__details">
+      <div class="cart-item__name"><span>{{ cartItem.product.name }}</span></div>
+      <div class="cart-item__price"><span>€ {{ cartItem.product.price }}</span></div>
+      <form @submit.prevent>
+        <div>
+          <label class="cart-item__quantity" for="itemCount">Quantity</label>
+          <input @change="updateItemCount" v-model.number="itemCount" type="number" step="1" />
+        </div>
+      </form>
+      <span class="cart-item__delete-btn" @click="deleteItem">Delete</span>
+    </div>
   </div>
 </template>
 

@@ -56,7 +56,7 @@ export default defineComponent({
     const userId = computed(() => getters.userId);
     const isInCart = computed(() => getters.isInCart);
 
-    const cartItemCount = ref(0);
+    const cartItemCount = ref(1);
 
     const addCartItem = () => {
       dispatch(ADD_CART_ITEM, {

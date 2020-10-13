@@ -18,6 +18,20 @@ const addOrder = async (newOrder: Order) => {
   }
 };
 
+const getAllOrders = async () => {
+  try {
+    const { data } = await ApiService.API.get('/order');
+
+    return data;
+  } catch (err) {
+    if (err && err.response) {
+      const axiosError = err as AxiosError<ServerError>;
+      if (axiosError.response) return axiosError.response.data;
+    }
+    throw err;
+  }
+};
+
 const getAllOrdersByUserId = async (id: number) => {
   try {
     const { data } = await ApiService.API.get(`/order/all-by-user/${id}`);
@@ -35,4 +49,5 @@ const getAllOrdersByUserId = async (id: number) => {
 export default {
   addOrder,
   getAllOrdersByUserId,
+  getAllOrders,
 };

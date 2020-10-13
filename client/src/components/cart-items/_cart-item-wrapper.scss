@@ -38,7 +38,7 @@
       display: block;
       width: 70px;
       padding: 0.6rem;
-      background-color: #d5d4d4;
+      background-color: $main-btn-color;
 
       cursor: pointer;
 
@@ -46,7 +46,7 @@
       float: right;
 
       &:hover {
-        background-color: #bababa;
+        background-color: $main-btn-color-hovered;
       }
     }
 

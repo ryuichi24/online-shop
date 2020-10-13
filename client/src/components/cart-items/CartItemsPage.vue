@@ -1,8 +1,19 @@
 <template>
   <div v-if="cartItems" class="container" style="margin-bottom: 10rem;">
-    <CartItemWrapper v-for="(item, index) in cartItems" :key="index" :cartItem="item" />
-    <p v-if="totalAmount">Total payment €{{ totalAmount }}</p>
-    <router-link to="/checkout">Proceed to checkout</router-link>
+    <div class="cart-item-page">
+      <div class="cart-item-page__items-wrapper">
+        <CartItemWrapper v-for="(item, index) in cartItems" :key="index" :cartItem="item" />
+      </div>
+      <div class="cart-item-page__checkout">
+        <div class="cart-item-page__total-payment">
+          <span>Total payment</span>
+          <span>€ {{ totalAmount }}</span>
+        </div>
+        <router-link to="/checkout">
+          <span class="cart-item-page__checkout-btn">Proceed to checkout</span>
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 

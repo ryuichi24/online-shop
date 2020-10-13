@@ -33,6 +33,18 @@ const actions = {
       console.log(err.message);
     }
   },
+  async getAllOrders({ commit }: { commit: Commit }) {
+    try {
+      const orders = await OrderController.getAllOrders();
+      // TODO: make error message
+      if (!orders) return;
+
+      commit(SET_ORDERS, orders);
+    } catch (err) {
+      console.log(err.message);
+    }
+
+  },
   async getAllOrdersByUserId({ commit }: { commit: Commit }, userId: number) {
     try {
       const orders = await OrderController.getAllOrdersByUserId(userId);

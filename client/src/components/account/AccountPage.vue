@@ -2,9 +2,9 @@
   <div class="container" style="margin-bottom: 10rem;">
     <div class="account-page">
       <div class="account-page__card account-page__info">
-        <span class="account-page__edit-btn" @click="isBeingEdited = !isBeingEdited">Edit</span>
-        <AccountInfo v-if="!isBeingEdited" />
-        <AccountInfoForm v-if="isBeingEdited" />
+        <span class="account-page__edit-btn" @click="isBeingEdited = !isBeingEdited">{{ editBtnText }}</span>
+        <AccountInfo v-if="!isBeingEdited" :user="currentUser" />
+        <AccountInfoForm v-if="isBeingEdited" :user="currentUser" />
       </div>
       <div class="account-page__card account-page__orders">Orders</div>
       <div class="account-page__card account-page__cart-items">CartItems</div>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 // vuex
 import { useStore } from 'vuex';
@@ -37,7 +37,7 @@ export default defineComponent({
   },
   setup() {
     const { push } = useRouter();
-    const { dispatch } = useStore();
+    const { dispatch, getters } = useStore();
 
     const isBeingEdited = ref(false);
 
@@ -45,9 +45,15 @@ export default defineComponent({
       dispatch(LOGOUT_USER).then(() => push({ name: 'LoginForm' }));
     };
 
+    const currentUser = computed(() => getters.currentUser);
+
+    const editBtnText = computed(() => isBeingEdited.value ? 'Done' : 'Edit');
+
     return {
       logout,
       isBeingEdited,
+      currentUser,
+      editBtnText,
     };
   },
 });

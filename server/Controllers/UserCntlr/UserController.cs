@@ -56,10 +56,10 @@ namespace server.Controllers.UserCntlr
             User existingUser = this._repository.GetById(id);
             if (existingUser == null) return this.NotFound();
 
-            if (userUpdateParameter.FirstName != null) existingUser.FirstName = userUpdateParameter.FirstName;
-            if (userUpdateParameter.LastName != null) existingUser.LastName = userUpdateParameter.LastName;
-            if (userUpdateParameter.Email != null) existingUser.Email = userUpdateParameter.Email;
-            if (userUpdateParameter.Phone != null) existingUser.Phone = userUpdateParameter.Phone;
+            if (userUpdateParameter.FirstName != null && userUpdateParameter.FirstName != existingUser.FirstName) existingUser.FirstName = userUpdateParameter.FirstName;
+            if (userUpdateParameter.LastName != null && userUpdateParameter.LastName != existingUser.LastName) existingUser.LastName = userUpdateParameter.LastName;
+            if (userUpdateParameter.Email != null && userUpdateParameter.Email != existingUser.Email) existingUser.Email = userUpdateParameter.Email;
+            if (userUpdateParameter.Phone != null && userUpdateParameter.Phone != existingUser.Phone) existingUser.Phone = userUpdateParameter.Phone;
             if (userUpdateParameter.Password != null) existingUser.Password = this._authManager.EncryptPassword(userUpdateParameter.Password);
 
             this._repository.Update(existingUser);
@@ -102,7 +102,7 @@ namespace server.Controllers.UserCntlr
         [HttpGet("{id}")]
         public ActionResult<User> GetUserById(int id)
         {
-           User user = this._repository.GetById(id);
+            User user = this._repository.GetById(id);
 
             if (user == null) return NotFound();
 

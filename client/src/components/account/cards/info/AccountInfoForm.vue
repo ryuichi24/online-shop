@@ -35,11 +35,11 @@ export default defineComponent({
   },
   setup({ user }) {
     const userInputs = reactive({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
+      firstName: user!.firstName,
+      lastName: user!.lastName,
+      email: user!.email,
       password: '',
-      phone: user.phone,
+      phone: user!.phone,
     });
 
     const update = () => {

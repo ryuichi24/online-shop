@@ -1,0 +1,13 @@
+.checkout-page {
+  $self: &;
+
+  display: flex;
+
+  margin-top: 3rem;
+
+  &__card {
+    background: #fff;
+    margin: 1rem;
+    padding: 2rem;
+  }
+}

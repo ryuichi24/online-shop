@@ -1,10 +1,12 @@
 <template>
-  <h2>Your orders</h2>
-  <div v-for="(item, index) in cartItems" :key="index">
-    <span>{{ item.product.name }}</span>
+  <div>
+    <h2>Your orders</h2>
+    <div v-for="(item, index) in cartItems" :key="index">
+      <span>{{ item.product.name }}</span>
+    </div>
+    <h3>Total payment</h3>
+    <div>€{{ totalAmount }}</div>
   </div>
-  <h3>Total payment</h3>
-  <div>€{{ totalAmount }}</div>
 </template>
 
 <script lang="ts">

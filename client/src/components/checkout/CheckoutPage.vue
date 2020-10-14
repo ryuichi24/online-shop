@@ -1,9 +1,17 @@
 <template>
   <div class="container" style="margin-bottom: 10rem;">
-    <AddressSection />
-    <OrderItemSection />
+    <div class="checkout-page">
+      <div class="checkout-page__card">
+        <AddressSection />
+      </div>
+      <div class="checkout-page__card">
+        <OrderItemSection />
+      </div>
+      <div class="checkout-page__card">
+        <button @click="sendOrder">Send order</button>
+      </div>
+    </div>
   </div>
-  <button @click="sendOrder">Send order</button>
 </template>
 
 <script lang="ts">

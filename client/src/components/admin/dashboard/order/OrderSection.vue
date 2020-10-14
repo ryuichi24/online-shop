@@ -1,5 +1,8 @@
 <template>
   <div class="order-section">
+    <div class="order-section__heading">
+      <h1>Orders</h1>
+    </div>
     <OrderWrapper v-for="(order, index) in orders" :key="index" :order="order" />
   </div>
 </template>

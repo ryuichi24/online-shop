@@ -1,0 +1,19 @@
+.order-section {
+  $self: &;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 85%;
+  margin: 0 auto;
+
+  &__heading {
+    width: 90%;
+
+    margin-top: 2rem;
+
+    h1 {
+        color: rgba(0, 0, 0, 0.755);
+    }
+  }
+}

@@ -33,6 +33,31 @@
 
     display: grid;
     grid-gap: 2rem;
-  }
 
+    #{ $self }__card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #{ $self }__logout-btn-container {
+      position: relative;
+
+      #{ $self }__logout-btn {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+
+        padding: 1rem;
+        background: rgb(255, 101, 101);
+        cursor: pointer;
+
+        color: #fff;
+
+        &:hover {
+          background: rgb(250, 53, 53);
+        }
+      }
+    }
+  }
 }

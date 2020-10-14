@@ -3,6 +3,7 @@ export const SIGN_UP_USER = 'signUpUser';
 export const LOGIN_USER = 'loginUser';
 export const LOGOUT_USER = 'logoutUser';
 export const CHECK_AUTH = 'checkAuth';
+export const UPDATE_USER = 'updateUser';
 // admin
 export const LOGIN_ADMIN = 'loginAdmin';
 export const CHECK_ADMIN_AUTH = 'checkAdminAuth';

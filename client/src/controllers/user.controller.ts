@@ -51,8 +51,26 @@ const checkUserAuth = async () => {
   }
 };
 
+const updateUser = async (user: User) => {
+  try {
+    ApiService.setToken();
+
+    const { status } = await ApiService.API.put('/user', user);
+    if (status !== 204) return null;
+
+    return true;
+  } catch (err) {
+    if (err && err.response) {
+      const axiosError = err as AxiosError<ServerError>;
+      if (axiosError.response) return axiosError.response.data;
+    }
+    throw err;
+  }
+}
+
 export default {
   createUser,
   checkUserAuth,
   loginUser,
+  updateUser,
 };

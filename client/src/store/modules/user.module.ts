@@ -42,7 +42,7 @@ const actions = {
   ) {
     try {
       const res = await UserController.loginUser(userCredentials);
-
+      // TODO: make error message
       if (!res.user || !res.token) return commit(CLEAR_AUTH);
 
       commit(SET_AUTH, res);
@@ -56,6 +56,7 @@ const actions = {
   async checkAuth({ commit }: { commit: Commit }) {
     try {
       const user = await UserController.checkUserAuth();
+      // TODO: make error message
       if (!user) return JwtService.destroyToken();
 
       commit(SET_AUTH, { user });
@@ -63,6 +64,16 @@ const actions = {
       console.log(err.message);
     }
   },
+  async updateUser({ commit }: { commit: Commit }, user: User) {
+    try {
+      const res = await UserController.updateUser(user);
+      if (!res) return;
+
+      commit(SET_AUTH, user);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
 };
 
 const mutations = {

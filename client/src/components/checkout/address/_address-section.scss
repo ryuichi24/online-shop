@@ -1,0 +1,28 @@
+.address-section {
+  $self: &;
+
+  &__add-address-btn {
+    display: flex;
+    flex-direction: row-reverse;
+
+    span {
+      padding: 0.7rem;
+      background: $main-btn-color;
+      &:hover {
+        background: $main-btn-color-hovered;
+      }
+      //   float: right;
+
+      cursor: pointer;
+    }
+  }
+
+  &__address-selecting {
+    margin-top: 2rem;
+
+    label {
+        display: block;
+        margin-bottom: 1rem;
+    }
+  }
+}

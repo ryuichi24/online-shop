@@ -1,5 +1,4 @@
 <template>
-  <h2>Address Form</h2>
   <form @submit.prevent>
     <div>
       <label for="address1">Address 1</label>
@@ -19,6 +18,7 @@
     </div>
     <button @click="addAddress">Add</button>
   </form>
+  <hr style="margin-top: 1rem;">
 </template>
 
 <script lang="ts">

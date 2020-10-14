@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <button @click="isAddressFormOpen = !isAddressFormOpen">{{ addressFormBtnText }}</button>
+  <div class="address-section">
+    <div class="address-section__add-address-btn">
+      <span @click="isAddressFormOpen = !isAddressFormOpen">{{ addressFormBtnText }}</span>
+    </div>
     <AddressForm v-if="isAddressFormOpen" />
-    <h2>Select your delivery address</h2>
-    <select v-model="selectedAddressId" name="address" @change="selectedAddress">
-      <option value="-1">--- Choose the delivery address ---</option>
-      <option v-for="(address, index) in addresses" :value="address.addressId" :key="index">
-        {{ address.address1 }} {{ address.address2 }}
-      </option>
-    </select>
+    <div class="address-section__address-selecting">
+      <label>Select your delivery address</label>
+      <select v-model="selectedAddressId" name="address" @change="selectedAddress">
+        <option value="-1">--- Choose the delivery address ---</option>
+        <option v-for="(address, index) in addresses" :value="address.addressId" :key="index">
+          {{ address.address1 }} {{ address.address2 }}
+        </option>
+      </select>
+    </div>
   </div>
 </template>
 
@@ -30,7 +34,7 @@ export default defineComponent({
     const isAddressFormOpen = ref(false);
 
     const addressFormBtnText = computed(() =>
-      isAddressFormOpen.value ? 'close' : 'Add a new address',
+      isAddressFormOpen.value ? 'close' : 'Add an address',
     );
 
     const userId = computed(() => getters.userId);

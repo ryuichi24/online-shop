@@ -15,6 +15,18 @@
   &__info {
     grid-row: 1/2;
     grid-column: 1/2;
+
+    #{ $self }__edit-btn {
+      cursor: pointer;
+      float: right;
+      padding: 0.6rem;
+      margin: 0.5rem;
+      background-color: $main-btn-color;
+
+      &:hover {
+        background-color: $main-btn-color-hovered;
+      }
+    }
   }
 
   &__orders {

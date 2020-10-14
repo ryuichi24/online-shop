@@ -1,7 +1,11 @@
 <template>
   <div class="container" style="margin-bottom: 10rem;">
     <div class="account-page">
-      <div class="account-page__card account-page__info">Account Info</div>
+      <div class="account-page__card account-page__info">
+        <span class="account-page__edit-btn" @click="isBeingEdited = !isBeingEdited">Edit</span>
+        <AccountInfo v-if="!isBeingEdited" />
+        <AccountInfoForm v-if="isBeingEdited" />
+      </div>
       <div class="account-page__card account-page__orders">Orders</div>
       <div class="account-page__card account-page__cart-items">CartItems</div>
       <div class="account-page__logout-contact-us">
@@ -17,16 +21,25 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
 // vuex
 import { useStore } from 'vuex';
 import { LOGOUT_USER } from '../../store/types/action.type';
+// components
+import AccountInfo from './cards/info/AccountInfo.vue';
+import AccountInfoForm from './cards/info/AccountInfoForm.vue';
 
 export default defineComponent({
+  components: {
+    AccountInfo,
+    AccountInfoForm,
+  },
   setup() {
     const { push } = useRouter();
     const { dispatch } = useStore();
+
+    const isBeingEdited = ref(false);
 
     const logout = () => {
       dispatch(LOGOUT_USER).then(() => push({ name: 'LoginForm' }));
@@ -34,6 +47,7 @@ export default defineComponent({
 
     return {
       logout,
+      isBeingEdited,
     };
   },
 });

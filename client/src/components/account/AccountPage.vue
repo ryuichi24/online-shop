@@ -16,7 +16,7 @@
         <div class="account-page__card account-page__contact-us">
           <h3>Contact us</h3>
           <ul>
-            <li>Company name: Example .inc</li>
+            <li>Company name: Example Inc.</li>
             <li>Email: example@exaple.com</li>
             <li>Phone: +359 1234567</li>
           </ul>

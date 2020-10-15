@@ -1,6 +1,6 @@
 version: '3'
 services:
-  mysql:
+  mssql:
     image: mcr.microsoft.com/mssql/server:2019-latest
     restart: always
     container_name: mssql
@@ -10,3 +10,12 @@ services:
       ACCEPT_EULA: Y
       SA_PASSWORD: ThisIsReallyStrongPassword123
       MSSQL_PID: Developer
+  api:
+    image: ryuichi24/onlineshopapi
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: always
+    container_name: api
+    ports:
+      - 8080:80

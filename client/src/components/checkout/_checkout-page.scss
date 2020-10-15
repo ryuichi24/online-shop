@@ -9,5 +9,20 @@
     background: #fff;
     margin: 1rem;
     padding: 2rem;
+
+    #{ $self }__order-btn {
+      margin-top: 2rem;
+
+      span {
+        padding: 0.5rem;
+        background: $main-btn-color;
+        float: right;
+        cursor: pointer;
+
+        &:hover {
+          background: $main-btn-color-hovered;
+        }
+      }
+    }
   }
 }

@@ -1,11 +1,27 @@
 <template>
-  <div>
-    <h2>Your orders</h2>
-    <div v-for="(item, index) in cartItems" :key="index">
-      <span>{{ item.product.name }}</span>
+  <div class="order-item-section">
+    <div class="order-item-section__orders-container">
+      <h3>Your orders</h3>
+      <div class="order-item-section__order" v-for="(item, index) in cartItems" :key="index">
+        <div class="order-item-section__item-info order-item-section__item-name">
+          <span>{{ item.product.name }}</span>
+        </div>
+        <div class="order-item-section__item-info order-item-section__item-price">
+          <span>€ {{ item.product.price }}</span>
+        </div>
+        <div class="order-item-section__item-info order-item-section__item-qty">
+          <span>Qty: {{ item.cartItemCount }}</span>
+        </div>
+      </div>
+      <hr />
     </div>
-    <h3>Total payment</h3>
-    <div>€{{ totalAmount }}</div>
+
+    <div class="order-item-section__total-payment-container">
+      <h3>Total payment</h3>
+      <div class="order-item-section__total-payment">
+        <span>€{{ totalAmount }}</span>
+      </div>
+    </div>
   </div>
 </template>
 

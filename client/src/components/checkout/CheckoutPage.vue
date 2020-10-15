@@ -6,9 +6,9 @@
       </div>
       <div class="checkout-page__card">
         <OrderItemSection />
-      </div>
-      <div class="checkout-page__card">
-        <button @click="sendOrder">Send order</button>
+        <div class="checkout-page__order-btn">
+          <span @click="sendOrder">Send order</span>
+        </div>
       </div>
     </div>
   </div>

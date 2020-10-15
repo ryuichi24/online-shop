@@ -1,0 +1,48 @@
+.order-item-section {
+    $self: &;
+
+    &__orders-container {
+         margin-bottom: 1rem;
+
+         h3 {
+             margin-bottom: 0.5rem;
+         }
+
+         #{ $self }__order {
+             margin-bottom: 1rem;
+             padding: 1rem;
+
+             background: rgba(106, 106, 106, 0.064);
+
+             #{ $self }__item-info {
+                 margin-bottom: 0.4rem;
+             }
+
+             #{ $self }__item-name {
+                font-weight: 600;
+             }
+
+             #{ $self }__item-price {
+                // color: #FF453A;
+             }
+
+             #{ $self }__item-qty {
+                //
+             }
+         }
+    }
+
+    &__total-payment-container {
+        h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        #{ $self }__total-payment {
+
+            span {
+                font-size: x-large;
+            }
+        }
+    }
+
+}

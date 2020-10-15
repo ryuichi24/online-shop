@@ -1,36 +1,29 @@
 <template>
   <div class="order">
-    <div class="order__orderId">
-      <span>{{ order.orderId }}</span>
+    <div>
+      <span>Order ID: {{ order.orderId }}</span>
     </div>
-    <div class="order__orderedAt">
-      <span>{{ order.orderedAt }}</span>
+    <div>
+      <span>Order date: {{ order.orderedAt }}</span>
     </div>
-    <div class="order__totalPayment">
-      <span>€ {{ order.totalPayment }}</span>
+    <div>
+      <span>Purchaser: {{ order.user.firstName }} {{ order.user.lastName }}</span>
     </div>
-    <div class="order__address">
-      <div>
-        <span>{{ order.user.firstName }} {{ order.user.lastName }}</span>
+    <div>
+      <span
+        >Delibery address: {{ order.address.address1 }}, {{ order.address.address2 }},
+        {{ order.address.city }}, Post Code: {{ order.address.postCode }}</span
+      >
+    </div>
+    <div>
+      <div v-for="(item, index) in order.orderItems" :key="index">
+        <div>
+          <span>{{ item.product.name }}</span>
+        </div>
       </div>
-      <div>
-        <span>{{ order.user.email }}</span>
-      </div>
-      <div>
-        <span>{{ order.user.phone }}</span>
-      </div>
-      <div>
-        <span>{{ order.address.address1 }}</span>
-      </div>
-      <div>
-        <span>{{ order.address.address2 }}</span>
-      </div>
-      <div>
-        <span>{{ order.address.city }}</span>
-      </div>
-      <div>
-        <span>{{ order.address.postCode }}</span>
-      </div>
+    </div>
+    <div>
+      <span>Total Payment: €{{ order.totalPayment }}</span>
     </div>
   </div>
 </template>

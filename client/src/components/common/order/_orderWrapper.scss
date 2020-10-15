@@ -1,7 +1,8 @@
-  .order {
-      $self: &;
+.order {
+  $self: &;
 
-      background: #fff;
-      margin: 2rem 0;
-      width: 90%;
-  }
+  padding: 2rem;
+  margin: 1rem;
+
+  background-color: rgba(106, 106, 106, 0.064);
+}

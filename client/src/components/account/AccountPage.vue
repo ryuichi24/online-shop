@@ -6,8 +6,12 @@
         <AccountInfo v-if="!isBeingEdited" />
         <AccountInfoForm v-if="isBeingEdited" :user="currentUser" />
       </div>
-      <div class="account-page__card account-page__orders">Orders</div>
-      <div class="account-page__card account-page__cart-items">CartItems</div>
+      <div class="account-page__card account-page__addresses">
+        <div>Addresses</div>
+      </div>
+      <div class="account-page__card account-page__order-history">
+        <OrderHistory />
+      </div>
       <div class="account-page__logout-contact-us">
         <div class="account-page__card">
           <span>Contact us</span>
@@ -29,11 +33,13 @@ import { LOGOUT_USER } from '../../store/types/action.type';
 // components
 import AccountInfo from './cards/info/AccountInfo.vue';
 import AccountInfoForm from './cards/info/AccountInfoForm.vue';
+import OrderHistory from './cards/order-history/OrderHistory.vue';
 
 export default defineComponent({
   components: {
     AccountInfo,
     AccountInfoForm,
+    OrderHistory,
   },
   setup() {
     const { push } = useRouter();

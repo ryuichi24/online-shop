@@ -13,8 +13,13 @@
         <OrderHistory />
       </div>
       <div class="account-page__logout-contact-us">
-        <div class="account-page__card">
-          <span>Contact us</span>
+        <div class="account-page__card account-page__contact-us">
+          <h3>Contact us</h3>
+          <ul>
+            <li>Company name: Example .inc</li>
+            <li>Email: example@exaple.com</li>
+            <li>Phone: +359 1234567</li>
+          </ul>
         </div>
         <div class="account-page__logout-btn-container">
           <span class="account-page__logout-btn" @click="logout">Logout</span>

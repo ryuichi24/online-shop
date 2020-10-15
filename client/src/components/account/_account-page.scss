@@ -27,6 +27,13 @@
         background-color: $main-btn-color-hovered;
       }
     }
+
+    &-main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 4rem;
+    }
   }
 
   &__addresses {

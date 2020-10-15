@@ -1,0 +1,23 @@
+.account-info-form {
+    $self: &;
+
+    &__update-btn {
+        display: block;
+        background: $main-btn-color;
+        padding: 0.5rem;
+
+        width: 70px;
+        text-align: center;
+
+        margin: 0 auto;
+
+        margin-top: 1.5rem;
+
+        cursor: pointer;
+
+        &:hover {
+            background: $main-btn-color-hovered;
+        }
+    }
+
+}

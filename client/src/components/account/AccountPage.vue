@@ -2,9 +2,13 @@
   <div class="container" style="margin-bottom: 10rem;">
     <div class="account-page">
       <div class="account-page__card account-page__info">
-        <span class="account-page__edit-btn" @click="isBeingEdited = !isBeingEdited">{{ editBtnText }}</span>
-        <AccountInfo v-if="!isBeingEdited" />
-        <AccountInfoForm v-if="isBeingEdited" :user="currentUser" />
+        <span class="account-page__edit-btn" @click="isBeingEdited = !isBeingEdited">{{
+          editBtnText
+        }}</span>
+        <div class="account-page__info-main">
+          <AccountInfo v-if="!isBeingEdited" />
+          <AccountInfoForm v-if="isBeingEdited" :user="currentUser" />
+        </div>
       </div>
       <div class="account-page__card account-page__addresses">
         <AddressList />
@@ -60,7 +64,7 @@ export default defineComponent({
 
     const currentUser = computed(() => getters.currentUser);
 
-    const editBtnText = computed(() => isBeingEdited.value ? 'Close' : 'Edit');
+    const editBtnText = computed(() => (isBeingEdited.value ? 'Close' : 'Edit'));
 
     return {
       logout,

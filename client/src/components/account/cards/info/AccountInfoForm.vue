@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent>
+  <form class="account-info-form" @submit.prevent>
     <div>
       <label for="">First Name</label>
       <input v-model="firstName" type="text" />
@@ -20,7 +20,7 @@
       <label for="">phone</label>
       <input v-model="phone" type="text" />
     </div>
-    <button @click="update">Update</button>
+    <span class="account-info-form__update-btn" @click="update">Update</span>
   </form>
 </template>
 

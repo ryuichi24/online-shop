@@ -7,7 +7,7 @@
         <AccountInfoForm v-if="isBeingEdited" :user="currentUser" />
       </div>
       <div class="account-page__card account-page__addresses">
-        <div>Addresses</div>
+        <AddressList />
       </div>
       <div class="account-page__card account-page__order-history">
         <OrderHistory />
@@ -34,12 +34,14 @@ import { LOGOUT_USER } from '../../store/types/action.type';
 import AccountInfo from './cards/info/AccountInfo.vue';
 import AccountInfoForm from './cards/info/AccountInfoForm.vue';
 import OrderHistory from './cards/order-history/OrderHistory.vue';
+import AddressList from './cards/address-list/AddressList';
 
 export default defineComponent({
   components: {
     AccountInfo,
     AccountInfoForm,
     OrderHistory,
+    AddressList,
   },
   setup() {
     const { push } = useRouter();

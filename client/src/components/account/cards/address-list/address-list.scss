@@ -1,0 +1,15 @@
+.address-list {
+    $self: &;
+
+    padding: 2rem;
+
+    &__address-wrapper {
+        margin-top: 1.5rem;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow: scroll;
+        height: 290px;
+    }
+}

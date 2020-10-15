@@ -1,0 +1,18 @@
+.address-wrapper {
+  $self: &;
+
+  display: flex;
+  justify-content: space-between;
+
+  padding: 2rem;
+  margin: 1rem;
+
+  background-color: rgba(106, 106, 106, 0.064);
+
+  &__trash-icon {
+      cursor: pointer;
+      &:hover {
+          background: rgb(87, 87, 87);
+      }
+  }
+}

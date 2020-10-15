@@ -37,7 +37,7 @@
 
 <script>
 import { defineComponent, onMounted, computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 // vuex
 import { useStore } from 'vuex';
 import {
@@ -50,20 +50,27 @@ import {
 export default defineComponent({
   setup() {
     const { params } = useRoute();
+    const { push } = useRouter();
     const { dispatch, getters } = useStore();
 
     const product = computed(() => getters.product);
     const userId = computed(() => getters.userId);
     const isInCart = computed(() => getters.isInCart);
+    const isAuthenticated = computed(() => getters.isAuthenticated);
 
     const cartItemCount = ref(1);
 
     const addCartItem = () => {
-      dispatch(ADD_CART_ITEM, {
-        userId: userId.value,
-        productId: product.value.productId,
-        cartItemCount: cartItemCount.value,
-      });
+      if (isAuthenticated.value) {
+        dispatch(ADD_CART_ITEM, {
+          userId: userId.value,
+          productId: product.value.productId,
+          cartItemCount: cartItemCount.value,
+        });
+      } else {
+        alert('Please login');
+        push({ name: 'LoginForm' });
+      }
     };
 
     onMounted(() => {

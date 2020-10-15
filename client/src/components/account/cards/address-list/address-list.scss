@@ -3,6 +3,11 @@
 
     padding: 2rem;
 
+    &__plus-icon {
+        float: right;
+        cursor: pointer;
+    }
+
     &__address-wrapper {
         margin-top: 1.5rem;
 

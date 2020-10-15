@@ -22,7 +22,7 @@ import { defineComponent, ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { GET_ALL_ADDRESSES_BY_USER_ID, SELECT_ADDRESS } from '../../../store/types/action.type';
 // components
-import AddressForm from './AddressForm.vue';
+import AddressForm from '../../common/address/AddressForm.vue';
 
 export default defineComponent({
   components: {

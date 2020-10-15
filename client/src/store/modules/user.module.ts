@@ -83,9 +83,9 @@ const mutations = {
     if (token) JwtService.saveToken(token);
   },
   CLEAR_AUTH: (state: UserState) => {
-    JwtService.destroyToken();
     state.currentUser = null;
     state.isAuthenticated = false;
+    JwtService.destroyToken();
   },
 };
 

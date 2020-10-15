@@ -41,6 +41,8 @@ const checkUserAuth = async () => {
 
     const { data } = await ApiService.API.get<User>('/user/check-auth');
 
+    ApiService.clearAuth();
+
     return data;
   } catch (err) {
     if (err && err.response) {

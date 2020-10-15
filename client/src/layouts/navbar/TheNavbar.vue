@@ -8,7 +8,13 @@
       </div>
       <ul class="nav__items">
         <li v-for="(item, index) in navItems" :key="index">
-          <router-link :to="item.path">
+          <router-link  v-if="!item.isForGuest && isAuthenticated" :to="item.path">
+            <span :class="[`nav__item ${item.isSelected && 'nav__item--selected'}`]">
+              {{ item.text }}
+            </span>
+          </router-link>
+
+          <router-link  v-else-if="item.isForGuest && !isAuthenticated" :to="item.path">
             <span :class="[`nav__item ${item.isSelected && 'nav__item--selected'}`]">
               {{ item.text }}
             </span>
@@ -20,14 +26,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, registerRuntimeCompiler } from 'vue';
+import { computed, defineComponent, registerRuntimeCompiler } from 'vue';
 import { useRouter } from 'vue-router';
+// vuex
+import { useStore } from 'vuex';
 // hooks
 import { useNavItems } from '../../hooks';
 
 export default defineComponent({
   setup() {
+    const { getters } = useStore();
     const { navItems, changeSelectedState, resetSelectedState } = useNavItems();
+
+    const isAuthenticated = computed(() => getters.isAuthenticated);
+
     const { afterEach } = useRouter();
     afterEach(() => {
       changeSelectedState();
@@ -35,6 +47,7 @@ export default defineComponent({
     return {
       navItems,
       resetSelectedState,
+      isAuthenticated,
     };
   },
 });

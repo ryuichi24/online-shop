@@ -15,6 +15,10 @@ const setToken = () => {
   };
 };
 
+const clearAuth = () => {
+  delete API.defaults.headers.common.Authorization;
+};
+
 const setAdminToken = () => {
   if (!jwtService.getAdminToken()) return;
   API.defaults.headers.common = {
@@ -26,4 +30,5 @@ export default {
   API,
   setToken,
   setAdminToken,
+  clearAuth,
 };

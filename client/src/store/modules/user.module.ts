@@ -73,7 +73,7 @@ const actions = {
     } catch (err) {
       console.log(err.message);
     }
-  }
+  },
 };
 
 const mutations = {

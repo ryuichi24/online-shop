@@ -26,6 +26,9 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs, PropType } from 'vue';
+// vuex
+import { useStore } from 'vuex';
+import { UPDATE_USER } from '../../../../store/types/action.type';
 // type
 import { User } from '../../../../types';
 
@@ -34,16 +37,19 @@ export default defineComponent({
     user: Object as PropType<User>,
   },
   setup({ user }) {
+    const { dispatch } = useStore();
+
     const userInputs = reactive({
       firstName: user!.firstName,
       lastName: user!.lastName,
       email: user!.email,
-      password: '',
+      password: null,
       phone: user!.phone,
+      userId: user!.userId,
     });
 
     const update = () => {
-      console.log(userInputs);
+      dispatch(UPDATE_USER, userInputs);
     };
 
     return {

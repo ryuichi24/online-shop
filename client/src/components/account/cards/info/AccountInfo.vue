@@ -1,19 +1,38 @@
 <template>
   <div class="account-info">
     <ul>
-      <li><span>Name: {{ user.firstName }} {{ user.lastName }}</span></li>
-      <li><span>Email: {{ user.email }}</span></li>
-      <li><span>Phone: {{ user.phone }}</span></li>
+      <li>
+        <span>Name: {{ user.firstName }} {{ user.lastName }}</span>
+      </li>
+      <li>
+        <span>Email: {{ user.email }}</span>
+      </li>
+      <li>
+        <span>Phone: {{ user.phone }}</span>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref, computed, onMounted } from 'vue';
+// vuex
+import { useStore } from 'vuex';
+import { CHECK_AUTH } from '../../../../store/types/action.type';
 
 export default defineComponent({
-  props: {
-    user: Object,
+  setup() {
+    const { getters, dispatch } = useStore();
+
+    const user = computed(() => getters.currentUser);
+
+    onMounted(() => {
+      dispatch(CHECK_AUTH);
+    });
+
+    return {
+      user,
+    };
   },
 });
 </script>

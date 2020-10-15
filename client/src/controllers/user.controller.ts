@@ -55,7 +55,7 @@ const updateUser = async (user: User) => {
   try {
     ApiService.setToken();
 
-    const { status } = await ApiService.API.put('/user', user);
+    const { status } = await ApiService.API.put(`/user/${user.userId}`, user);
     if (status !== 204) return null;
 
     return true;
@@ -66,7 +66,7 @@ const updateUser = async (user: User) => {
     }
     throw err;
   }
-}
+};
 
 export default {
   createUser,

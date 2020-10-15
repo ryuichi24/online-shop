@@ -49,7 +49,9 @@ export default defineComponent({
     });
 
     const update = () => {
-      dispatch(UPDATE_USER, userInputs);
+      dispatch(UPDATE_USER, userInputs).then(() => {
+        alert('The account details have beem updated.');
+      });
     };
 
     return {

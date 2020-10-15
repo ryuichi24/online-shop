@@ -24,13 +24,13 @@ const getters = {
 const actions = {
   async addOrder({ commit }: { commit: Commit }, newOrder: Order) {
     try {
-      const addedOrder = await OrderController.addOrder(newOrder);
+      const res = await OrderController.addOrder(newOrder);
       // TODO: make error message
-      if (!addedOrder) return;
+      if (res.status === 400) throw Error;
 
-      commit(ADD_ORDER, addedOrder);
+      commit(ADD_ORDER, res);
     } catch (err) {
-      console.log(err.message);
+      throw Error;
     }
   },
   async getAllOrders({ commit }: { commit: Commit }) {

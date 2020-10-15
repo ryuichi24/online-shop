@@ -51,7 +51,13 @@ export default defineComponent({
         orderItems,
       };
 
-      dispatch(ADD_ORDER, order);
+      dispatch(ADD_ORDER, order)
+        .then(() => {
+          alert('The order has been processed');
+        })
+        .catch(() => {
+          alert('The order has failed to be processed');
+        });
     };
 
     return {

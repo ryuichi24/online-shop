@@ -66,6 +66,8 @@ export default defineComponent({
           userId: userId.value,
           productId: product.value.productId,
           cartItemCount: cartItemCount.value,
+        }).then(() => {
+          alert('The Item has been added to the cart');
         });
       } else {
         alert('Please login');

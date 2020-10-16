@@ -77,7 +77,7 @@ const clearCartItems = async (userId: number) => {
     }
     throw err;
   }
-}
+};
 
 export default {
   addCartItem,

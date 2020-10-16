@@ -133,7 +133,8 @@ const mutations = {
   },
   CLEAR_CART_ITEMS: (state: CartItemState) => {
     state.cartItems = [];
-  }
+    state.totalPayment = 0;
+  },
 };
 
 export default {

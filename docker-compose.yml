@@ -10,6 +10,8 @@ services:
       ACCEPT_EULA: Y
       SA_PASSWORD: ThisIsReallyStrongPassword123
       MSSQL_PID: Developer
+    volumes:
+      - ./database:/var/opt/mssql/data
   api:
     image: ryuichi24/onlineshopapi
     build:

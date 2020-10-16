@@ -22,12 +22,5 @@ namespace server.DataAccess
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderItem> OrderItem { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Category>()
-                .HasMany(c => c.Products)
-                .WithOne(p => p.Category);
-        }
     }
 }

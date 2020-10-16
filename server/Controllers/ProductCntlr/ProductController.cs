@@ -71,11 +71,11 @@ namespace server.Controllers.ProductCntlr
             if (existingProduct == null) return this.NotFound();
 
             if (productUpdateParameter.Name != null) existingProduct.Name = productUpdateParameter.Name;
-            if (!productUpdateParameter.Price.Equals(null)) existingProduct.Price = productUpdateParameter.Price;
+            if (productUpdateParameter.Price != null) existingProduct.Price = float.Parse(productUpdateParameter.Price.ToString());
             if (productUpdateParameter.Description != null) existingProduct.Description = productUpdateParameter.Description;
-            if (!productUpdateParameter.Inventory.Equals(null)) existingProduct.Inventory = productUpdateParameter.Inventory;
+            if (productUpdateParameter.Inventory != null) existingProduct.Inventory = int.Parse(productUpdateParameter.Inventory.ToString());
             if (productUpdateParameter.Image != null) existingProduct.Image = productUpdateParameter.Image;
-            if (!productUpdateParameter.CategoryId.Equals(null)) existingProduct.CategoryId = productUpdateParameter.CategoryId;
+            if (productUpdateParameter.CategoryId != null) existingProduct.CategoryId = int.Parse(productUpdateParameter.CategoryId.ToString());
 
             this._repository.Update(existingProduct);
             this._repository.SaveChanges();

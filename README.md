@@ -12,10 +12,13 @@ dotnet add package System.IdentityModel.Tokens.Jwt
 ```
 ## Commands
 ```
+#dotnet
 dotnet watch run
 dotnet ef migrations add <migration name>
 dotnet ef database update
 dotnet ef migrations remove
+# docker
+docker exec -it <container id> /bin/ash
 ```
 ## Sources
 - [Introducing FOREIGN KEY constraint may cause cycles or multiple cascade paths - why?](https://stackoverflow.com/questions/17127351/introducing-foreign-key-constraint-may-cause-cycles-or-multiple-cascade-paths)
@@ -30,5 +33,3 @@ dotnet ef migrations remove
 - [.Net Core 3.0 possible object cycle was detected which is not supported](https://entityframeworkcore.com/knowledge-base/59199593/-net-core-3-0-possible-object-cycle-was-detected-which-is-not-supported)
 - [Include->ThenInclude for a collection](https://github.com/dotnet/efcore/issues/6560)
 - [dotnet ef not found in .NET Core 3](https://stackoverflow.com/questions/57066856/dotnet-ef-not-found-in-net-core-3)
-
-docker exec -it 03c86 /bin/ash

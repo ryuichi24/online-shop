@@ -13,7 +13,7 @@
           <input @change="updateItemCount" v-model.number="itemCount" type="number" step="1" />
         </div>
       </form>
-      <span class="cart-item__delete-btn" @click="deleteItem">Delete</span>
+      <span class="cart-item__delete-btn" @click="deleteItem(cartItem.cartItemId)">Delete</span>
     </div>
   </div>
 </template>
@@ -41,8 +41,8 @@ export default defineComponent({
       });
     };
 
-    const deleteItem = () => {
-      dispatch(REMOVE_CART_ITEM, cartItem!.cartItemId);
+    const deleteItem = (cartItemId: number) => {
+      dispatch(REMOVE_CART_ITEM, cartItemId);
     };
 
     return {

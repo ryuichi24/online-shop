@@ -37,7 +37,7 @@ const actions = {
       // TODO: make error message
       if (!addedAddress) return;
 
-      commit(ADD_ADDRESS, newAddress);
+      commit(ADD_ADDRESS, addedAddress);
     } catch (err) {
       console.log(err.message);
     }
@@ -86,6 +86,7 @@ const actions = {
 const mutations = {
   ADD_ADDRESS: (state: AddressState, newAddress: Address) => {
     state.addresses?.push(newAddress);
+    state.selectedAddressId = newAddress.addressId!;
   },
   REMOVE_ADDRESS: (state: AddressState, addressId: number) => {
     const indexToRemove = state.addresses?.findIndex((a: Address) => a.addressId === addressId);

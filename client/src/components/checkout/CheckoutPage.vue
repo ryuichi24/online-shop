@@ -18,7 +18,7 @@
 import { defineComponent, computed } from 'vue';
 // vuex
 import { useStore } from 'vuex';
-import { ADD_ORDER } from '../../store/types/action.type';
+import { ADD_ORDER, CLEAR_CART_ITEMS } from '../../store/types/action.type';
 // components
 import AddressSection from './address/AddressSection.vue';
 import OrderItemSection from './order-items/OrderItemSection.vue';
@@ -52,6 +52,9 @@ export default defineComponent({
       };
 
       dispatch(ADD_ORDER, order)
+        .then(() => {
+          dispatch(CLEAR_CART_ITEMS, userId.value);
+        })
         .then(() => {
           alert('The order has been processed');
         })

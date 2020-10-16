@@ -66,7 +66,7 @@ namespace server
             // CORS
             services.AddCors(options => options.AddDefaultPolicy
             (
-                builder => builder.WithOrigins("http://localhost:8080")
+                builder => builder.WithOrigins(Environment.GetEnvironmentVariable("CLIENT_ORIGIN") ?? "http://localhost:8080")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()

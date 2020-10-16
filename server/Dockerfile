@@ -5,7 +5,7 @@ COPY . ./
 RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
-ENV ASPNETCORE_URLS=http://+:80
+ENV ASPNETCORE_URLS=http://+:2000
 ENV PATH $PATH:/root/.dotnet/tools
 
 RUN dotnet tool install -g dotnet-ef --version 3.1.8

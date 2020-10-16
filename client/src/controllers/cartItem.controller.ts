@@ -64,9 +64,25 @@ const getAllCartItemsByUserId = async (id: number) => {
   }
 };
 
+const clearCartItems = async (userId: number) => {
+  try {
+    const { status } = await ApiService.API.delete(`/cartitem/clear-cart-items/${userId}`);
+    if (status !== 204) return false;
+
+    return true;
+  } catch (err) {
+    if (err && err.response) {
+      const axiosError = err as AxiosError<ServerError>;
+      if (axiosError.response) return axiosError.response.data;
+    }
+    throw err;
+  }
+}
+
 export default {
   addCartItem,
   removeCartItem,
   updateCartItemCount,
   getAllCartItemsByUserId,
+  clearCartItems,
 };

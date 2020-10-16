@@ -9,6 +9,7 @@ import {
   SET_CART_ITEMS,
   SET_IS_IN_CART,
   SET_TOTAL_PAYMENT,
+  CLEAR_CART_ITEMS,
 } from '@/store/types/mutation.type';
 // controller
 import { CartItemController } from '@/controllers';
@@ -83,6 +84,14 @@ const actions = {
       console.log(err.message);
     }
   },
+  async clearCartItems({ commit }: { commit: Commit }, userId: number) {
+    try {
+      await CartItemController.clearCartItems(userId);
+      commit(CLEAR_CART_ITEMS);
+    } catch (err) {
+      console.log(err.message);
+    }
+  },
   checkIsInCart({ commit }: { commit: Commit }, productId: number) {
     commit(SET_IS_IN_CART, productId);
   },
@@ -122,6 +131,9 @@ const mutations = {
       })
       .reduce((accum: number, current: number) => accum + current);
   },
+  CLEAR_CART_ITEMS: (state: CartItemState) => {
+    state.cartItems = [];
+  }
 };
 
 export default {

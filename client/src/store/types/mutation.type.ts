@@ -19,6 +19,7 @@ export const UPDATE_CART_ITEM_COUNT = 'UPDATE_CART_ITEM_COUNT';
 export const SET_CART_ITEMS = 'SET_CART_ITEMS';
 export const SET_IS_IN_CART = 'SET_IS_IN_CART';
 export const SET_TOTAL_PAYMENT = 'SET_TOTAL_PAYMENT';
+export const CLEAR_CART_ITEMS = 'CLEAR_CART_ITEMS';
 // address
 export const ADD_ADDRESS = 'ADD_ADDRESS';
 export const REMOVE_ADDRESS = 'REMOVE_ADDRESS';

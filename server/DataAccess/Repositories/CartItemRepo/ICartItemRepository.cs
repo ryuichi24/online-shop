@@ -6,6 +6,8 @@ namespace server.DataAccess.Repositories.CartItemRepo
     public interface ICartItemRepository : IRepository<CartItem>
     {
          // add some features specially for CartItem
-         public IEnumerable<CartItem> GetAllCartItemsByUserId(int userId);
+         IEnumerable<CartItem> GetAllCartItemsByUserId(int userId);
+
+        void ClearCartItems(IEnumerable<CartItem> cartItems);
     }
 }

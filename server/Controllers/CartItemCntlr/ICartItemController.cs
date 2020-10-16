@@ -16,5 +16,7 @@ namespace server.Controllers.CartItemCntlr
         public ActionResult<CartItem> AddNewCartItem([FromBody] CartItemCreateParameter cartItemCreateParameter);
 
         public ActionResult UpdateCartItem(int id, [FromBody] CartItemUpdateParameter cartItemUpdateParameter);
+
+        public ActionResult ClearCartItems(int id);
     }
 }

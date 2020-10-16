@@ -75,5 +75,16 @@ namespace server.Controllers.CartItemCntlr
 
             return this.NoContent();
         }
+
+        [HttpDelete("clear-cart-items/{id}")]
+        public ActionResult ClearCartItems(int id)
+        {
+            IEnumerable<CartItem> cartItems = this._repository.GetAllCartItemsByUserId(id);
+
+            this._repository.ClearCartItems(cartItems);
+            this._repository.SaveChanges();
+
+            return this.Ok();
+        }
     }
 }

@@ -18,5 +18,10 @@ namespace server.DataAccess.Repositories.CartItemRepo
             .Include( c => c.Product.Category )
             .ToList();
         }
+
+        public void ClearCartItems(IEnumerable<CartItem> cartItems)
+        {
+            this._DbContext.RemoveRange(cartItems);
+        }
     }
 }

@@ -3,11 +3,11 @@
     <div class="product-section__heading-container">
       <h1>PRODUCTS</h1>
     </div>
-    <div class="product-section__product-list-container">
-      <div class="product-section__product" v-for="(product, index) in products" :key="index">
-        <div class="product-section__edit-btn">
+     <div class="product-section__edit-btn">
           <span @click="isEditting = !isEditting">{{ editBtnText }}</span>
         </div>
+    <div class="product-section__product-list-container">
+      <div class="product-section__product" v-for="(product, index) in products" :key="index">
         <ProductEditForm :product="product" v-if="isEditting" />
         <div v-if="!isEditting">
           <div>
@@ -65,7 +65,7 @@ export default defineComponent({
 
     const isEditting = ref(false);
 
-    const editBtnText = computed(() => (isEditting.value ? 'Close' : 'Edit'));
+    const editBtnText = computed(() => (isEditting.value ? 'Close' : 'Edit products'));
 
     onMounted(() => {
       dispatch(GET_PRODUCTS);

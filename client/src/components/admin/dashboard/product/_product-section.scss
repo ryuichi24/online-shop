@@ -11,6 +11,21 @@
   height: 100vh;
   overflow: scroll;
 
+  &__edit-btn {
+    width: 91%;
+    span {
+      font-size: larger;
+      float: right;
+      cursor: pointer;
+      padding: 1rem;
+      background: $main-btn-color;
+      margin: 0.5rem;
+      &:hover {
+        background: $main-btn-color-hovered;
+      }
+    }
+  }
+
 
   &__heading-container {
     width: 90%;
@@ -36,19 +51,6 @@
     #{ $self }__product {
       background-color: #fff;
       border-radius: 0.5rem;
-
-      #{ $self }__edit-btn {
-        span {
-          cursor: pointer;
-          padding: 0.7rem;
-          float: right;
-          background: $main-btn-color;
-          margin: 0.5rem;
-          &:hover {
-            background: $main-btn-color-hovered;
-          }
-        }
-      }
     }
   }
 }

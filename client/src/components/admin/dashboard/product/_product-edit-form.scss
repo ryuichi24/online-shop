@@ -1,0 +1,19 @@
+.product-edit-form {
+  $self: &;
+
+  &__update-btn {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    span {
+      cursor: pointer;
+      padding: 0.7rem;
+      background: $main-btn-color;
+
+      &:hover {
+        background: $main-btn-color-hovered;
+      }
+    }
+  }
+}

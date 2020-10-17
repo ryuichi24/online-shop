@@ -1,5 +1,5 @@
 <template>
-  <form @submi.prevent>
+  <form class="product-edit-form" @submi.prevent>
     <div>
       <label for="name">name</label>
       <input v-model="name" type="text" />
@@ -10,7 +10,7 @@
     </div>
     <div>
       <label for="description">description</label>
-      <input v-model="description" type="text" />
+      <textarea v-model="description" name="description" cols="30" rows="10"></textarea>
     </div>
     <div>
       <label for="image">image</label>
@@ -20,7 +20,9 @@
       <label for="inventory">inventory</label>
       <input v-model="inventory" type="text" />
     </div>
-    <span @click="updateProduct">Update</span>
+    <div class="product-edit-form__update-btn">
+      <span @click="updateProduct">Update</span>
+    </div>
   </form>
 </template>
 

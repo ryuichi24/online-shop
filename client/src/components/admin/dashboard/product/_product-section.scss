@@ -36,6 +36,19 @@
     #{ $self }__product {
       background-color: #fff;
       border-radius: 0.5rem;
+
+      #{ $self }__edit-btn {
+        span {
+          cursor: pointer;
+          padding: 0.7rem;
+          float: right;
+          background: $main-btn-color;
+          margin: 0.5rem;
+          &:hover {
+            background: $main-btn-color-hovered;
+          }
+        }
+      }
     }
   }
 }

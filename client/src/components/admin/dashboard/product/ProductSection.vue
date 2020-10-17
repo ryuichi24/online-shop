@@ -5,7 +5,9 @@
     </div>
     <div class="product-section__product-list-container">
       <div class="product-section__product" v-for="(product, index) in products" :key="index">
-        <span @click="isEditting = !isEditting">{{ editBtnText }}</span>
+        <div class="product-section__edit-btn">
+          <span @click="isEditting = !isEditting">{{ editBtnText }}</span>
+        </div>
         <ProductEditForm :product="product" v-if="isEditting" />
         <div v-if="!isEditting">
           <div>

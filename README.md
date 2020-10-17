@@ -20,6 +20,9 @@ Demo accounts both for a normal user and admin user were created. You can login 
 - Admin user
     - email => admin@example.com
     - password => admin
+
+## Database Schema
+<img width="550" alt="home" src="./images-readme/database_model.png">
 ## Dependencies
 ```
 dotnet add package Microsoft.EntityFrameworkCore

@@ -5,11 +5,26 @@
     </div>
     <div class="product-section__product-list-container">
       <div class="product-section__product" v-for="(product, index) in products" :key="index">
-        <div>{{ product.productId }}</div>
-        <div>{{ product.name }}</div>
-        <div>{{ product.price }}</div>
-        <div>{{ product.description }}</div>
-        <div>{{ product.inventory }}</div>
+        <div>
+          <h3><span>Product Id</span></h3>
+          <div><span>{{ product.productId }}</span></div>
+        </div>
+        <div>
+          <h3><span>Product name</span></h3>
+          <div><span>{{ product.name }}</span></div>
+        </div>
+        <div>
+          <h3><span>Product price</span></h3>
+          <div><span>€ {{ product.price }}</span></div>
+        </div>
+        <div>
+          <h3><span>Product description</span></h3>
+          <div><span>{{ product.description }}</span></div>
+        </div>
+        <div>
+          <h3><span>Product inventory</span></h3>
+          <div><span>{{ product.inventory }}</span></div>
+        </div>
       </div>
     </div>
   </div>

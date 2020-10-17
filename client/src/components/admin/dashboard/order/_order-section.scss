@@ -13,7 +13,22 @@
     margin-top: 2rem;
 
     h1 {
-        color: rgba(0, 0, 0, 0.755);
+      color: rgba(0, 0, 0, 0.755);
     }
+  }
+
+  &__orders {
+
+    margin-top: 2rem;
+    background: #fff;
+
+    overflow: scroll;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
+    grid-auto-rows: minmax(350px, auto);
+
+    height: 1000px;
   }
 }

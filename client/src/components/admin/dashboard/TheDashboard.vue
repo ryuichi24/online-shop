@@ -6,13 +6,21 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 // components
 import TheSideBar from './sidebar/TheSidebar.vue';
 
 export default defineComponent({
   components: {
     TheSideBar,
+  },
+  setup() {
+    const { push } = useRouter();
+
+    onMounted(() => {
+      push({ name: 'ProductSection' });
+    });
   },
 });
 </script>

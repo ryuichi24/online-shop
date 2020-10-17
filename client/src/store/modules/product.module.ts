@@ -9,6 +9,7 @@ import {
   SET_PRODUCT,
   ADD_PRODUCT,
   SET_SELECTED_PRODUCT,
+  UPDATE_PRODUCT,
 } from '../types/mutation.type';
 
 interface ProductState {
@@ -57,7 +58,11 @@ const actions = {
   },
   async updateProduct({ commit }: { commit: Commit }, productToUpdate: Product) {
     try {
-      console.log(productToUpdate);
+      const res = await ProductController.updatedProduct(productToUpdate);
+      // TODO: make error message
+      if (!res) return;
+
+      commit(UPDATE_PRODUCT, productToUpdate);
     } catch (err) {
       console.log(err.message);
     }
@@ -84,6 +89,12 @@ const mutations = {
     if (!selected) return;
 
     state.product = selected;
+  },
+  UPDATE_PRODUCT: (state: ProductState, product: Product) => {
+    const indexToUpdate = state.products.findIndex(
+      (p: Product) => p.productId === product.productId,
+    );
+    state.products[indexToUpdate] = product;
   },
 };
 

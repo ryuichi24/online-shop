@@ -12,6 +12,7 @@ export const SET_PRODUCTS = 'SET_PRODUCTS';
 export const SET_PRODUCT = 'SET_PRODUCT';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const SET_SELECTED_PRODUCT = 'SET_SELECTED_PRODUCT';
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 // cart item
 export const ADD_CART_ITEM = 'ADD_CART_ITEM';
 export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';

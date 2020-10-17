@@ -46,8 +46,24 @@ const addProduct = async (product: Product) => {
   }
 };
 
+const updatedProduct = async (product: Product) => {
+  try {
+    const { status } = await ApiService.API.put(`/product/${product.productId}`, product);
+    if (status !== 204) return null;
+
+    return true;
+  } catch (err) {
+    if (err && err.response) {
+      const axiosError = err as AxiosError<ServerError>;
+      if (axiosError.response) return axiosError.response.data;
+    }
+    throw err;
+  }
+};
+
 export default {
   getProducts,
   getProductById,
   addProduct,
+  updatedProduct,
 };

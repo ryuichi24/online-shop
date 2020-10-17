@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="margin-bottom: 10rem;">
+  <div class="container">
     <div class="account-page">
       <div class="account-page__card account-page__info">
         <span class="account-page__edit-btn" @click="isBeingEdited = !isBeingEdited">{{

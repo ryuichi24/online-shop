@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="address-wrapper__trash-icon">
-      <TrashIcon @click="removeAddress(address.addressId)" :width="30" :height="35" :fill="'#B6B6B6'" />
+      <TrashIcon @click="removeAddress(address.addressId)" :width="'30'" :height="'35'" :fill="'#B6B6B6'" />
     </div>
   </div>
 </template>
@@ -35,8 +35,12 @@ export default defineComponent({
     const { dispatch } = useStore();
 
     const removeAddress = (addressId: number) => {
-      dispatch(REMOVE_ADDRESS, addressId).then(() => {
+      dispatch(REMOVE_ADDRESS, addressId)
+      .then(() => {
         alert('The address has been deleted');
+      })
+      .catch(() => {
+        alert('You are not allowed to delete an address with which an order was processed.');
       });
     };
 

@@ -46,11 +46,12 @@ const actions = {
     try {
       const res = await AddressController.removeAddress(addressId);
       // TODO: make error message
-      if (!res) return;
+      if (!res) throw Error;
 
       commit(REMOVE_ADDRESS, addressId);
     } catch (err) {
       console.log(err.message);
+      throw Error;
     }
   },
   async updatedAddress(

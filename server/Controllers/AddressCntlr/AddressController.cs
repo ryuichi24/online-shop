@@ -41,10 +41,16 @@ namespace server.Controllers.AddressCntlr
             Address existingAddress = this._repository.GetById(id);
             if (existingAddress == null) this.NotFound();
 
-            this._repository.Remove(existingAddress);
-            this._repository.SaveChanges();
-
-            return this.NoContent();
+            try
+            {
+                this._repository.Remove(existingAddress);
+                this._repository.SaveChanges();
+                return this.NoContent();
+            }
+            catch (System.Exception)
+            {
+                return this.Forbid();
+            }
         }
 
         [HttpGet("{id}")]

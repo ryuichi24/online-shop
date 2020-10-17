@@ -1,8 +1,8 @@
 <template>
   <div class="address-list">
     <div class="address-list__plus-icon">
-      <PlusIcon v-if="!isAddingAddress"  @click="isAddingAddress = !isAddingAddress" :width="30" :height="35" :fill="'#B6B6B6'" />
-      <XIcon v-if="isAddingAddress"  @click="isAddingAddress = !isAddingAddress" :width="30" :height="35" :fill="'#B6B6B6'" />
+      <PlusIcon v-if="!isAddingAddress"  @click="isAddingAddress = !isAddingAddress" :width="'30'" :height="'35'" :fill="'#B6B6B6'" />
+      <XIcon v-if="isAddingAddress"  @click="isAddingAddress = !isAddingAddress" :width="'30'" :height="'35'" :fill="'#B6B6B6'" />
     </div>
     <AddressForm v-if="isAddingAddress" />
     <h3>Address list</h3>

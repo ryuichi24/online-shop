@@ -6,6 +6,8 @@ import { CartItem, ServerError } from '@/types';
 
 const addCartItem = async (cartItem: CartItem) => {
   try {
+    ApiService.setToken();
+
     const { data } = await ApiService.API.post('/cartitem', cartItem);
 
     return data;
@@ -20,6 +22,8 @@ const addCartItem = async (cartItem: CartItem) => {
 
 const removeCartItem = async (id: number) => {
   try {
+    ApiService.setToken();
+
     const { status } = await ApiService.API.delete(`/cartitem/${id}`);
     if (status !== 204) return null;
 
@@ -35,6 +39,8 @@ const removeCartItem = async (id: number) => {
 
 const updateCartItemCount = async (id: number, cartItemCount: number) => {
   try {
+    ApiService.setToken();
+
     const { status } = await ApiService.API.put(`/cartitem/${id}`, {
       cartItemCount,
     });
@@ -52,6 +58,8 @@ const updateCartItemCount = async (id: number, cartItemCount: number) => {
 
 const getAllCartItemsByUserId = async (id: number) => {
   try {
+    ApiService.setToken();
+
     const { data } = await ApiService.API.get(`/cartitem/all-by-user/${id}`);
 
     return data;
@@ -66,6 +74,8 @@ const getAllCartItemsByUserId = async (id: number) => {
 
 const clearCartItems = async (userId: number) => {
   try {
+    ApiService.setToken();
+
     const { status } = await ApiService.API.delete(`/cartitem/clear-cart-items/${userId}`);
     if (status !== 204) return false;
 

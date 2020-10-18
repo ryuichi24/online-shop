@@ -34,6 +34,8 @@ const getProductById = async (id: number) => {
 
 const addProduct = async (product: Product) => {
   try {
+    ApiService.setToken();
+
     const { data } = await ApiService.API.post<Product>('/product', product);
 
     return data;
@@ -48,6 +50,8 @@ const addProduct = async (product: Product) => {
 
 const updatedProduct = async (product: Product) => {
   try {
+    ApiService.setAdminToken();
+
     const { status } = await ApiService.API.put(`/product/${product.productId}`, product);
     if (status !== 204) return null;
 

@@ -20,6 +20,8 @@ const getCategories = async () => {
 
 const addCategory = async (name: string) => {
   try {
+    ApiService.setAdminToken();
+
     const { data } = await ApiService.API.post<Category>('/category', { name });
     return data;
   } catch (err) {

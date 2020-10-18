@@ -3,9 +3,12 @@ using server.Helpers.ParameterClass;
 using server.Models;
 using server.DataAccess.Repositories.ProductRepo;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using server.Helpers;
 
 namespace server.Controllers.ProductCntlr
 {
+    [Authorize(Roles = AuthRole.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase, IProductController
@@ -48,12 +51,14 @@ namespace server.Controllers.ProductCntlr
             return this.NoContent();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetAllProduct()
         {
             return this.Ok(this._repository.GetAll());
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<Product> GetProductById(int id)
         {

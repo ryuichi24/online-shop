@@ -6,6 +6,8 @@ import { Address, ServerError } from '@/types';
 
 const addAddress = async (address: Address) => {
   try {
+    ApiService.setToken();
+
     const { data } = await ApiService.API.post<Address>('/address', address);
 
     return data;
@@ -20,6 +22,8 @@ const addAddress = async (address: Address) => {
 
 const removeAddress = async (id: number) => {
   try {
+    ApiService.setToken();
+
     const { status } = await ApiService.API.delete(`/address/${id}`);
     if (status !== 204) return null;
 
@@ -35,6 +39,8 @@ const removeAddress = async (id: number) => {
 
 const updatedAddress = async (id: number, newAddress: Address) => {
   try {
+    ApiService.setToken();
+
     const { status } = await ApiService.API.put(`/address/${id}`, newAddress);
     if (status !== 204) return null;
 
@@ -50,6 +56,8 @@ const updatedAddress = async (id: number, newAddress: Address) => {
 
 const getAllAddressesByUserId = async (id: number) => {
   try {
+    ApiService.setToken();
+
     const { data } = await ApiService.API.get<Address[]>(`/address/all-by-user/${id}`);
 
     return data;

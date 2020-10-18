@@ -5,9 +5,12 @@ using server.Helpers.ParameterClass;
 using System.Collections.Generic;
 using server.DataAccess.Repositories.OrderItemRepo;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using server.Helpers;
 
 namespace server.Controllers.OrderContlr
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase, IOrderController

@@ -3,9 +3,12 @@ using server.Models;
 using server.DataAccess.Repositories.CartItemRepo;
 using server.Helpers.ParameterClass;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using server.Helpers;
 
 namespace server.Controllers.CartItemCntlr
 {
+    [Authorize(Roles = AuthRole.User)]
     [Route("api/[controller]")]
     [ApiController]
     public class CartItemController : ControllerBase, ICartItemController

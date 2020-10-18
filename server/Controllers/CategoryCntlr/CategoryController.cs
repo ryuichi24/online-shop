@@ -4,9 +4,12 @@ using server.Models;
 using server.DataAccess.Repositories.CategoryRepo;
 using server.Helpers.CustomResponse;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using server.Helpers;
 
 namespace server.Controllers.CategoryCntlr
 {
+    [Authorize(Roles = AuthRole.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase, ICategoryController
@@ -44,12 +47,14 @@ namespace server.Controllers.CategoryCntlr
             return this.NoContent();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult<IEnumerable<Category>> GetAllCategories()
         {
             return this.Ok(this._repository.GetAll());
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<Category> GetCategoryById(int id)
         {

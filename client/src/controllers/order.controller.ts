@@ -6,6 +6,8 @@ import { Order, ServerError } from '@/types';
 
 const addOrder = async (newOrder: Order) => {
   try {
+    ApiService.setToken();
+
     const { data } = await ApiService.API.post('/order', newOrder);
 
     return data;
@@ -20,6 +22,7 @@ const addOrder = async (newOrder: Order) => {
 
 const getAllOrders = async () => {
   try {
+    ApiService.setAdminToken();
     const { data } = await ApiService.API.get('/order');
 
     return data;
@@ -34,6 +37,8 @@ const getAllOrders = async () => {
 
 const getAllOrdersByUserId = async (id: number) => {
   try {
+    ApiService.setToken();
+
     const { data } = await ApiService.API.get(`/order/all-by-user/${id}`);
 
     return data;

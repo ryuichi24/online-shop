@@ -27,6 +27,7 @@ namespace server
             // setup
             services
                 .SetupController()
+                .SetupAutoMapper()
                 .RegisterServices()
                 .SetupCors()
                 .SetupDatabase(this.Configuration)

@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace server.Helpers.ParameterClass
+namespace server.Dtos.User
 {
-    public class UserCreateParameter
+    public class UserCreateDto
     {
         [Required]
         [MaxLength(50)]

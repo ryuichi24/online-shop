@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace server.Helpers.ParameterClass
+namespace server.Dtos.User
 {
-    public class UserUpdateParameter
+    public class UserUpdateDto
     {
         [MaxLength(50)]
         public string FirstName { get; set; }
@@ -13,7 +13,6 @@ namespace server.Helpers.ParameterClass
         [MaxLength(50)]
         public string Email { get; set; }
 
-        [MaxLength(250)]
         public string Password { get; set; }
 
         [MaxLength(50)]

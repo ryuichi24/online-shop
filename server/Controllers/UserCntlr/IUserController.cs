@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using server.Dtos.User;
 using server.Helpers.CustomResponse;
 using server.Helpers.ParameterClass;
 using server.Models;
@@ -7,16 +8,16 @@ namespace server.Controllers.UserCntlr
 {
     public interface IUserController
     {
-        public ActionResult<User> GetUserById(int id);
+        public ActionResult<UserReadDto> GetUserById(int id);
 
         public ActionResult DeleteUser(int id);
 
-        public ActionResult<SignUpUserSuccessResponse> AddNewUser([FromBody] UserCreateParameter userCreateParameter);
+        public ActionResult<SignUpUserSuccessResponse> AddNewUser([FromBody] UserCreateDto userCreateDto);
 
-        public ActionResult<User> UpdateUser(int id, [FromBody] UserUpdateParameter userUpdateParameter);
+        public ActionResult UpdateUser(int id, [FromBody] UserUpdateDto userUpdateDto);
 
         public ActionResult<LoginUserSuccessResponse> LoginUser(LoginParameter loginParameter);
 
-        public ActionResult<User> CheckUserAuth();
+        public ActionResult<UserReadDto> CheckUserAuth();
     }
 }

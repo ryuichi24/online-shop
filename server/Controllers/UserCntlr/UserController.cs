@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 using server.Helpers;
 using System.Linq;
 using System;
+using AutoMapper;
+using server.Dtos.User;
 
 namespace server.Controllers.UserCntlr
 {
@@ -20,52 +22,45 @@ namespace server.Controllers.UserCntlr
 
         private readonly IAuthManager _authManager;
 
-        public UserController(IUserRepository repository, IAuthManager authManager)
+        private readonly IMapper _mapper;
+
+        public UserController(IUserRepository repository, IAuthManager authManager, IMapper mapper)
         {
             this._repository = repository;
             this._authManager = authManager;
+            this._mapper = mapper;
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult<SignUpUserSuccessResponse> AddNewUser([FromBody] UserCreateParameter userCreateParameter)
+        public ActionResult<SignUpUserSuccessResponse> AddNewUser([FromBody] UserCreateDto userCreateDto)
         {
-            User existingUser = this._repository.GetUserByEmail(userCreateParameter.Email);
+            User existingUser = this._repository.GetUserByEmail(userCreateDto.Email);
             if (existingUser != null) return this.BadRequest();
 
-            User newUser = new User()
-            {
-                FirstName = userCreateParameter.FirstName,
-                LastName = userCreateParameter.LastName,
-                Email = userCreateParameter.Email,
-                Password = this._authManager.EncryptPassword(userCreateParameter.Password),
-                Phone = userCreateParameter.Phone
-            };
+            var newUserModel = this._mapper.Map<User>(userCreateDto);
+            newUserModel.Password = this._authManager.EncryptPassword(newUserModel.Password);
 
-            this._repository.Add(newUser);
+            this._repository.Add(newUserModel);
             this._repository.SaveChanges();
 
-            string token = this._authManager.GenerateJwt(newUser.UserId.ToString(), newUser.Email, AuthRole.User);
-            return this.CreatedAtRoute(new { Id = newUser.UserId }, new SignUpUserSuccessResponse { Token = token, User = newUser });
+            string token = this._authManager.GenerateJwt(newUserModel.UserId.ToString(), newUserModel.Email, AuthRole.User);
+            return this.CreatedAtRoute(new { Id = newUserModel.UserId }, new SignUpUserSuccessResponse { Token = token, User = newUserModel });
         }
 
 
         [HttpPut("{id}")]
-        public ActionResult<User> UpdateUser(int id, [FromBody] UserUpdateParameter userUpdateParameter)
+        public ActionResult UpdateUser(int id, [FromBody] UserUpdateDto userUpdateDto)
         {
             User existingUser = this._repository.GetById(id);
             if (existingUser == null) return this.NotFound();
 
-            if (userUpdateParameter.FirstName != null && userUpdateParameter.FirstName != existingUser.FirstName) existingUser.FirstName = userUpdateParameter.FirstName;
-            if (userUpdateParameter.LastName != null && userUpdateParameter.LastName != existingUser.LastName) existingUser.LastName = userUpdateParameter.LastName;
-            if (userUpdateParameter.Email != null && userUpdateParameter.Email != existingUser.Email) existingUser.Email = userUpdateParameter.Email;
-            if (userUpdateParameter.Phone != null && userUpdateParameter.Phone != existingUser.Phone) existingUser.Phone = userUpdateParameter.Phone;
-            if (userUpdateParameter.Password != null) existingUser.Password = this._authManager.EncryptPassword(userUpdateParameter.Password);
+            User result = this._mapper.Map(userUpdateDto, existingUser);
 
             this._repository.Update(existingUser);
             this._repository.SaveChanges();
 
-            return this.Ok(existingUser);
+            return this.NoContent();
         }
 
         [AllowAnonymous]
@@ -86,7 +81,7 @@ namespace server.Controllers.UserCntlr
 
         [Route("check-auth")]
         [HttpGet]
-        public ActionResult<User> CheckUserAuth()
+        public ActionResult<UserReadDto> CheckUserAuth()
         {
             var userIdClaim = this.User.Claims.SingleOrDefault(claim => claim.Type.ToString().Equals("id", StringComparison.InvariantCultureIgnoreCase));
             if (userIdClaim == null) return this.Unauthorized();
@@ -96,17 +91,18 @@ namespace server.Controllers.UserCntlr
             User currentUser = this._repository.GetById(UserId);
             if (currentUser == null) return this.Unauthorized();
 
-            return this.Ok(currentUser);
+
+            return this.Ok(this._mapper.Map<UserReadDto>(currentUser));
         }
 
         [HttpGet("{id}")]
-        public ActionResult<User> GetUserById(int id)
+        public ActionResult<UserReadDto> GetUserById(int id)
         {
             User user = this._repository.GetById(id);
 
             if (user == null) return NotFound();
 
-            return this.Ok(user);
+            return this.Ok(this._mapper.Map<UserReadDto>(user));
         }
 
         [HttpDelete("{id}")]

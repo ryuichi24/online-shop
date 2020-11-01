@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -44,6 +45,12 @@ namespace server.Extensions
                 options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
+            return services;
+        }
+
+        public static IServiceCollection SetupAutoMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(Startup));
             return services;
         }
 

@@ -14,6 +14,21 @@ namespace server.Profiles
             CreateMap<UserUpdateDto, User>()
                 .ForMember
                 (
+                    dest => dest.Addresses,
+                    opt => opt.Ignore()
+                )
+                .ForMember
+                (
+                    dest => dest.Orders,
+                    opt => opt.Ignore()
+                )
+                .ForMember
+                (
+                    dest => dest.CartItems,
+                    opt => opt.Ignore()
+                )
+                .ForMember
+                (
                     dest => dest.FirstName,
                     opt =>
                     {

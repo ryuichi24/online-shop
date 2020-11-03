@@ -55,7 +55,7 @@ namespace server.Controllers.UserCntlr
             User existingUser = this._repository.GetById(id);
             if (existingUser == null) return this.NotFound();
 
-            User result = this._mapper.Map(userUpdateDto, existingUser);
+            this._mapper.Map(userUpdateDto, existingUser);
 
             this._repository.Update(existingUser);
             this._repository.SaveChanges();

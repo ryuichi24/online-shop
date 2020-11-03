@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace server.Helpers.ParameterClass
+namespace server.Dtos.Product
 {
-    public class ProductUpdateParameter
+    public class ProductUpdateDto
     {
         [MaxLength(150)]
         public string Name { get; set; }

@@ -1,20 +1,20 @@
 using System.Collections.Generic;
+using server.Dtos.Product;
 using Microsoft.AspNetCore.Mvc;
 using server.Helpers.ParameterClass;
-using server.Models;
 
 namespace server.Controllers.ProductCntlr
 {
     public interface IProductController
     {
-        public ActionResult<IEnumerable<Product>> GetAllProduct();
+        public ActionResult<IEnumerable<ProductReadDto>> GetAllProduct();
 
-        public ActionResult<Product> GetProductById(int id);
+        public ActionResult<ProductReadDto> GetProductById(int id);
 
         public ActionResult DeleteProduct(int id);
 
-        public ActionResult<Product> AddNewProduct([FromBody] ProductCreateParameter productCreateParameter);
+        public ActionResult<ProductReadDto> AddNewProduct([FromBody] ProductCreateDto productCreateDto);
 
-        public ActionResult UpdateProduct(int id, [FromBody] ProductUpdateParameter productUpdateParameter);
+        public ActionResult UpdateProduct(int id, [FromBody] ProductUpdateDto productUpdateDto);
     }
 }

@@ -5,6 +5,8 @@ using server.DataAccess.Repositories.ProductRepo;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using server.Helpers;
+using server.Dtos.Product;
+using AutoMapper;
 
 namespace server.Controllers.ProductCntlr
 {
@@ -14,29 +16,23 @@ namespace server.Controllers.ProductCntlr
     public class ProductController : ControllerBase, IProductController
     {
         private readonly IProductRepository _repository;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductRepository repository)
+        public ProductController(IProductRepository repository, IMapper mapper)
         {
             this._repository = repository;
+            this._mapper = mapper;
         }
 
         [HttpPost]
-        public ActionResult<Product> AddNewProduct([FromBody] ProductCreateParameter productCreateParameter)
+        public ActionResult<ProductReadDto> AddNewProduct([FromBody] ProductCreateDto productCreateDto)
         {
-            Product newProduct = new Product()
-            {
-                Name = productCreateParameter.Name,
-                Price = productCreateParameter.Price,
-                Description = productCreateParameter.Description,
-                Inventory = productCreateParameter.Inventory,
-                CategoryId = productCreateParameter.CategoryId,
-                Image = productCreateParameter.Image
-            };
+            var newProductModel = this._mapper.Map<Product>(productCreateDto);
 
-            this._repository.Add(newProduct);
+            this._repository.Add(newProductModel);
             this._repository.SaveChanges();
 
-            return this.CreatedAtRoute(new { Id = newProduct.ProductId }, newProduct);
+            return this.CreatedAtRoute(new { Id = newProductModel.ProductId }, newProductModel);
         }
 
         [HttpDelete("{id}")]
@@ -53,34 +49,29 @@ namespace server.Controllers.ProductCntlr
 
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetAllProduct()
+        public ActionResult<IEnumerable<ProductReadDto>> GetAllProduct()
         {
-            return this.Ok(this._repository.GetAll());
+            return this.Ok(this._mapper.Map<IEnumerable<ProductReadDto>>(this._repository.GetAll()));
         }
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public ActionResult<Product> GetProductById(int id)
+        public ActionResult<ProductReadDto> GetProductById(int id)
         {
             Product product = this._repository.GetById(id);
 
             if (product == null) return this.NotFound();
 
-            return this.Ok(product);
+            return this.Ok(this._mapper.Map<ProductReadDto>(product));
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateProduct(int id, [FromBody] ProductUpdateParameter productUpdateParameter)
+        public ActionResult UpdateProduct(int id, [FromBody] ProductUpdateDto productUpdateDto)
         {
             Product existingProduct = this._repository.GetById(id);
             if (existingProduct == null) return this.NotFound();
 
-            if (productUpdateParameter.Name != null) existingProduct.Name = productUpdateParameter.Name;
-            if (productUpdateParameter.Price != null) existingProduct.Price = float.Parse(productUpdateParameter.Price.ToString());
-            if (productUpdateParameter.Description != null) existingProduct.Description = productUpdateParameter.Description;
-            if (productUpdateParameter.Inventory != null) existingProduct.Inventory = int.Parse(productUpdateParameter.Inventory.ToString());
-            if (productUpdateParameter.Image != null) existingProduct.Image = productUpdateParameter.Image;
-            if (productUpdateParameter.CategoryId != null) existingProduct.CategoryId = int.Parse(productUpdateParameter.CategoryId.ToString());
+            this._mapper.Map(productUpdateDto, existingProduct);
 
             this._repository.Update(existingProduct);
             this._repository.SaveChanges();

@@ -1,25 +1,19 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace server.Helpers.ParameterClass
+namespace server.Dtos.Product
 {
-    public class ProductCreateParameter
+    public class ProductReadDto
     {
-        [Required]
-        [MaxLength(150)]
+        public int ProductId { get; set; }
+
         public string Name { get; set; }
 
-        [Required]
         public float Price { get; set; }
 
-        [MaxLength(1000)]
         public string Description { get; set; }
 
-        [Required]
         public int Inventory { get; set; }
 
         public string Image { get; set; }
 
-        [Required]
         public int CategoryId { get; set; }
     }
 }

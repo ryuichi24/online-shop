@@ -2,7 +2,7 @@ using AutoMapper;
 using server.Dtos.Admin;
 using server.Models;
 
-namespace Profiles
+namespace server.Profiles
 {
     public class AdminProfile : Profile
     {

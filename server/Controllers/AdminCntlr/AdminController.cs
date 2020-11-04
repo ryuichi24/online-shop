@@ -10,7 +10,7 @@ using server.Services.Auth;
 using System;
 using System.Collections.Generic;
 using AutoMapper;
-using server.Dtos.Admin;
+using server.Dtos.AdminDto;
 
 namespace server.Controllers.AdminCntlr
 {

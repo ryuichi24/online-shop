@@ -9,7 +9,7 @@ using server.Helpers;
 using System.Linq;
 using System;
 using AutoMapper;
-using server.Dtos.User;
+using server.Dtos.UserDto;
 
 namespace server.Controllers.UserCntlr
 {

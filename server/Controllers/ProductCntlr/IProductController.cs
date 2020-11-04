@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using server.Dtos.Product;
+using server.Dtos.ProductDto;
 using Microsoft.AspNetCore.Mvc;
 using server.Helpers.ParameterClass;
 

@@ -1,4 +1,4 @@
-namespace server.Dtos.Product
+namespace server.Dtos.ProductDto
 {
     public class ProductReadDto
     {

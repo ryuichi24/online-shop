@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using server.Models;
 
-namespace server.Dtos.User
+namespace server.Dtos.UserDto
 {
     public class UserReadDto
     {

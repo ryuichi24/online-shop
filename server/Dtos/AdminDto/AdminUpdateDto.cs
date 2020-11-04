@@ -1,18 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace server.Dtos.User
+namespace server.Dtos.AdminDto
 {
-    public class UserUpdateDto
+    public class AdminUpdateDto
     {
-        [MaxLength(50)]
-        public string FirstName { get; set; }
-
-        [MaxLength(50)]
-        public string LastName { get; set; }
+        [MaxLength(100)]
+        public string Name { get; set; }
 
         [MaxLength(50)]
         public string Email { get; set; }
 
+        [MaxLength(250)]
         public string Password { get; set; }
 
         [MaxLength(50)]

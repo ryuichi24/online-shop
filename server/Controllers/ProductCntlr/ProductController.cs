@@ -5,7 +5,7 @@ using server.DataAccess.Repositories.ProductRepo;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using server.Helpers;
-using server.Dtos.Product;
+using server.Dtos.ProductDto;
 using AutoMapper;
 
 namespace server.Controllers.ProductCntlr

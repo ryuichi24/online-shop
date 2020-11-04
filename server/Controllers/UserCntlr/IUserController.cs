@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using server.Dtos.User;
+using server.Dtos.UserDto;
 using server.Helpers.CustomResponse;
 using server.Helpers.ParameterClass;
 using server.Models;

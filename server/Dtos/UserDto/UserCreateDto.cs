@@ -1,12 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace server.Dtos.Admin
+namespace server.Dtos.UserDto
 {
-    public class AdminCreateDto
+    public class UserCreateDto
     {
         [Required]
-        [MaxLength(100)]
-        public string Name { get; set; }
+        [MaxLength(50)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string LastName { get; set; }
 
         [Required]
         [MaxLength(50)]

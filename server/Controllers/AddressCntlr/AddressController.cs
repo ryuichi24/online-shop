@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using server.Models;
 using server.DataAccess.Repositories.AddressRepo;
-using server.Helpers.ParameterClass;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using server.Helpers;
+using AutoMapper;
+using server.Dtos.AddressDto;
 
 namespace server.Controllers.AddressCntlr
 {
@@ -14,28 +15,23 @@ namespace server.Controllers.AddressCntlr
     public class AddressController : ControllerBase, IAddressController
     {
         private readonly IAddressRepository _repository;
+        private readonly IMapper _mapper;
 
-        public AddressController(IAddressRepository repository)
+        public AddressController(IAddressRepository repository, IMapper mapper)
         {
             this._repository = repository;
+            this._mapper = mapper;
         }
 
         [HttpPost]
-        public ActionResult<Address> AddNewAddress([FromBody] AddressCreateParameter addressCreateParameter)
+        public ActionResult<AddressReadDto> AddNewAddress([FromBody] AddressCreateDto addressCreateDto)
         {
-            Address newAddress = new Address()
-            {
-                Address1 = addressCreateParameter.Address1,
-                Address2 = addressCreateParameter.Address2,
-                City = addressCreateParameter.City,
-                PostCode = addressCreateParameter.PostCode,
-                UserId = addressCreateParameter.UserId,
-            };
+            var newAddressModel = this._mapper.Map<Address>(addressCreateDto);
 
-            this._repository.Add(newAddress);
+            this._repository.Add(newAddressModel);
             this._repository.SaveChanges();
 
-            return this.CreatedAtRoute(new { Id = newAddress.AddressId }, newAddress);
+            return this.CreatedAtRoute(new { Id = newAddressModel.AddressId }, newAddressModel);
         }
 
         [HttpDelete("{id}")]
@@ -57,30 +53,27 @@ namespace server.Controllers.AddressCntlr
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Address> GetAddressById(int id)
+        public ActionResult<AddressReadDto> GetAddressById(int id)
         {
             Address address = this._repository.GetById(id);
             if (address == null) this.NotFound();
 
-            return this.Ok(address);
+            return this.Ok(this._mapper.Map<AddressReadDto>(address));
         }
 
         [HttpGet("all-by-user/{id}")]
-        public ActionResult<IEnumerable<Address>> GetAllAddressByUserId(int id)
+        public ActionResult<IEnumerable<AddressReadDto>> GetAllAddressByUserId(int id)
         {
-            return this.Ok(this._repository.GetAllAddressesByUserId(id));
+            return this.Ok(this._mapper.Map<IEnumerable<AddressReadDto>>(this._repository.GetAllAddressesByUserId(id)));
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateAddress(int id, [FromBody] AddressUpdateParameter addressUpdateParameter)
+        public ActionResult UpdateAddress(int id, [FromBody] AddressUpdateDto addressUpdateDto)
         {
             Address existingAddress = this._repository.GetById(id);
             if (existingAddress == null) return this.NotFound();
 
-            if (addressUpdateParameter.Address1 != null) existingAddress.Address1 = addressUpdateParameter.Address1;
-            if (addressUpdateParameter.Address2 != null) existingAddress.Address2 = addressUpdateParameter.Address2;
-            if (addressUpdateParameter.City != null) existingAddress.City = addressUpdateParameter.City;
-            if (addressUpdateParameter.PostCode != null) existingAddress.PostCode = addressUpdateParameter.PostCode;
+            this._mapper.Map(addressUpdateDto, existingAddress);
 
             this._repository.Update(existingAddress);
             this._repository.SaveChanges();

@@ -1,5 +1,5 @@
 using AutoMapper;
-using server.Dtos.Admin;
+using server.Dtos.AdminDto;
 using server.Models;
 
 namespace server.Profiles

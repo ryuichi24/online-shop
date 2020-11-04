@@ -1,4 +1,4 @@
-namespace server.Dtos.Admin
+namespace server.Dtos.AdminDto
 {
     public class AdminReadDto
     {

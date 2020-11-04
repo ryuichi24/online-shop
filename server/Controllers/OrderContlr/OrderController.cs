@@ -7,6 +7,8 @@ using server.DataAccess.Repositories.OrderItemRepo;
 using System;
 using Microsoft.AspNetCore.Authorization;
 using server.Helpers;
+using AutoMapper;
+using server.Dtos.OrderDto;
 
 namespace server.Controllers.OrderContlr
 {
@@ -18,32 +20,30 @@ namespace server.Controllers.OrderContlr
         private readonly IOrderRepository _orderRepository;
 
         private readonly IOrderItemRepository _orderItemRepository;
+        private readonly IMapper _mapper;
 
-        public OrderController(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository)
+        public OrderController(IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IMapper mapper)
         {
             this._orderRepository = orderRepository;
             this._orderItemRepository = orderItemRepository;
+            this._mapper = mapper;
         }
 
         [HttpPost]
-        public ActionResult<Order> AddNewOrder([FromBody] OrderCreateParameter orderCreateParameter)
+        public ActionResult<OrderReadDto> AddNewOrder([FromBody] OrderCreateDto orderCreateDto)
         {
-            Order newOrder = new Order()
-            {
-                TotalPayment = orderCreateParameter.TotalPayment,
-                AddressId = orderCreateParameter.AddressId,
-                UserId = orderCreateParameter.UserId,
-                OrderedAt = DateTime.Now,
-            };
+            var newOrderModel = this._mapper.Map<Order>(orderCreateDto);
 
-            this._orderRepository.Add(newOrder);
+            newOrderModel.OrderedAt = DateTime.Now;
+
+            this._orderRepository.Add(newOrderModel);
             this._orderRepository.SaveChanges();
 
-            orderCreateParameter.OrderItems.ForEach(orderItem =>
+            newOrderModel.OrderItems.ForEach(orderItem =>
             {
                 this._orderItemRepository.Add(new OrderItem
                 {
-                    OrderId = newOrder.OrderId,
+                    OrderId = newOrderModel.OrderId,
                     ProductId = orderItem.ProductId,
                     OrderItemCount = orderItem.OrderItemCount
                 });
@@ -51,7 +51,7 @@ namespace server.Controllers.OrderContlr
                 this._orderItemRepository.SaveChanges();
             });
 
-            return this.CreatedAtRoute(new { Id = newOrder.OrderId }, newOrder);
+            return this.CreatedAtRoute(new { Id = newOrderModel.OrderId }, newOrderModel);
         }
 
         [HttpDelete("{id}")]
@@ -67,24 +67,24 @@ namespace server.Controllers.OrderContlr
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Order>> GetAllOrders()
+        public ActionResult<IEnumerable<OrderReadDto>> GetAllOrders()
         {
-            return this.Ok(this._orderRepository.GetAllOrderWithPopulatedChildren());
+            return this.Ok(this._mapper.Map<IEnumerable<OrderReadDto>>(this._orderRepository.GetAllOrderWithPopulatedChildren()));
         }
 
         [HttpGet("all-by-user/{id}")]
-        public ActionResult<IEnumerable<Order>> GetAllOrdersByUserId(int id)
+        public ActionResult<IEnumerable<OrderReadDto>> GetAllOrdersByUserId(int id)
         {
-            return this.Ok(this._orderRepository.GetAllOrdersByUserId(id));
+            return this.Ok(this._mapper.Map<IEnumerable<OrderReadDto>>(this._orderRepository.GetAllOrdersByUserId(id)));
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Order> GetOrderById(int id)
+        public ActionResult<OrderReadDto> GetOrderById(int id)
         {
             Order order = this._orderRepository.GetById(id);
             if (order == null) return NotFound();
 
-            return this.Ok(order);
+            return this.Ok(this._mapper.Map<OrderReadDto>(order));
         }
     }
 }

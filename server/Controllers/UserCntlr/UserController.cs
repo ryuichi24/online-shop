@@ -63,7 +63,7 @@ namespace server.Controllers.UserCntlr
         public ActionResult<UserReadDto> CheckUserAuth()
         {
             var userReadDto = this._userService.CheckUserAuth(this.User.Claims);
-            if(userReadDto != null) return this.Unauthorized();
+            if(userReadDto == null) return this.Unauthorized();
 
             return this.Ok(userReadDto);
         }
@@ -72,7 +72,7 @@ namespace server.Controllers.UserCntlr
         public ActionResult<UserReadDto> GetUserById(int id)
         {
             var userReadDto = this._userService.GetUserById(id);
-            if(userReadDto != null) return this.BadRequest();
+            if(userReadDto == null) return this.BadRequest();
 
             return this.Ok(userReadDto);
         }

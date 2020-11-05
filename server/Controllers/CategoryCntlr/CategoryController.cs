@@ -6,6 +6,8 @@ using server.Helpers.CustomResponse;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using server.Helpers;
+using AutoMapper;
+using server.Dtos.CategoryDto;
 
 namespace server.Controllers.CategoryCntlr
 {
@@ -15,19 +17,18 @@ namespace server.Controllers.CategoryCntlr
     public class CategoryController : ControllerBase, ICategoryController
     {
         private readonly ICategoryRepository _repository;
+        private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryRepository repository)
+        public CategoryController(ICategoryRepository repository, IMapper mapper)
         {
             this._repository = repository;
+            this._mapper = mapper;
         }
 
         [HttpPost]
-        public ActionResult<Category> AddNewCategory([FromBody] CategoryCreateParameter categoryCreateParameter)
+        public ActionResult<CategoryReadDto> AddNewCategory([FromBody] CategoryCreateDto categoryCreateDto)
         {
-            Category newCategory = new Category()
-            {
-                Name = categoryCreateParameter.Name
-            };
+            var newCategory = this._mapper.Map<Category>(categoryCreateDto);
 
             this._repository.Add(newCategory);
             this._repository.SaveChanges();
@@ -49,29 +50,29 @@ namespace server.Controllers.CategoryCntlr
 
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult<IEnumerable<Category>> GetAllCategories()
+        public ActionResult<IEnumerable<CategoryReadDto>> GetAllCategories()
         {
-            return this.Ok(this._repository.GetAll());
+            return this.Ok(this._mapper.Map<IEnumerable<CategoryReadDto>>(this._repository.GetAll()));
         }
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public ActionResult<Category> GetCategoryById(int id)
+        public ActionResult<CategoryReadDto> GetCategoryById(int id)
         {
             Category category = this._repository.GetById(id);
 
             if (category == null) return NotFound();
 
-            return this.Ok(category);
+            return this.Ok(this._mapper.Map<Category>(category));
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateCategory(int id, [FromBody] CategoryUpdateParameter categoryUpdateParameter)
+        public ActionResult UpdateCategory(int id, [FromBody] CategoryUpdateDto categoryUpdateDto)
         {
             Category existingCategory = this._repository.GetById(id);
             if (existingCategory == null) return this.NotFound();
 
-            if (categoryUpdateParameter.Name != null) existingCategory.Name = categoryUpdateParameter.Name;
+            this._mapper.Map(categoryUpdateDto, existingCategory);
 
             this._repository.Update(existingCategory);
             this._repository.SaveChanges();

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using server.Dtos.UserDto;
-using server.Helpers.CustomResponse;
 using server.Helpers.ParameterClass;
 
 namespace server.Services.UserService

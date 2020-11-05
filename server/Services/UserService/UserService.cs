@@ -5,7 +5,6 @@ using System.Security.Claims;
 using AutoMapper;
 using server.DataAccess.Repositories.UserRepo;
 using server.Dtos.UserDto;
-using server.Helpers.CustomResponse;
 using server.Helpers.ParameterClass;
 using server.Models;
 using server.Services.Auth;

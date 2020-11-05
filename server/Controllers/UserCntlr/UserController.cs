@@ -1,14 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using server.Models;
-using server.DataAccess.Repositories.UserRepo;
 using server.Helpers.ParameterClass;
 using server.Helpers.CustomResponse;
 using server.Services.Auth;
 using Microsoft.AspNetCore.Authorization;
 using server.Helpers;
-using System.Linq;
-using System;
-using AutoMapper;
 using server.Dtos.UserDto;
 using server.Services.UserService;
 

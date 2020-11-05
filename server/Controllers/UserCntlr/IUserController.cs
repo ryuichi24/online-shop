@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using server.Dtos.UserDto;
 using server.Helpers.CustomResponse;
 using server.Helpers.ParameterClass;
-using server.Models;
 
 namespace server.Controllers.UserCntlr
 {

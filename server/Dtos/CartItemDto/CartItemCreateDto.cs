@@ -1,15 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace server.Helpers.ParameterClass
+namespace server.Dtos.CartItemDto
 {
-    public class CartItemCreateParameter
+    public class CartItemCreateDto
     {
         [Required]
         public int ProductId { get; set; }
 
         [Required]
-        public int UserId { get; set; }
-
         public int CartItemCount { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
     }
 }

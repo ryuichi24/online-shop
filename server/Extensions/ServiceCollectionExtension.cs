@@ -19,6 +19,7 @@ using server.DataAccess.Repositories.ProductRepo;
 using server.DataAccess.Repositories.UserRepo;
 using server.Helpers;
 using server.Services.Auth;
+using server.Services.UserService;
 
 namespace server.Extensions
 {
@@ -34,6 +35,7 @@ namespace server.Extensions
             services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

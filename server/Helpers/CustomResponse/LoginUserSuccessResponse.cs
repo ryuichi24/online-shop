@@ -1,3 +1,4 @@
+using server.Dtos.UserDto;
 using server.Models;
 
 namespace server.Helpers.CustomResponse
@@ -6,6 +7,6 @@ namespace server.Helpers.CustomResponse
     {
         public string Token { get; set; }
 
-        public User User { get; set; }
+        public UserReadDto UserReadDto { get; set; }
     }
 }

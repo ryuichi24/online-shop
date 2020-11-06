@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using server.Models;
-using server.DataAccess.Repositories.CartItemRepo;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using server.Helpers;
-using AutoMapper;
 using server.Dtos.CartItemDto;
+using Services.CartItemService;
 
 namespace server.Controllers.CartItemCntlr
 {
@@ -14,34 +12,27 @@ namespace server.Controllers.CartItemCntlr
     [ApiController]
     public class CartItemController : ControllerBase, ICartItemController
     {
-        private readonly ICartItemRepository _repository;
-        private readonly IMapper _mapper;
+        private readonly ICartItemService _cartItemService;
 
-        public CartItemController(ICartItemRepository repository, IMapper mapper)
+        public CartItemController(ICartItemService cartItemService)
         {
-            this._repository = repository;
-            this._mapper = mapper;
+            this._cartItemService = cartItemService;
         }
 
         [HttpPost]
         public ActionResult<CartItemReadDto> AddNewCartItem([FromBody] CartItemCreateDto cartItemCreateDto)
         {
-            var newCartItemModel = this._mapper.Map<CartItem>(cartItemCreateDto);
+            var cartItemReadDto = this._cartItemService.AddNewCartItem(cartItemCreateDto);
+            if (cartItemReadDto == null) return this.BadRequest();
 
-            this._repository.Add(newCartItemModel);
-            this._repository.SaveChanges();
-
-            return this.CreatedAtRoute(new { Id = newCartItemModel.CartItemId }, newCartItemModel);
+            return this.CreatedAtRoute(new { Id = cartItemReadDto.CartItemId }, cartItemReadDto);
         }
 
         [HttpDelete("{id}")]
         public ActionResult DeleteCartItem(int id)
         {
-            CartItem cartItem = this._repository.GetById(id);
-            if (cartItem == null) return NotFound();
-
-            this._repository.Remove(cartItem);
-            this._repository.SaveChanges();
+            var isDeleted = this._cartItemService.DeleteCartItem(id);
+            if (!isDeleted) return this.BadRequest();
 
             return this.NoContent();
         }
@@ -50,29 +41,26 @@ namespace server.Controllers.CartItemCntlr
         [HttpGet("all-by-user/{id}")]
         public ActionResult<IEnumerable<CartItemReadDto>> GetAllCartItemsByUserId(int id)
         {
-            return this.Ok(this._mapper.Map<IEnumerable<CartItemReadDto>>(this._repository.GetAllCartItemsByUserId(id)));
+            var cartItemReadDtos = this._cartItemService.GetAllCartItemsByUserId(id);
+            if (cartItemReadDtos == null) return this.BadRequest();
+
+            return this.Ok(cartItemReadDtos);
         }
 
         [HttpGet("{id}")]
         public ActionResult<CartItemReadDto> GetCartItemById(int id)
         {
-            CartItem cartItem = this._repository.GetById(id);
+            var cartItemReadDto = this._cartItemService.GetCartItemById(id);
+            if (cartItemReadDto == null) return this.BadRequest();
 
-            if (cartItem == null) return NotFound();
-
-            return this.Ok(this._mapper.Map<CartItemReadDto>(cartItem));
+            return this.Ok(cartItemReadDto);
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateCartItem(int id, [FromBody] CartItemUpdateDto cartItemUpdateDto)
         {
-            CartItem existingCartItem = this._repository.GetById(id);
-            if (existingCartItem == null) return this.NotFound();
-
-            this._mapper.Map(cartItemUpdateDto, existingCartItem);
-
-            this._repository.Update(existingCartItem);
-            this._repository.SaveChanges();
+            var isUpdated = this._cartItemService.UpdateCartItem(id, cartItemUpdateDto);
+            if (!isUpdated) return this.BadRequest();
 
             return this.NoContent();
         }
@@ -80,10 +68,8 @@ namespace server.Controllers.CartItemCntlr
         [HttpDelete("clear-cart-items/{id}")]
         public ActionResult ClearCartItems(int id)
         {
-            IEnumerable<CartItem> cartItems = this._repository.GetAllCartItemsByUserId(id);
-
-            this._repository.ClearCartItems(cartItems);
-            this._repository.SaveChanges();
+            var isDeleted = this._cartItemService.ClearCartItems(id);
+            if (!isDeleted) return this.BadRequest();
 
             return this.Ok();
         }

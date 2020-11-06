@@ -22,6 +22,7 @@ using server.Services.Auth;
 using server.Services.UserService;
 using Services.AddressService;
 using Services.AdminService;
+using Services.CartItemService;
 
 namespace server.Extensions
 {
@@ -40,6 +41,7 @@ namespace server.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<ICartItemService, CartItemService>();
 
             return services;
         }

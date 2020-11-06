@@ -71,6 +71,7 @@ namespace server.Controllers.AdminCntlr
         public ActionResult<IEnumerable<AdminReadDto>> GetAllAdmin()
         {
             var adminReadDtos = this._adminService.GetAllAdmin();
+            if (adminReadDtos == null) return this.NotFound();
 
             return this.Ok(adminReadDtos);
         }
@@ -79,7 +80,7 @@ namespace server.Controllers.AdminCntlr
         public ActionResult<AdminReadDto> GetAdminById(int id)
         {
            var adminReadDto = this._adminService.GetAdminById(id);
-           if (adminReadDto == null) return this.BadRequest();
+           if (adminReadDto == null) return this.NotFound();
 
             return this.Ok(adminReadDto);
         }

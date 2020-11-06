@@ -72,7 +72,7 @@ namespace server.Controllers.UserCntlr
         public ActionResult<UserReadDto> GetUserById(int id)
         {
             var userReadDto = this._userService.GetUserById(id);
-            if(userReadDto == null) return this.BadRequest();
+            if(userReadDto == null) return this.NotFound();
 
             return this.Ok(userReadDto);
         }

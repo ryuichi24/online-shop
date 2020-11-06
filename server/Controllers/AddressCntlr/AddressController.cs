@@ -41,7 +41,7 @@ namespace server.Controllers.AddressCntlr
         public ActionResult<AddressReadDto> GetAddressById(int id)
         {
             var addressReadDto = this._addressService.GetAddressById(id);
-            if (addressReadDto == null) return this.BadRequest();
+            if (addressReadDto == null) return this.NotFound();
 
             return this.Ok(addressReadDto);
         }
@@ -50,7 +50,7 @@ namespace server.Controllers.AddressCntlr
         public ActionResult<IEnumerable<AddressReadDto>> GetAllAddressByUserId(int id)
         {
             var addressReadDtos = this._addressService.GetAllAddressByUserId(id);
-            if (addressReadDtos == null) return this.BadRequest();
+            if (addressReadDtos == null) return this.NotFound();
 
             return this.Ok(addressReadDtos);
         }

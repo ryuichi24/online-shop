@@ -42,7 +42,7 @@ namespace server.Controllers.CartItemCntlr
         public ActionResult<IEnumerable<CartItemReadDto>> GetAllCartItemsByUserId(int id)
         {
             var cartItemReadDtos = this._cartItemService.GetAllCartItemsByUserId(id);
-            if (cartItemReadDtos == null) return this.BadRequest();
+            if (cartItemReadDtos == null) return this.NotFound();
 
             return this.Ok(cartItemReadDtos);
         }
@@ -51,7 +51,7 @@ namespace server.Controllers.CartItemCntlr
         public ActionResult<CartItemReadDto> GetCartItemById(int id)
         {
             var cartItemReadDto = this._cartItemService.GetCartItemById(id);
-            if (cartItemReadDto == null) return this.BadRequest();
+            if (cartItemReadDto == null) return this.NotFound();
 
             return this.Ok(cartItemReadDto);
         }

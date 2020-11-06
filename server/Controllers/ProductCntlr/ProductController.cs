@@ -1,12 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using server.Helpers.ParameterClass;
-using server.Models;
-using server.DataAccess.Repositories.ProductRepo;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using server.Helpers;
 using server.Dtos.ProductDto;
-using AutoMapper;
+using Services.ProductService;
 
 namespace server.Controllers.ProductCntlr
 {
@@ -15,34 +12,27 @@ namespace server.Controllers.ProductCntlr
     [ApiController]
     public class ProductController : ControllerBase, IProductController
     {
-        private readonly IProductRepository _repository;
-        private readonly IMapper _mapper;
+        private readonly IProductService _productService;
 
-        public ProductController(IProductRepository repository, IMapper mapper)
+        public ProductController(IProductService productService)
         {
-            this._repository = repository;
-            this._mapper = mapper;
+            this._productService = productService;
         }
 
         [HttpPost]
         public ActionResult<ProductReadDto> AddNewProduct([FromBody] ProductCreateDto productCreateDto)
         {
-            var newProductModel = this._mapper.Map<Product>(productCreateDto);
+            var productReadDto = this._productService.AddNewProduct(productCreateDto);
+            if (productReadDto == null) return this.BadRequest();
 
-            this._repository.Add(newProductModel);
-            this._repository.SaveChanges();
-
-            return this.CreatedAtRoute(new { Id = newProductModel.ProductId }, newProductModel);
+            return this.CreatedAtRoute(new { Id = productReadDto.ProductId }, productReadDto);
         }
 
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(int id)
         {
-            Product product = this._repository.GetById(id);
-            if (product == null) return NotFound();
-
-            this._repository.Remove(product);
-            this._repository.SaveChanges();
+            var isDeleted = this._productService.DeleteProduct(id);
+            if (!isDeleted) return this.BadRequest();
 
             return this.NoContent();
         }
@@ -51,30 +41,27 @@ namespace server.Controllers.ProductCntlr
         [HttpGet]
         public ActionResult<IEnumerable<ProductReadDto>> GetAllProduct()
         {
-            return this.Ok(this._mapper.Map<IEnumerable<ProductReadDto>>(this._repository.GetAll()));
+            var productReadDtos = this._productService.GetAllProduct();
+            if (productReadDtos == null) return this.NotFound();
+
+            return this.Ok(productReadDtos);
         }
 
         [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<ProductReadDto> GetProductById(int id)
         {
-            Product product = this._repository.GetById(id);
+            var productReadDto = this._productService.GetProductById(id);
+            if (productReadDto == null) return this.NotFound();
 
-            if (product == null) return this.NotFound();
-
-            return this.Ok(this._mapper.Map<ProductReadDto>(product));
+            return this.Ok(productReadDto);
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateProduct(int id, [FromBody] ProductUpdateDto productUpdateDto)
         {
-            Product existingProduct = this._repository.GetById(id);
-            if (existingProduct == null) return this.NotFound();
-
-            this._mapper.Map(productUpdateDto, existingProduct);
-
-            this._repository.Update(existingProduct);
-            this._repository.SaveChanges();
+            var isUpdated = this._productService.UpdateProduct(id, productUpdateDto);
+            if (!isUpdated) return this.BadRequest();
 
             return this.NoContent();
         }

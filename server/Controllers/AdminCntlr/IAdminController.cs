@@ -8,18 +8,18 @@ namespace server.Controllers.AdminCntlr
 {
     public interface IAdminController
     {
-        public ActionResult<IEnumerable<AdminReadDto>> GetAllAdmin();
+        ActionResult<IEnumerable<AdminReadDto>> GetAllAdmin();
 
-        public ActionResult<AdminReadDto> GetAdminById(int id);
+        ActionResult<AdminReadDto> GetAdminById(int id);
 
-        public ActionResult DeleteAdmin(int id);
+        ActionResult DeleteAdmin(int id);
 
-        public ActionResult<AdminReadDto> AddNewAdmin([FromBody] AdminCreateDto adminCreateDto);
+        ActionResult<AdminReadDto> AddNewAdmin([FromBody] AdminCreateDto adminCreateDto);
 
-        public ActionResult UpdateAdmin(int id, [FromBody] AdminUpdateDto adminUpdateDto);
+        ActionResult UpdateAdmin(int id, [FromBody] AdminUpdateDto adminUpdateDto);
 
-        public ActionResult<LoginAdminSuccessResponse> LoginAdmin(LoginParameter loginParameter);
+        ActionResult<LoginAdminSuccessResponse> LoginAdmin(LoginParameter loginParameter);
 
-        public ActionResult<AdminReadDto> CheckAdminAuth();
+        ActionResult<AdminReadDto> CheckAdminAuth();
     }
 }

@@ -6,14 +6,14 @@ namespace server.Controllers.AddressCntlr
 {
     public interface IAddressController
     {
-        public ActionResult<IEnumerable<AddressReadDto>> GetAllAddressByUserId(int id);
+        ActionResult<IEnumerable<AddressReadDto>> GetAllAddressByUserId(int id);
 
-        public ActionResult<AddressReadDto> GetAddressById(int id);
+        ActionResult<AddressReadDto> GetAddressById(int id);
 
-        public ActionResult DeleteAddress(int id);
+        ActionResult DeleteAddress(int id);
 
-        public ActionResult<AddressReadDto> AddNewAddress([FromBody] AddressCreateDto addressCreateDto);
+        ActionResult<AddressReadDto> AddNewAddress([FromBody] AddressCreateDto addressCreateDto);
 
-        public ActionResult UpdateAddress(int id, [FromBody] AddressUpdateDto addressUpdateDto);
+        ActionResult UpdateAddress(int id, [FromBody] AddressUpdateDto addressUpdateDto);
     }
 }

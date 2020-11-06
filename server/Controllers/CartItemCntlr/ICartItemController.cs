@@ -8,16 +8,16 @@ namespace server.Controllers.CartItemCntlr
 {
     public interface ICartItemController
     {
-        public ActionResult<IEnumerable<CartItemReadDto>> GetAllCartItemsByUserId(int id);
+        ActionResult<IEnumerable<CartItemReadDto>> GetAllCartItemsByUserId(int id);
 
-        public ActionResult<CartItemReadDto> GetCartItemById(int id);
+        ActionResult<CartItemReadDto> GetCartItemById(int id);
 
-        public ActionResult DeleteCartItem(int id);
+        ActionResult DeleteCartItem(int id);
 
-        public ActionResult<CartItemReadDto> AddNewCartItem([FromBody] CartItemCreateDto cartItemCreateDto);
+        ActionResult<CartItemReadDto> AddNewCartItem([FromBody] CartItemCreateDto cartItemCreateDto);
 
-        public ActionResult UpdateCartItem(int id, [FromBody] CartItemUpdateDto cartItemUpdateDto);
+        ActionResult UpdateCartItem(int id, [FromBody] CartItemUpdateDto cartItemUpdateDto);
 
-        public ActionResult ClearCartItems(int id);
+        ActionResult ClearCartItems(int id);
     }
 }

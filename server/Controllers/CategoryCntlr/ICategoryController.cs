@@ -9,14 +9,14 @@ namespace server.Controllers.CategoryCntlr
 {
     public interface ICategoryController
     {
-        public ActionResult<IEnumerable<CategoryReadDto>> GetAllCategories();
+        ActionResult<IEnumerable<CategoryReadDto>> GetAllCategories();
 
-        public ActionResult<CategoryReadDto> GetCategoryById(int id);
+        ActionResult<CategoryReadDto> GetCategoryById(int id);
 
-        public ActionResult DeleteCategory(int id);
+        ActionResult DeleteCategory(int id);
 
-        public ActionResult<CategoryReadDto> AddNewCategory([FromBody] CategoryCreateDto categoryCreateDto);
+        ActionResult<CategoryReadDto> AddNewCategory([FromBody] CategoryCreateDto categoryCreateDto);
 
-        public ActionResult UpdateCategory(int id, [FromBody] CategoryUpdateDto categoryUpdateDto);
+        ActionResult UpdateCategory(int id, [FromBody] CategoryUpdateDto categoryUpdateDto);
     }
 }

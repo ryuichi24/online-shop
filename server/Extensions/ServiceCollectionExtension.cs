@@ -20,6 +20,7 @@ using server.DataAccess.Repositories.UserRepo;
 using server.Helpers;
 using server.Services.Auth;
 using server.Services.UserService;
+using Services.AddressService;
 
 namespace server.Extensions
 {
@@ -36,6 +37,7 @@ namespace server.Extensions
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAddressService, AddressService>();
 
             return services;
         }

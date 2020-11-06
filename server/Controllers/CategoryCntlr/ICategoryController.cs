@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using server.Dtos.CategoryDto;
-using server.Helpers.CustomResponse;
-using server.Helpers.ParameterClass;
-using server.Models;
 
 namespace server.Controllers.CategoryCntlr
 {

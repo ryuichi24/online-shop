@@ -1,13 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using server.Helpers.ParameterClass;
-using server.Models;
-using server.DataAccess.Repositories.CategoryRepo;
-using server.Helpers.CustomResponse;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using server.Helpers;
-using AutoMapper;
 using server.Dtos.CategoryDto;
+using Services.CategoryService;
 
 namespace server.Controllers.CategoryCntlr
 {
@@ -16,34 +12,27 @@ namespace server.Controllers.CategoryCntlr
     [ApiController]
     public class CategoryController : ControllerBase, ICategoryController
     {
-        private readonly ICategoryRepository _repository;
-        private readonly IMapper _mapper;
+        private readonly ICategoryService _categoryService;
 
-        public CategoryController(ICategoryRepository repository, IMapper mapper)
+        public CategoryController(ICategoryService categoryService)
         {
-            this._repository = repository;
-            this._mapper = mapper;
+            this._categoryService = categoryService;
         }
 
         [HttpPost]
         public ActionResult<CategoryReadDto> AddNewCategory([FromBody] CategoryCreateDto categoryCreateDto)
         {
-            var newCategory = this._mapper.Map<Category>(categoryCreateDto);
+            var categoryReadDto = this._categoryService.AddNewCategory(categoryCreateDto);
+            if (categoryReadDto == null) return this.BadRequest();
 
-            this._repository.Add(newCategory);
-            this._repository.SaveChanges();
-
-            return this.CreatedAtRoute(new { Id = newCategory.CategoryId }, newCategory);
+            return this.CreatedAtRoute(new { Id = categoryReadDto.CategoryId }, categoryReadDto);
         }
 
         [HttpDelete("{id}")]
         public ActionResult DeleteCategory(int id)
         {
-            Category category = this._repository.GetById(id);
-            if (category == null) return NotFound();
-
-            this._repository.Remove(category);
-            this._repository.SaveChanges();
+            var isDeleted = this._categoryService.DeleteCategory(id);
+            if (!isDeleted) return this.BadRequest();
 
             return this.NoContent();
         }
@@ -52,30 +41,27 @@ namespace server.Controllers.CategoryCntlr
         [HttpGet]
         public ActionResult<IEnumerable<CategoryReadDto>> GetAllCategories()
         {
-            return this.Ok(this._mapper.Map<IEnumerable<CategoryReadDto>>(this._repository.GetAll()));
+            var categoryReadDtos = this._categoryService.GetAllCategories();
+            if (categoryReadDtos == null) return this.NotFound();
+
+            return this.Ok(categoryReadDtos);
         }
 
         [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<CategoryReadDto> GetCategoryById(int id)
         {
-            Category category = this._repository.GetById(id);
+            var categoryReadDto = this._categoryService.GetCategoryById(id);
+            if (categoryReadDto == null) return this.NotFound();
 
-            if (category == null) return NotFound();
-
-            return this.Ok(this._mapper.Map<Category>(category));
+            return this.Ok(categoryReadDto);
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateCategory(int id, [FromBody] CategoryUpdateDto categoryUpdateDto)
         {
-            Category existingCategory = this._repository.GetById(id);
-            if (existingCategory == null) return this.NotFound();
-
-            this._mapper.Map(categoryUpdateDto, existingCategory);
-
-            this._repository.Update(existingCategory);
-            this._repository.SaveChanges();
+            var isUpdated = this._categoryService.UpdateCategory(id, categoryUpdateDto);
+            if (!isUpdated) return this.BadRequest();
 
             return this.NoContent();
         }

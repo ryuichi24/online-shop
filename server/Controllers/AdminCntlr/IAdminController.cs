@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using server.Dtos.AdminDto;
 using server.Helpers.CustomResponse;
 using server.Helpers.ParameterClass;
-using server.Models;
 
 namespace server.Controllers.AdminCntlr
 {
     public interface IAdminController
     {
-        // TODO: for future feature managing multiple admins with different permissions
         public ActionResult<IEnumerable<AdminReadDto>> GetAllAdmin();
 
         public ActionResult<AdminReadDto> GetAdminById(int id);

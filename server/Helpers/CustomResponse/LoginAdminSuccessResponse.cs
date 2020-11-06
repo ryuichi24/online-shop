@@ -1,4 +1,4 @@
-using server.Models;
+using server.Dtos.AdminDto;
 
 namespace server.Helpers.CustomResponse
 {
@@ -6,6 +6,6 @@ namespace server.Helpers.CustomResponse
     {
         public string Token { get; set; }
 
-        public Admin Admin { get; set; }
+        public AdminReadDto AdminReadDto { get; set; }
     }
 }

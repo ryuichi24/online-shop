@@ -21,6 +21,7 @@ using server.Helpers;
 using server.Services.Auth;
 using server.Services.UserService;
 using Services.AddressService;
+using Services.AdminService;
 
 namespace server.Extensions
 {
@@ -38,6 +39,7 @@ namespace server.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<IAdminService, AdminService>();
 
             return services;
         }

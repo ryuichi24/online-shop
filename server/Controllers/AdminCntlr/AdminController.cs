@@ -1,16 +1,12 @@
-using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using server.Helpers;
 using server.Helpers.CustomResponse;
 using server.Helpers.ParameterClass;
-using server.Models;
-using server.DataAccess.Repositories.AdminRepo;
 using server.Services.Auth;
-using System;
 using System.Collections.Generic;
-using AutoMapper;
 using server.Dtos.AdminDto;
+using Services.AdminService;
 
 namespace server.Controllers.AdminCntlr
 {
@@ -19,44 +15,31 @@ namespace server.Controllers.AdminCntlr
     [ApiController]
     public class AdminController : ControllerBase, IAdminController
     {
-        private readonly IAdminRepository _repository;
-
         private readonly IAuthManager _authManager;
 
-        public readonly IMapper _mapper;
+        private readonly IAdminService _adminService;
 
-        public AdminController(IAdminRepository repository, IAuthManager authManager, IMapper mapper)
+        public AdminController(IAdminService adminService, IAuthManager authManager)
         {
-            this._repository = repository;
+            this._adminService = adminService;
             this._authManager = authManager;
-            this._mapper = mapper;
         }
 
         [AllowAnonymous]
         [HttpPost]
         public ActionResult<AdminReadDto> AddNewAdmin([FromBody] AdminCreateDto adminCreateDto)
         {
-            Admin existingAdmin = this._repository.GetAdminByEmail(adminCreateDto.Email);
-            if (existingAdmin != null) return this.BadRequest();
+            var adminReadDto = this._adminService.AddNewAdmin(adminCreateDto);
+            if (adminReadDto == null) return this.BadRequest();
 
-            var newAdminModel = this._mapper.Map<Admin>(adminCreateDto);
-            newAdminModel.Password = this._authManager.EncryptPassword(newAdminModel.Password);
-
-            this._repository.Add(newAdminModel);
-            this._repository.SaveChanges();
-            return this.CreatedAtRoute(new { Id = newAdminModel.AdminId }, this._mapper.Map<AdminReadDto>(newAdminModel));
+            return this.CreatedAtRoute(new { Id = adminReadDto.AdminId }, adminReadDto);
         }
 
         [HttpPut("{id}")]
         public ActionResult UpdateAdmin(int id, [FromBody] AdminUpdateDto adminUpdateDto)
         {
-            Admin existingAdmin = this._repository.GetById(id);
-            if (existingAdmin == null) return this.NotFound();
-
-            this._mapper.Map(adminUpdateDto, existingAdmin);
-
-            this._repository.Update(existingAdmin);
-            this._repository.SaveChanges();
+            var isUpdated = this._adminService.UpdateAdmin(id, adminUpdateDto);
+            if (!isUpdated) return this.BadRequest();
 
             return this.NoContent();
         }
@@ -66,56 +49,46 @@ namespace server.Controllers.AdminCntlr
         [HttpPost]
         public ActionResult<LoginAdminSuccessResponse> LoginAdmin(LoginParameter loginParameter)
         {
-            Admin existingAdmin = this._repository.GetAdminByEmail(loginParameter.Email);
-            if (existingAdmin == null) return this.Unauthorized();
+            var adminReadDto = this._adminService.LoginAdmin(loginParameter);
+            if (adminReadDto == null) return this.Unauthorized();
 
-            bool isAuthorized = this._authManager.ComparePassword(loginParameter.Password, existingAdmin.Password);
-            if (!isAuthorized) return this.Unauthorized();
+            string token = this._authManager.GenerateJwt(adminReadDto.AdminId.ToString(), adminReadDto.Email, AuthRole.Admin);
 
-            string token = this._authManager.GenerateJwt(existingAdmin.AdminId.ToString(), existingAdmin.Email, AuthRole.Admin);
-
-            return this.Ok(new LoginAdminSuccessResponse { Token = token, Admin = existingAdmin });
+            return this.Ok(new LoginAdminSuccessResponse { Token = token, AdminReadDto = adminReadDto });
         }
 
         [Route("check-auth")]
         [HttpGet]
         public ActionResult<AdminReadDto> CheckAdminAuth()
         {
-            var adminIdClaim = this.User.Claims.SingleOrDefault(claim => claim.Type.ToString().Equals("id", StringComparison.InvariantCultureIgnoreCase));
-            if (adminIdClaim == null) return this.Unauthorized();
+            var adminReadDto = this._adminService.CheckAdminAuth(this.User.Claims);
+            if (adminReadDto == null) return this.Unauthorized();
 
-            int adminId = int.Parse(adminIdClaim.Value);
-
-            Admin currentAdmin = this._repository.GetById(adminId);
-            if(currentAdmin == null) return this.Unauthorized();
-
-            return this.Ok(this._mapper.Map<AdminReadDto>(currentAdmin));
+            return this.Ok(adminReadDto);
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<AdminReadDto>> GetAllAdmin()
         {
-            return this.Ok(this._mapper.Map<IEnumerable<AdminReadDto>>(this._repository.GetAll()));
+            var adminReadDtos = this._adminService.GetAllAdmin();
+
+            return this.Ok(adminReadDtos);
         }
 
         [HttpGet("{id}")]
         public ActionResult<AdminReadDto> GetAdminById(int id)
         {
-           Admin admin = this._repository.GetById(id);
+           var adminReadDto = this._adminService.GetAdminById(id);
+           if (adminReadDto == null) return this.BadRequest();
 
-            if (admin == null) return NotFound();
-
-            return this.Ok(this._mapper.Map<AdminReadDto>(admin));
+            return this.Ok(adminReadDto);
         }
 
         [HttpDelete("{id}")]
         public ActionResult DeleteAdmin(int id)
         {
-            Admin admin = this._repository.GetById(id);
-            if (admin == null) return NotFound();
-
-            this._repository.Remove(admin);
-            this._repository.SaveChanges();
+            var isDeleted = this._adminService.DeleteAdmin(id);
+            if (!isDeleted) return this.BadRequest();
 
             return this.NoContent();
         }

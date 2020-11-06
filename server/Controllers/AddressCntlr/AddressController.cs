@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using server.DataAccess.Repositories.AddressRepo;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using server.Helpers;
-using AutoMapper;
 using server.Dtos.AddressDto;
 using Services.AddressService;
 
@@ -16,7 +14,7 @@ namespace server.Controllers.AddressCntlr
     {
         private readonly IAddressService _addressService;
 
-        public AddressController(IAddressRepository repository, IMapper mapper, IAddressService addressService)
+        public AddressController(IAddressService addressService)
         {
             this._addressService = addressService;
         }

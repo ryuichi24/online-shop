@@ -24,6 +24,7 @@ using Services.AddressService;
 using Services.AdminService;
 using Services.CartItemService;
 using Services.CategoryService;
+using Services.OrderService;
 using Services.ProductService;
 
 namespace server.Extensions
@@ -46,6 +47,7 @@ namespace server.Extensions
             services.AddScoped<ICartItemService, CartItemService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             return services;
         }

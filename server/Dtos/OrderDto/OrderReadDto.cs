@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Dtos.OrderDto;
+using server.Dtos.AddressDto;
+using server.Dtos.UserDto;
 using server.Models;
 
 namespace server.Dtos.OrderDto
@@ -14,12 +17,12 @@ namespace server.Dtos.OrderDto
 
         public int? AddressId { get; set; }
 
-        public Address Address { get; set; }
+        public AddressReadDto Address { get; set; }
 
         public int? UserId { get; set; }
 
-        public User User { get; set; }
+        public UserReadDto User { get; set; }
 
-        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public List<OrderItemReadDto> OrderItems { get; set; } = new List<OrderItemReadDto>();
     }
 }

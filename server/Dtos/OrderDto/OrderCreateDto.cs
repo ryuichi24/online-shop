@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using server.Models;
+using Dtos.OrderDto;
 
 namespace server.Dtos.OrderDto
 {
@@ -19,6 +19,6 @@ namespace server.Dtos.OrderDto
         [Required]
         public int UserId { get; set; }
 
-        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public List<OrderItemCreateDto> OrderItems { get; set; } = new List<OrderItemCreateDto>();
     }
 }

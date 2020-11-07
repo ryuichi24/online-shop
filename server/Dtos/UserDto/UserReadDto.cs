@@ -14,11 +14,5 @@ namespace server.Dtos.UserDto
         public string Email { get; set; }
 
         public string Phone { get; set; }
-
-        public List<Address> Addresses { get; set; } = new List<Address>();
-
-        public List<Order> Orders { get; set; } = new List<Order>();
-
-        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
     }
 }

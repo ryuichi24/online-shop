@@ -34,7 +34,7 @@ const getProductById = async (id: number) => {
 
 const addProduct = async (product: Product) => {
   try {
-    ApiService.setToken();
+    ApiService.setAdminToken();
 
     const { data } = await ApiService.API.post<Product>('/product', product);
 

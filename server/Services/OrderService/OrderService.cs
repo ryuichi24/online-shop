@@ -30,17 +30,20 @@ namespace Services.OrderService
             this._orderRepository.Add(newOrderModel);
             this._orderRepository.SaveChanges();
 
+            List<OrderItem> newOrderItems = new List<OrderItem>();
+
             newOrderModel.OrderItems.ForEach(orderItem =>
             {
-                this._orderItemRepository.Add(new OrderItem
+                newOrderItems.Add(new OrderItem
                 {
                     OrderId = newOrderModel.OrderId,
                     ProductId = orderItem.ProductId,
                     OrderItemCount = orderItem.OrderItemCount
                 });
-
-                this._orderItemRepository.SaveChanges();
             });
+
+            this._orderItemRepository.AddOrderItems(newOrderItems);
+            this._orderItemRepository.SaveChanges();
 
             var orderReadDto = this._mapper.Map<OrderReadDto>(newOrderModel);
 

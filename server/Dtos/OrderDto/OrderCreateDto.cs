@@ -1,16 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using server.Models;
 
 namespace server.Dtos.OrderDto
 {
-    public class OrderItemCreateObject
-    {
-        public int ProductId { get; set; }
-
-        public int OrderItemCount { get; set; }
-    }
-
     public class OrderCreateDto
     {
         [Required]
@@ -25,6 +19,6 @@ namespace server.Dtos.OrderDto
         [Required]
         public int UserId { get; set; }
 
-        public List<OrderItemCreateObject> OrderItems { get; set; } = new List<OrderItemCreateObject>();
+        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 }

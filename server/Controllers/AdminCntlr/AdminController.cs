@@ -54,7 +54,7 @@ namespace server.Controllers.AdminCntlr
 
             string token = this._authManager.GenerateJwt(adminReadDto.AdminId.ToString(), adminReadDto.Email, AuthRole.Admin);
 
-            return this.Ok(new LoginAdminSuccessResponse { Token = token, AdminReadDto = adminReadDto });
+            return this.Ok(new LoginAdminSuccessResponse { Token = token, Admin = adminReadDto });
         }
 
         [Route("check-auth")]

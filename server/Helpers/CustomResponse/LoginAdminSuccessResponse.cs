@@ -6,6 +6,6 @@ namespace server.Helpers.CustomResponse
     {
         public string Token { get; set; }
 
-        public AdminReadDto AdminReadDto { get; set; }
+        public AdminReadDto Admin { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace server.Controllers.UserCntlr
 
             string token = this._authManager.GenerateJwt(userReadDto.UserId.ToString(), userReadDto.Email, AuthRole.User);
 
-            return this.CreatedAtRoute(new { Id = userReadDto.UserId }, new SignUpUserSuccessResponse { Token = token, UserReadDto = userReadDto });
+            return this.CreatedAtRoute(new { Id = userReadDto.UserId }, new SignUpUserSuccessResponse { Token = token, User = userReadDto });
         }
 
         [HttpPut("{id}")]
@@ -55,7 +55,7 @@ namespace server.Controllers.UserCntlr
 
             string token = this._authManager.GenerateJwt(userReadDto.UserId.ToString(), userReadDto.Email, AuthRole.User);
 
-            return this.Ok(new LoginUserSuccessResponse { Token = token, UserReadDto = userReadDto });
+            return this.Ok(new LoginUserSuccessResponse { Token = token, User = userReadDto });
         }
 
         [Route("check-auth")]

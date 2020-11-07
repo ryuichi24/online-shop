@@ -84,6 +84,16 @@ namespace server.Migrations
                     b.HasKey("AdminId");
 
                     b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            AdminId = 1,
+                            Email = "admin@example.com",
+                            Name = "admin",
+                            Password = "$s2$16384$8$1$kve5s3vEqi8SD93fllHGH4U9GylAr7GJx98Dy7L8c3Q=$hf4Z9+SG9f+kTuWU5fWFiieRSpsIqbuM8/cdgtK7v4g=",
+                            Phone = "1234567890"
+                        });
                 });
 
             modelBuilder.Entity("server.Models.CartItem", b =>
@@ -126,6 +136,23 @@ namespace server.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            Name = "camera"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            Name = "watch"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            Name = "glasses"
+                        });
                 });
 
             modelBuilder.Entity("server.Models.Order", b =>
@@ -135,7 +162,7 @@ namespace server.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AddressId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderedAt")
@@ -214,6 +241,38 @@ namespace server.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            CategoryId = 1,
+                            Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi urna, lacinia in lacinia in, suscipit a sem. Curabitur vitae elit quis tellus egestas porttitor porttitor mollis orci. Pellentesque euismod erat aliquam risus placerat maximus ac sit amet dolor. Praesent malesuada tellus id justo bibendum congue.",
+                            Image = "https://images.unsplash.com/photo-1496335506811-1e4380d47d18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+                            Inventory = 10,
+                            Name = "Instamatic 133 Camera Kodak",
+                            Price = 45f
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            CategoryId = 2,
+                            Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi urna, lacinia in lacinia in, suscipit a sem. Curabitur vitae elit quis tellus egestas porttitor porttitor mollis orci. Pellentesque euismod erat aliquam risus placerat maximus ac sit amet dolor. Praesent malesuada tellus id justo bibendum congue.",
+                            Image = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1289&q=80",
+                            Inventory = 5,
+                            Name = "Minimum design watch (white)",
+                            Price = 60f
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            CategoryId = 3,
+                            Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi urna, lacinia in lacinia in, suscipit a sem. Curabitur vitae elit quis tellus egestas porttitor porttitor mollis orci. Pellentesque euismod erat aliquam risus placerat maximus ac sit amet dolor. Praesent malesuada tellus id justo bibendum congue.",
+                            Image = "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
+                            Inventory = 4,
+                            Name = "Quite simple sunglasses",
+                            Price = 30f
+                        });
                 });
 
             modelBuilder.Entity("server.Models.User", b =>
@@ -250,6 +309,17 @@ namespace server.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Email = "ryuichi@example.com",
+                            FirstName = "Ryuichi",
+                            LastName = "Nishi",
+                            Password = "$s2$16384$8$1$iBv8lgtOZpHidMGhzqB9bq986GSX1LMtqzHtxqQZRKE=$mCc79YWOAbFQ75l8qmbcRRVzDRf0jsEUShJLiv/XHRk=",
+                            Phone = "0123456789"
+                        });
                 });
 
             modelBuilder.Entity("server.Models.Address", b =>
@@ -280,7 +350,9 @@ namespace server.Migrations
                 {
                     b.HasOne("server.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId");
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("server.Models.User", "User")
                         .WithMany("Orders")

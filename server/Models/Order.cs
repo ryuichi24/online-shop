@@ -21,7 +21,7 @@ namespace server.Models
         [ForeignKey("AddressId")]
         public Address Address { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         [ForeignKey("UserId")]
         public User User { get; set; }

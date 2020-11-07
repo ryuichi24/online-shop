@@ -1,11 +1,18 @@
+using Extensions;
 using Microsoft.EntityFrameworkCore;
 using server.Models;
+using server.Services.Auth;
 
 namespace server.DataAccess
 {
     public class OnlineShopDbContext : DbContext
     {
-        public OnlineShopDbContext(DbContextOptions options) : base(options) { }
+        private readonly IAuthManager _authManager;
+
+        public OnlineShopDbContext(DbContextOptions options, IAuthManager authManager) : base(options)
+        {
+            this._authManager = authManager;
+        }
 
         public DbSet<User> Users { get; set; }
 
@@ -22,5 +29,11 @@ namespace server.DataAccess
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderItem> OrderItem { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed(this._authManager);
+        }
     }
 }

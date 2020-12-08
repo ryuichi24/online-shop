@@ -19,6 +19,11 @@ namespace server.Controllers.ProductCntlr
             this._productService = productService;
         }
 
+        /// <summary>
+        /// add a new product
+        /// </summary>
+        /// <param name="productCreateDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult<ProductReadDto> AddNewProduct([FromBody] ProductCreateDto productCreateDto)
         {
@@ -28,6 +33,11 @@ namespace server.Controllers.ProductCntlr
             return this.CreatedAtRoute(new { Id = productReadDto.ProductId }, productReadDto);
         }
 
+        /// <summary>
+        /// delete a product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult DeleteProduct(int id)
         {
@@ -37,6 +47,10 @@ namespace server.Controllers.ProductCntlr
             return this.NoContent();
         }
 
+        /// <summary>
+        /// get all products
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
         public ActionResult<IEnumerable<ProductReadDto>> GetAllProduct()
@@ -47,6 +61,11 @@ namespace server.Controllers.ProductCntlr
             return this.Ok(productReadDtos);
         }
 
+        /// <summary>
+        /// get a product by a product Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<ProductReadDto> GetProductById(int id)
@@ -57,6 +76,12 @@ namespace server.Controllers.ProductCntlr
             return this.Ok(productReadDto);
         }
 
+        /// <summary>
+        /// update a product
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="productUpdateDto"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public ActionResult UpdateProduct(int id, [FromBody] ProductUpdateDto productUpdateDto)
         {

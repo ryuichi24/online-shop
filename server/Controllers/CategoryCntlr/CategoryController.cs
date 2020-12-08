@@ -19,6 +19,11 @@ namespace server.Controllers.CategoryCntlr
             this._categoryService = categoryService;
         }
 
+        /// <summary>
+        /// add a new category
+        /// </summary>
+        /// <param name="categoryCreateDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult<CategoryReadDto> AddNewCategory([FromBody] CategoryCreateDto categoryCreateDto)
         {
@@ -28,6 +33,11 @@ namespace server.Controllers.CategoryCntlr
             return this.CreatedAtRoute(new { Id = categoryReadDto.CategoryId }, categoryReadDto);
         }
 
+        /// <summary>
+        /// delete a category by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult DeleteCategory(int id)
         {
@@ -37,6 +47,10 @@ namespace server.Controllers.CategoryCntlr
             return this.NoContent();
         }
 
+        /// <summary>
+        /// get all categories
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
         public ActionResult<IEnumerable<CategoryReadDto>> GetAllCategories()
@@ -47,6 +61,11 @@ namespace server.Controllers.CategoryCntlr
             return this.Ok(categoryReadDtos);
         }
 
+        /// <summary>
+        /// get a category by category Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("{id}")]
         public ActionResult<CategoryReadDto> GetCategoryById(int id)
@@ -57,6 +76,12 @@ namespace server.Controllers.CategoryCntlr
             return this.Ok(categoryReadDto);
         }
 
+        /// <summary>
+        /// update a category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="categoryUpdateDto"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public ActionResult UpdateCategory(int id, [FromBody] CategoryUpdateDto categoryUpdateDto)
         {

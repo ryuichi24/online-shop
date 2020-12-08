@@ -24,6 +24,11 @@ namespace server.Controllers.UserCntlr
             this._userService = userService;
         }
 
+        /// <summary>
+        /// add a new user
+        /// </summary>
+        /// <param name="userCreateDto"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         public ActionResult<SignUpUserSuccessResponse> AddNewUser([FromBody] UserCreateDto userCreateDto)
@@ -36,6 +41,12 @@ namespace server.Controllers.UserCntlr
             return this.CreatedAtRoute(new { Id = userReadDto.UserId }, new SignUpUserSuccessResponse { Token = token, User = userReadDto });
         }
 
+        /// <summary>
+        /// update a user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userUpdateDto"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public ActionResult UpdateUser(int id, [FromBody] UserUpdateDto userUpdateDto)
         {
@@ -45,6 +56,11 @@ namespace server.Controllers.UserCntlr
             return this.NoContent();
         }
 
+        /// <summary>
+        /// authenticate the user and return the token
+        /// </summary>
+        /// <param name="loginParameter"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [Route("login")]
         [HttpPost]
@@ -58,6 +74,10 @@ namespace server.Controllers.UserCntlr
             return this.Ok(new LoginUserSuccessResponse { Token = token, User = userReadDto });
         }
 
+        /// <summary>
+        /// check json web token fron the client and authenticate it
+        /// </summary>
+        /// <returns></returns>
         [Route("check-auth")]
         [HttpGet]
         public ActionResult<UserReadDto> CheckUserAuth()
@@ -68,6 +88,11 @@ namespace server.Controllers.UserCntlr
             return this.Ok(userReadDto);
         }
 
+        /// <summary>
+        /// get a user by a user Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public ActionResult<UserReadDto> GetUserById(int id)
         {
@@ -77,6 +102,11 @@ namespace server.Controllers.UserCntlr
             return this.Ok(userReadDto);
         }
 
+        /// <summary>
+        /// delete a user by a user Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult DeleteUser(int id)
         {

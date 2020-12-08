@@ -19,6 +19,11 @@ namespace server.Controllers.CartItemCntlr
             this._cartItemService = cartItemService;
         }
 
+        /// <summary>
+        /// add a new cart item
+        /// </summary>
+        /// <param name="cartItemCreateDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult<CartItemReadDto> AddNewCartItem([FromBody] CartItemCreateDto cartItemCreateDto)
         {
@@ -28,6 +33,11 @@ namespace server.Controllers.CartItemCntlr
             return this.CreatedAtRoute(new { Id = cartItemReadDto.CartItemId }, cartItemReadDto);
         }
 
+        /// <summary>
+        /// delete a cart item
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult DeleteCartItem(int id)
         {
@@ -37,7 +47,11 @@ namespace server.Controllers.CartItemCntlr
             return this.NoContent();
         }
 
-
+        /// <summary>
+        /// get all cart items by user Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("all-by-user/{id}")]
         public ActionResult<IEnumerable<CartItemReadDto>> GetAllCartItemsByUserId(int id)
         {
@@ -47,6 +61,11 @@ namespace server.Controllers.CartItemCntlr
             return this.Ok(cartItemReadDtos);
         }
 
+        /// <summary>
+        /// get a cart item by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public ActionResult<CartItemReadDto> GetCartItemById(int id)
         {
@@ -56,6 +75,12 @@ namespace server.Controllers.CartItemCntlr
             return this.Ok(cartItemReadDto);
         }
 
+        /// <summary>
+        /// update a cart item
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cartItemUpdateDto"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public ActionResult UpdateCartItem(int id, [FromBody] CartItemUpdateDto cartItemUpdateDto)
         {
@@ -65,6 +90,11 @@ namespace server.Controllers.CartItemCntlr
             return this.NoContent();
         }
 
+        /// <summary>
+        /// delete all cart items by user Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("clear-cart-items/{id}")]
         public ActionResult ClearCartItems(int id)
         {

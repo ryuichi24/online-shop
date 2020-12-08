@@ -25,6 +25,11 @@ namespace server.Controllers.AdminCntlr
             this._authManager = authManager;
         }
 
+        /// <summary>
+        /// add a new admin
+        /// </summary>
+        /// <param name="adminCreateDto"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         public ActionResult<AdminReadDto> AddNewAdmin([FromBody] AdminCreateDto adminCreateDto)
@@ -35,6 +40,12 @@ namespace server.Controllers.AdminCntlr
             return this.CreatedAtRoute(new { Id = adminReadDto.AdminId }, adminReadDto);
         }
 
+        /// <summary>
+        /// update an admin
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="adminUpdateDto"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public ActionResult UpdateAdmin(int id, [FromBody] AdminUpdateDto adminUpdateDto)
         {
@@ -44,6 +55,11 @@ namespace server.Controllers.AdminCntlr
             return this.NoContent();
         }
 
+        /// <summary>
+        /// login an admin
+        /// </summary>
+        /// <param name="loginParameter"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [Route("login")]
         [HttpPost]
@@ -57,6 +73,10 @@ namespace server.Controllers.AdminCntlr
             return this.Ok(new LoginAdminSuccessResponse { Token = token, Admin = adminReadDto });
         }
 
+        /// <summary>
+        /// check json web token fron the client and authenticate it
+        /// </summary>
+        /// <returns></returns>
         [Route("check-auth")]
         [HttpGet]
         public ActionResult<AdminReadDto> CheckAdminAuth()
@@ -67,6 +87,10 @@ namespace server.Controllers.AdminCntlr
             return this.Ok(adminReadDto);
         }
 
+        /// <summary>
+        /// get all admins
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult<IEnumerable<AdminReadDto>> GetAllAdmin()
         {
@@ -76,6 +100,11 @@ namespace server.Controllers.AdminCntlr
             return this.Ok(adminReadDtos);
         }
 
+        /// <summary>
+        /// get an admin by admin Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public ActionResult<AdminReadDto> GetAdminById(int id)
         {
@@ -85,6 +114,11 @@ namespace server.Controllers.AdminCntlr
             return this.Ok(adminReadDto);
         }
 
+        /// <summary>
+        /// delete an admin by admin Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult DeleteAdmin(int id)
         {

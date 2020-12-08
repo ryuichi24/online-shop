@@ -18,6 +18,11 @@ namespace server.Controllers.OrderContlr
             this._orderService = orderService;
         }
 
+        /// <summary>
+        /// add a new order
+        /// </summary>
+        /// <param name="orderCreateDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult<OrderReadDto> AddNewOrder([FromBody] OrderCreateDto orderCreateDto)
         {
@@ -27,6 +32,11 @@ namespace server.Controllers.OrderContlr
             return this.CreatedAtRoute(new { Id = orderReadDto.OrderId }, orderReadDto);
         }
 
+        /// <summary>
+        /// delete an order by an order Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult DeleteOrder(int id)
         {
@@ -36,6 +46,10 @@ namespace server.Controllers.OrderContlr
             return this.NoContent();
         }
 
+        /// <summary>
+        /// get all orders
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult<IEnumerable<OrderReadDto>> GetAllOrders()
         {   var orderReadDtos = this._orderService.GetAllOrders();
@@ -44,6 +58,11 @@ namespace server.Controllers.OrderContlr
             return this.Ok(orderReadDtos);
         }
 
+        /// <summary>
+        /// get all orders by a user Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("all-by-user/{id}")]
         public ActionResult<IEnumerable<OrderReadDto>> GetAllOrdersByUserId(int id)
         {
@@ -53,6 +72,11 @@ namespace server.Controllers.OrderContlr
             return this.Ok(orderReadDtos);
         }
 
+        /// <summary>
+        /// get an irder by an order Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public ActionResult<OrderReadDto> GetOrderById(int id)
         {

@@ -19,6 +19,11 @@ namespace server.Controllers.AddressCntlr
             this._addressService = addressService;
         }
 
+        /// <summary>
+        /// add a new address in the database
+        /// </summary>
+        /// <param name="addressCreateDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult<AddressReadDto> AddNewAddress([FromBody] AddressCreateDto addressCreateDto)
         {
@@ -28,6 +33,11 @@ namespace server.Controllers.AddressCntlr
             return this.CreatedAtRoute(new { Id = addressReadDto.AddressId }, addressReadDto);
         }
 
+        /// <summary>
+        /// delete an address by an address Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult DeleteAddress(int id)
         {
@@ -37,6 +47,11 @@ namespace server.Controllers.AddressCntlr
             return this.NoContent();
         }
 
+        /// <summary>
+        /// get an address by an address Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public ActionResult<AddressReadDto> GetAddressById(int id)
         {
@@ -46,6 +61,11 @@ namespace server.Controllers.AddressCntlr
             return this.Ok(addressReadDto);
         }
 
+        /// <summary>
+        /// get all addresses by user Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("all-by-user/{id}")]
         public ActionResult<IEnumerable<AddressReadDto>> GetAllAddressByUserId(int id)
         {
@@ -55,6 +75,12 @@ namespace server.Controllers.AddressCntlr
             return this.Ok(addressReadDtos);
         }
 
+        /// <summary>
+        /// update an address
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="addressUpdateDto"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public ActionResult UpdateAddress(int id, [FromBody] AddressUpdateDto addressUpdateDto)
         {
